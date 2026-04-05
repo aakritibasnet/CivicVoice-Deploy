@@ -1,0 +1,32 @@
+import { Router } from "express";
+import authRoutes from "./auth/auth.routes";
+import profileRoutes from "./user/profile.routes";
+import reportsRoutes from "./reports/reports.routes";
+import statsRoutes from "./stats/stats.routes";
+import badgesRoutes from "./badges/badges.routes";
+import leaderboardRoutes from "./leaderboard/leaderboard.routes";
+import notificationsRoutes from "./notifications/notifications.routes";
+import notificationPreferencesRoutes from "./notification-preferences/notification-preferences.routes";
+import searchRoutes from "./search/search.routes";
+import wardRoutes from "./ward/ward.routes";
+import reportPostsRoutes from "./report-posts/report-posts.routes";
+import officerRoutes from "./officer/officer.routes";
+
+const router = Router();
+
+router.use("/auth", authRoutes);
+router.use("/profile", profileRoutes);
+router.use("/reports", reportsRoutes);
+router.use("/report-posts", reportPostsRoutes);
+router.use("/stats", statsRoutes);
+router.use("/badges", badgesRoutes);
+router.use("/leaderboard", leaderboardRoutes);
+router.use("/notifications", notificationsRoutes);
+router.use("/notification-preferences", notificationPreferencesRoutes);
+router.use("/search", searchRoutes);
+router.use("/wards", wardRoutes);
+router.use("/officer", officerRoutes);
+
+export default router;
+
+

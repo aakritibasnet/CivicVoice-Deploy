@@ -1,0 +1,43 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find D:projectsVoiceCivicFYPApp -type f -name *loginService* -o -name *authService*)",
+      "Bash(npx expo:*)",
+      "Bash(cat \"D:/projects/VoiceCivicFYP/App/mobile/app/\\(tabs\\)/reports.tsx\")",
+      "Bash(ls:*)",
+      "Bash(grep -n \"CREATE TABLE.*users\" \"D:/projects/VoiceCivicFYP/App/backend/src/db/migrations\"/*.sql)",
+      "Bash(xargs grep:*)",
+      "Bash(find /d/projects/VoiceCivicFYP/App/backend -type f \\\\\\(-name *.sql -o -name init* -o -name seed* \\\\\\))",
+      "Bash(grep -n \"CREATE TABLE\\\\|ALTER TABLE reports\" /d/projects/VoiceCivicFYP/App/backend/src/db/migrations/*.sql)",
+      "Bash(find /d/projects/VoiceCivicFYP -name package.json -path */backend/* -exec cat {})",
+      "Bash(2)",
+      "Bash(find /d/projects/VoiceCivicFYP -name *.sql -type f)",
+      "Bash(find /d/projects/VoiceCivicFYP -type f \\\\\\(-name *.md -o -name *.txt -o -name *.json \\\\\\) -path *backend* -o -path *mobile*)",
+      "Bash(find /d/projects/VoiceCivicFYP/App/backend/src/db/migrations -type f -name *.sql)",
+      "Bash(grep:*)",
+      "Bash(npm install:*)",
+      "Bash(npx tsc:*)",
+      "Bash(node -e \"const fs = require\\(''expo-file-system''\\); console.log\\(Object.keys\\(fs\\).filter\\(k => k.includes\\(''doc''\\) || k.includes\\(''Dir''\\)\\)\\)\")",
+      "Bash(find /d/projects/VoiceCivicFYP/App/mobile/app -type f -name *.tsx -o -name *.ts)",
+      "Bash(find D:/projects/VoiceCivicFYP/website/src/graphql -name *resolver* -o -name *resolves*)",
+      "Bash(node -e \":*)",
+      "Bash(find /d/projects/VoiceCivicFYP -name schema.prisma -o -name *.prisma)",
+      "Bash(find D:projectsVoiceCivicFYPwebsite -type f -name *.geojson -o -name *.geo.json)",
+      "Bash(find D:/projects/VoiceCivicFYP/website -type f \\\\\\(-name *.geojson -o -name *.shp -o -name *.shx -o -name *.dbf -o -name *.prj -o -name *.json \\\\\\) ! -path */.next/* ! -path */node_modules/*)",
+      "Bash(npx prisma:*)",
+      "Bash(done)",
+      "Bash(fi)",
+      "Bash(npx tsx:*)",
+      "Bash(curl -s \"https://data.humdata.org/api/3/action/package_show?id=administrative-boundaries-of-nepal\")",
+      "Bash(python3 -c \":*)",
+      "Bash(node:*)",
+      "Bash(SKIP_WARDS=1 npx tsx prisma/scripts/import-nepal-boundaries.ts)",
+      "Bash(unzip -l npl_admin_boundaries.geojson.zip)",
+      "Bash(PGPASSWORD=root psql:*)",
+      "Bash(where psql:*)",
+      "Read(//c/Program Files/PostgreSQL/**)",
+      "Read(//c/Program Files \\(x86\\)/**)",
+      "Bash(PGPASSWORD=root /c/Program Files/PostgreSQL/18/bin/psql.exe:*)"
+    ]
+  }
+}

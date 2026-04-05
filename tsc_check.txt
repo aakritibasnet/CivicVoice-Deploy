@@ -1,0 +1,4 @@
+src/services/auth/password.service.ts(36,7): error TS2353: Object literal may only specify known properties, and 'channel' does not exist in type '{ purpose: VerificationPurpose; email: string; target?: string | undefined; meta?: Record<string, any> | undefined; }'.
+src/services/auth/password.service.ts(56,5): error TS2353: Object literal may only specify known properties, and 'channel' does not exist in type '{ purpose: VerificationPurpose; lookupEmail: string; code: string; }'.
+src/services/user/profile.service.ts(132,5): error TS2353: Object literal may only specify known properties, and 'channel' does not exist in type '{ purpose: VerificationPurpose; email: string; target?: string | undefined; meta?: Record<string, any> | undefined; }'.
+src/services/user/profile.service.ts(157,5): error TS2353: Object literal may only specify known properties, and 'channel' does not exist in type '{ purpose: VerificationPurpose; lookupEmail: string; code: string; }'.
