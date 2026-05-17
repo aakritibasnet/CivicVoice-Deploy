@@ -343,7 +343,11 @@ export async function listPublishedReports(wardId: string, page = 1, limit = 10)
 
   const { rows } = await pool.query(
     `SELECT id, published_at, cycle_start, cycle_end, is_auto_published, summary_text,
-            (SELECT name FROM users WHERE id = published_by) AS published_by_name
+            COALESCE(
+              (SELECT name FROM users WHERE id = published_by),
+              (SELECT NULLIF(TRIM(CONCAT_WS(' ', first_name, last_name)), '')
+                 FROM officers WHERE id = published_by)
+            ) AS published_by_name
      FROM ward_published_reports
      WHERE ward_id = $1
      ORDER BY published_at DESC
@@ -387,7 +391,11 @@ export async function listPublicPublishedReports(page = 1, limit = 10) {
     `SELECT wpr.id, wpr.published_at, wpr.cycle_start, wpr.cycle_end,
             wpr.is_auto_published, wpr.summary_text, wpr.report_snapshot,
             w.name AS ward_name,
-            (SELECT name FROM users WHERE id = wpr.published_by) AS published_by_name
+            COALESCE(
+              (SELECT name FROM users WHERE id = wpr.published_by),
+              (SELECT NULLIF(TRIM(CONCAT_WS(' ', first_name, last_name)), '')
+                 FROM officers WHERE id = wpr.published_by)
+            ) AS published_by_name
      FROM ward_published_reports wpr
      JOIN wards w ON w.id = wpr.ward_id
      ORDER BY wpr.published_at DESC

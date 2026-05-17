@@ -26,6 +26,22 @@ function toMobileStatus(dbStatus) {
         return "todo"; // treat returned as todo
     return dbStatus;
 }
+function proofTypeSql(alias) {
+    return `CASE
+    WHEN ${alias}.before_image_url IS NOT NULL
+      AND ${alias}.before_image_url = ${alias}.after_image_url
+    THEN 'invalidation'
+    ELSE 'completion'
+  END`;
+}
+function proofImageSql(alias) {
+    return `CASE
+    WHEN ${alias}.before_image_url IS NOT NULL
+      AND ${alias}.before_image_url = ${alias}.after_image_url
+    THEN ${alias}.before_image_url
+    ELSE ${alias}.after_image_url
+  END`;
+}
 async function logOfficerActivity(reportId, officerId, action, details = {}) {
     await pool.query(`INSERT INTO activity_log (report_id, actor_id, actor_name, action, details)
      VALUES (
@@ -330,12 +346,13 @@ export async function getTaskDetail(taskId, officerId) {
     // Proof (task_completions)
     const proofRes = await pool.query(`SELECT tc.id, tc.task_id, tc.completed_by_officer_id AS officer_id,
             tc.description AS note,
-            tc.before_image_url, tc.after_image_url AS image_url,
-            'completion' AS type,
-            tc.created_at
+            tc.before_image_url,
+            ${proofImageSql("tc")} AS image_url,
+            ${proofTypeSql("tc")} AS type,
+            tc.updated_at AS created_at
      FROM task_completions tc
      WHERE tc.task_id = $1
-     ORDER BY tc.created_at DESC`, [taskId]);
+     ORDER BY tc.updated_at DESC`, [taskId]);
     return {
         task,
         activity,
@@ -370,11 +387,24 @@ export async function updateTaskStatus(taskId, officerId, newStatus, note) {
     if (!validTransitions[oldDbStatus]?.includes(newDbStatus)) {
         throw new AppError(`Cannot move task from '${oldMobileStatus}' to '${newStatus}'`, 400);
     }
-    // If completing, check task_completions proof exists
+    // If completing, check completion proof exists
     if (newDbStatus === "completed") {
-        const proofRes = await pool.query(`SELECT COUNT(*)::int AS count FROM task_completions WHERE task_id = $1`, [taskId]);
+        const proofRes = await pool.query(`SELECT COUNT(*)::int AS count
+       FROM task_completions tc
+       WHERE tc.task_id = $1
+         AND ${proofTypeSql("tc")} = 'completion'`, [taskId]);
         if (proofRes.rows[0].count === 0) {
             throw new AppError("Cannot complete task without uploading proof. Please upload at least 1 proof image.", 400);
+        }
+    }
+    // If invalidating, check invalidation proof exists
+    if (newDbStatus === "invalid") {
+        const proofRes = await pool.query(`SELECT COUNT(*)::int AS count
+       FROM task_completions tc
+       WHERE tc.task_id = $1
+         AND ${proofTypeSql("tc")} = 'invalidation'`, [taskId]);
+        if (proofRes.rows[0].count === 0) {
+            throw new AppError("Cannot mark task as invalid without uploading invalidation proof with a description.", 400);
         }
     }
     // Update report status
@@ -439,22 +469,49 @@ export async function uploadTaskProof(taskId, officerId, imageUrl, type = "compl
     const existingRes = await pool.query(`SELECT id FROM task_completions WHERE task_id = $1`, [taskId]);
     let proofRow;
     if (existingRes.rows.length > 0) {
-        // Update existing completion with the new image
-        // If type is 'invalidation', store as before_image (since it's not a completion)
-        const updateField = type === "invalidation" ? "before_image_url" : "after_image_url";
-        const updateRes = await pool.query(`UPDATE task_completions
-       SET ${updateField} = $2, description = $3, completed_by_officer_id = $4, updated_at = NOW()
-       WHERE task_id = $1
-       RETURNING *`, [taskId, imageUrl, note.trim(), officerId]);
+        // The current schema stores one task_completions row per task and has no
+        // explicit proof_type column. We encode invalidation proof by mirroring the
+        // same image into both before/after fields; completion proof uses the
+        // after_image_url as the active proof image.
+        const updateRes = type === "invalidation"
+            ? await pool.query(`UPDATE task_completions
+             SET before_image_url = $2,
+                 after_image_url = $2,
+                 description = $3,
+                 completed_by_officer_id = $4,
+                 updated_at = NOW()
+             WHERE task_id = $1
+             RETURNING *`, [taskId, imageUrl, note.trim(), officerId])
+            : await pool.query(`UPDATE task_completions
+             SET after_image_url = $2,
+                 description = $3,
+                 completed_by_officer_id = $4,
+                 updated_at = NOW()
+             WHERE task_id = $1
+             RETURNING *`, [taskId, imageUrl, note.trim(), officerId]);
         proofRow = updateRes.rows[0];
     }
     else {
         // Insert new task_completion
-        const imgField = type === "invalidation" ? "before_image_url" : "after_image_url";
-        const otherField = type === "invalidation" ? "after_image_url" : "before_image_url";
-        const res = await pool.query(`INSERT INTO task_completions (task_id, completed_by_officer_id, description, ${imgField}, ${otherField})
-       VALUES ($1, $2, $3, $4, $5)
-       RETURNING *`, [taskId, officerId, note.trim(), imageUrl, type === "invalidation" ? imageUrl : null]);
+        const res = type === "invalidation"
+            ? await pool.query(`INSERT INTO task_completions (
+               task_id,
+               completed_by_officer_id,
+               description,
+               before_image_url,
+               after_image_url
+             )
+             VALUES ($1, $2, $3, $4, $4)
+             RETURNING *`, [taskId, officerId, note.trim(), imageUrl])
+            : await pool.query(`INSERT INTO task_completions (
+               task_id,
+               completed_by_officer_id,
+               description,
+               before_image_url,
+               after_image_url
+             )
+             VALUES ($1, $2, $3, NULL, $4)
+             RETURNING *`, [taskId, officerId, note.trim(), imageUrl]);
         proofRow = res.rows[0];
     }
     // Log activity
@@ -471,7 +528,7 @@ export async function uploadTaskProof(taskId, officerId, imageUrl, type = "compl
             type,
             image_url: proofRow.after_image_url || proofRow.before_image_url,
             note: proofRow.description,
-            created_at: proofRow.created_at,
+            created_at: proofRow.updated_at || proofRow.created_at,
         },
     };
 }

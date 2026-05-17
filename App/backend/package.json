@@ -10,6 +10,7 @@
     "dev": "nodemon",
     "build": "tsc -p tsconfig.json",
     "start": "node dist/server.js",
+    "prisma:apply-sql-patches": "node ./scripts/apply-prisma-sql-patches.mjs",
     "prisma:generate": "prisma generate --schema prisma/schema.prisma",
     "prisma:validate": "prisma validate --schema prisma/schema.prisma",
     "prisma:format": "prisma format --schema prisma/schema.prisma"

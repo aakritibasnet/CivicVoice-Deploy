@@ -20,14 +20,19 @@ async function ensureWardPublishingSchema() {
 }
 /** Get current snapshot of all tasks in a ward */
 async function getWardTaskSnapshot(wardId) {
-    const { rows } = await pool.query(`SELECT r.report_id, r.title, r.category, r.status,
-            r.assigned_to, u.name AS officer_name,
-            d.name AS department_name,
+    const { rows } = await pool.query(`SELECT r.id AS report_id, r.title, r.category, r.status,
+            r.assigned_field_officer_id AS assigned_to,
+            CASE
+              WHEN o.id IS NOT NULL THEN CONCAT_WS(' ', o.first_name, o.last_name)
+              ELSE u.name
+            END AS officer_name,
+            od.name AS department_name,
             r.created_at, r.updated_at
      FROM reports r
-     LEFT JOIN users u ON u.id = r.assigned_to
-     LEFT JOIN officer_departments od ON od.officer_id = r.assigned_to
-     LEFT JOIN departments d ON d.id = od.department_id
+     LEFT JOIN officers o ON o.id = r.assigned_field_officer_id
+     LEFT JOIN users u ON u.id = r.assigned_officer_id
+     LEFT JOIN officer_departments od
+       ON od.id = COALESCE(r.assigned_department_id, o.department_id)
      WHERE r.ward_id = $1
      ORDER BY r.created_at DESC`, [wardId]);
     return rows;
@@ -76,10 +81,10 @@ function detectChanges(current, previousSnapshot) {
 /** Generate human-readable summary */
 function generateSummary(snapshot, changes) {
     const total = snapshot.length;
-    const planned = snapshot.filter((t) => t.status === "submitted").length;
-    const inProgress = snapshot.filter((t) => t.status === "in_progress" || t.status === "under_review").length;
-    const completed = snapshot.filter((t) => t.status === "resolved").length;
-    const closed = snapshot.filter((t) => t.status === "closed").length;
+    const planned = snapshot.filter((t) => t.status === "incoming").length;
+    const inProgress = snapshot.filter((t) => t.status === "in_progress").length;
+    const completed = snapshot.filter((t) => t.status === "completed").length;
+    const closed = snapshot.filter((t) => ["invalid", "returned"].includes(t.status)).length;
     const lines = [];
     lines.push(`Total tasks: ${total}`);
     lines.push("");
@@ -113,11 +118,11 @@ function generateSummary(snapshot, changes) {
 }
 function friendlyStatus(status) {
     const map = {
-        submitted: "Planned",
-        under_review: "Under Review",
+        incoming: "Incoming",
         in_progress: "In Progress",
-        resolved: "Completed",
-        closed: "Closed",
+        completed: "Completed",
+        returned: "Returned",
+        invalid: "Invalid",
     };
     return map[status] || status;
 }
@@ -231,7 +236,11 @@ export async function listPublishedReports(wardId, page = 1, limit = 10) {
     const countRes = await pool.query(`SELECT COUNT(*)::int AS total FROM ward_published_reports WHERE ward_id = $1`, [wardId]);
     const total = countRes.rows[0]?.total ?? 0;
     const { rows } = await pool.query(`SELECT id, published_at, cycle_start, cycle_end, is_auto_published, summary_text,
-            (SELECT name FROM users WHERE id = published_by) AS published_by_name
+            COALESCE(
+              (SELECT name FROM users WHERE id = published_by),
+              (SELECT NULLIF(TRIM(CONCAT_WS(' ', first_name, last_name)), '')
+                 FROM officers WHERE id = published_by)
+            ) AS published_by_name
      FROM ward_published_reports
      WHERE ward_id = $1
      ORDER BY published_at DESC
@@ -264,18 +273,22 @@ export async function listPublicPublishedReports(page = 1, limit = 10) {
     const { rows } = await pool.query(`SELECT wpr.id, wpr.published_at, wpr.cycle_start, wpr.cycle_end,
             wpr.is_auto_published, wpr.summary_text, wpr.report_snapshot,
             w.name AS ward_name,
-            (SELECT name FROM users WHERE id = wpr.published_by) AS published_by_name
+            COALESCE(
+              (SELECT name FROM users WHERE id = wpr.published_by),
+              (SELECT NULLIF(TRIM(CONCAT_WS(' ', first_name, last_name)), '')
+                 FROM officers WHERE id = wpr.published_by)
+            ) AS published_by_name
      FROM ward_published_reports wpr
-     JOIN wards w ON w.ward_id = wpr.ward_id
+     JOIN wards w ON w.id = wpr.ward_id
      ORDER BY wpr.published_at DESC
      LIMIT $1 OFFSET $2`, [limit, offset]);
     return {
         reports: rows.map((r) => {
             const snapshot = r.report_snapshot;
-            const planned = snapshot.filter((t) => t.status === "submitted").length;
-            const inProgress = snapshot.filter((t) => ["in_progress", "under_review"].includes(t.status)).length;
-            const completed = snapshot.filter((t) => t.status === "resolved").length;
-            const closed = snapshot.filter((t) => t.status === "closed").length;
+            const planned = snapshot.filter((t) => t.status === "incoming").length;
+            const inProgress = snapshot.filter((t) => t.status === "in_progress").length;
+            const completed = snapshot.filter((t) => t.status === "completed").length;
+            const closed = snapshot.filter((t) => ["invalid", "returned"].includes(t.status)).length;
             return {
                 id: r.id,
                 ward_name: r.ward_name,
@@ -312,7 +325,7 @@ export async function getPublicPublishedReport(reportId) {
             wpr.summary_text,
             w.name AS ward_name
      FROM ward_published_reports wpr
-     JOIN wards w ON w.ward_id = wpr.ward_id
+     JOIN wards w ON w.id = wpr.ward_id
      WHERE wpr.id = $1`, [reportId]);
     if (rows.length === 0)
         return null;
@@ -321,10 +334,10 @@ export async function getPublicPublishedReport(reportId) {
     const prevSnapshot = report.previous_snapshot;
     const changes = detectChanges(snapshot, prevSnapshot);
     // Build human-readable format
-    const planned = snapshot.filter((t) => t.status === "submitted");
-    const inProgress = snapshot.filter((t) => ["in_progress", "under_review"].includes(t.status));
-    const completed = snapshot.filter((t) => t.status === "resolved");
-    const closed = snapshot.filter((t) => t.status === "closed");
+    const planned = snapshot.filter((t) => t.status === "incoming");
+    const inProgress = snapshot.filter((t) => t.status === "in_progress");
+    const completed = snapshot.filter((t) => t.status === "completed");
+    const closed = snapshot.filter((t) => ["invalid", "returned"].includes(t.status));
     return {
         id: report.id,
         ward_name: report.ward_name,
