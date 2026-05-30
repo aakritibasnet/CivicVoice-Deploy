@@ -90,7 +90,8 @@
       "PowerShell(Get-NetTCPConnection *)",
       "Bash(npm install *)",
       "Bash(git add *)",
-      "Bash(git commit -m ' *)"
+      "Bash(git commit -m ' *)",
+      "Bash(chmod +x /home/rohansitoulaa/Desktop/work/CivicVoice/App/mobile/node_modules/expo/bin/cli)"
     ]
   }
 }

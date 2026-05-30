@@ -18,7 +18,13 @@ const ENV_API_BASE_URL = process.env.EXPO_PUBLIC_API_BASE_URL;
 const RAW_API_BASE_URL =
   ENV_API_BASE_URL?.trim() || (__DEV__ ? LOCAL_API_BASE_URL : "");
 
-export const API_BASE_URL = RAW_API_BASE_URL.replace(/\/+$/, "");
+function normalizeApiBaseUrl(url: string) {
+  const trimmed = url.trim().replace(/\/+$/, "");
+  if (!trimmed) return "";
+  return /\/api$/i.test(trimmed) ? trimmed : `${trimmed}/api`;
+}
+
+export const API_BASE_URL = normalizeApiBaseUrl(RAW_API_BASE_URL);
 
 export const api = axios.create({
   baseURL: API_BASE_URL,

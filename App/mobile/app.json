@@ -26,9 +26,21 @@
       [
         "expo-splash-screen",
         {
-          "backgroundColor": "#ffffff",
-          "dark": {
-            "backgroundColor": "#000000"
+          "android": {
+            "backgroundColor": "#ffffff",
+            "resizeMode": "contain",
+            "drawable": {
+              "icon": "./assets/splashscreen_logo.xml"
+            },
+            "dark": {
+              "backgroundColor": "#000000"
+            }
+          },
+          "ios": {
+            "backgroundColor": "#ffffff",
+            "dark": {
+              "backgroundColor": "#000000"
+            }
           }
         }
       ],
@@ -39,6 +51,12 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "392136a5-ca24-4259-a49e-03b391c4ccd5"
+      }
     }
   }
 }
