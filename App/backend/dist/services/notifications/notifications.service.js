@@ -79,6 +79,15 @@ function isTypeEnabled(prefs, type) {
         case "task_comment":
         case "task_status_updated":
             return true;
+        // Chat notifications: presence/mute suppression is decided upstream in
+        // chat-notify.service; if we reach here the message is meant to land.
+        case "chat_message":
+        case "chat_mention":
+        case "chat_escalated":
+        case "chat_announcement":
+        case "chat_sla_overdue":
+        case "chat_closed":
+            return true;
         default:
             return true;
     }

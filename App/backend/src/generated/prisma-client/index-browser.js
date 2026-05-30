@@ -593,6 +593,65 @@ exports.Prisma.WardsScalarFieldEnum = {
   municipality_id: 'municipality_id'
 };
 
+exports.Prisma.ChatsScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  title: 'title',
+  municipality_id: 'municipality_id',
+  ward_id: 'ward_id',
+  department_id: 'department_id',
+  complaint_id: 'complaint_id',
+  status: 'status',
+  priority: 'priority',
+  is_group: 'is_group',
+  is_archived: 'is_archived',
+  created_by_kind: 'created_by_kind',
+  created_by_id: 'created_by_id',
+  last_message_at: 'last_message_at',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
+exports.Prisma.Chat_participantsScalarFieldEnum = {
+  id: 'id',
+  chat_id: 'chat_id',
+  party_kind: 'party_kind',
+  party_id: 'party_id',
+  role_in_chat: 'role_in_chat',
+  last_read_message_id: 'last_read_message_id',
+  last_read_at: 'last_read_at',
+  muted_until: 'muted_until',
+  notification_level: 'notification_level',
+  is_active: 'is_active',
+  joined_at: 'joined_at',
+  removed_at: 'removed_at'
+};
+
+exports.Prisma.MessagesScalarFieldEnum = {
+  id: 'id',
+  chat_id: 'chat_id',
+  sender_kind: 'sender_kind',
+  sender_id: 'sender_id',
+  type: 'type',
+  body: 'body',
+  reply_to_message_id: 'reply_to_message_id',
+  priority: 'priority',
+  client_msg_id: 'client_msg_id',
+  edited_at: 'edited_at',
+  deleted_at: 'deleted_at',
+  created_at: 'created_at'
+};
+
+exports.Prisma.Message_receiptsScalarFieldEnum = {
+  id: 'id',
+  message_id: 'message_id',
+  party_kind: 'party_kind',
+  party_id: 'party_id',
+  delivered_at: 'delivered_at',
+  read_at: 'read_at',
+  acknowledged_at: 'acknowledged_at'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -660,6 +719,44 @@ exports.officer_type = exports.$Enums.officer_type = {
   municipality_officer: 'municipality_officer'
 };
 
+exports.chat_type = exports.$Enums.chat_type = {
+  officer_ward: 'officer_ward',
+  municipality_internal: 'municipality_internal',
+  ward_municipality: 'ward_municipality',
+  complaint_case: 'complaint_case'
+};
+
+exports.chat_status = exports.$Enums.chat_status = {
+  open: 'open',
+  pending: 'pending',
+  escalated: 'escalated',
+  resolved: 'resolved',
+  closed: 'closed',
+  reopened: 'reopened'
+};
+
+exports.chat_priority = exports.$Enums.chat_priority = {
+  normal: 'normal',
+  important: 'important',
+  urgent: 'urgent',
+  emergency: 'emergency'
+};
+
+exports.chat_role = exports.$Enums.chat_role = {
+  admin: 'admin',
+  member: 'member',
+  viewer: 'viewer'
+};
+
+exports.chat_message_type = exports.$Enums.chat_message_type = {
+  text: 'text',
+  image: 'image',
+  file: 'file',
+  audio: 'audio',
+  location: 'location',
+  system: 'system'
+};
+
 exports.Prisma.ModelName = {
   activity_log: 'activity_log',
   analytics_snapshots: 'analytics_snapshots',
@@ -699,7 +796,11 @@ exports.Prisma.ModelName = {
   officer_departments: 'officer_departments',
   officers: 'officers',
   municipalities: 'municipalities',
-  wards: 'wards'
+  wards: 'wards',
+  chats: 'chats',
+  chat_participants: 'chat_participants',
+  messages: 'messages',
+  message_receipts: 'message_receipts'
 };
 
 /**

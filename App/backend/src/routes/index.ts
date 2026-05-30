@@ -11,6 +11,7 @@ import searchRoutes from "./search/search.routes";
 import wardRoutes from "./ward/ward.routes";
 import reportPostsRoutes from "./report-posts/report-posts.routes";
 import officerRoutes from "./officer/officer.routes";
+import chatRoutes from "./chat/chat.routes";
 
 const router = Router();
 
@@ -26,6 +27,7 @@ router.use("/notification-preferences", notificationPreferencesRoutes);
 router.use("/search", searchRoutes);
 router.use("/wards", wardRoutes);
 router.use("/officer", officerRoutes);
+router.use("/chat", chatRoutes);
 
 export default router;
 

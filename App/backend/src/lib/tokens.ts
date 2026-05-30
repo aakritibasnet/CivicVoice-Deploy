@@ -5,10 +5,19 @@ import "@/lib/env";
 
 export type Role = "citizen" | "officer" | "ward" | "municipality" | "admin";
 
+/**
+ * Principal kind. The `users` and `officers` tables have independent UUID
+ * spaces, and `users.role` may itself be `officer` (enum default), so the
+ * role string is NOT a reliable discriminator. Tokens now carry an explicit
+ * `kind` so `resolvePrincipal` can deterministically pick the table.
+ */
+export type PrincipalKind = "user" | "officer";
+
 export type AccessTokenPayload = {
   id: string;
   email: string;
   role: Role;
+  kind: PrincipalKind;
   ward_id?: string | number | null;
 };
 

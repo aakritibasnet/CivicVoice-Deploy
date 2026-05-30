@@ -10,6 +10,9 @@ declare global {
         id: string;
         email: string;
         role: string;
+        // Present on tokens issued after the chat-module change. Legacy
+        // tokens omit it; resolvePrincipal falls back to a table lookup.
+        kind?: "user" | "officer";
         ward_id?: string | number | null;
       };
     }
@@ -22,6 +25,7 @@ type TokenPayload = jwt.JwtPayload & {
   sub?: string;
   email?: string;
   role?: string;
+  kind?: "user" | "officer";
   ward_id?: string | number | null;
 };
 
@@ -65,6 +69,7 @@ export function requireAuth(req: Request, res: Response, next: NextFunction) {
       id: String(userId),
       email: payload.email || "",
       role: payload.role || "citizen",
+      kind: payload.kind,
       ward_id: payload.ward_id ?? null,
     };
 

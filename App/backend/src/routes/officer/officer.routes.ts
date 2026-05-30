@@ -20,6 +20,7 @@ import {
   profile,
   updatePhoto,
   changePassword,
+  forceChangePassword,
 } from "@/controllers/officer/officer.controller";
 
 const router = Router();
@@ -54,5 +55,6 @@ router.patch("/profile/photo", uploadMemory.single("image"), updatePhoto);
 
 // Password
 router.post("/change-password", changePassword);
+router.post("/force-change-password", forceChangePassword);
 
 export default router;

@@ -41,6 +41,8 @@ export async function meService(jwtUser) {
             wards: {
                 select: {
                     name: true,
+                    municipality_id: true,
+                    municipality: { select: { name: true } },
                 },
             },
             officer_departments: {
@@ -67,6 +69,10 @@ export async function meService(jwtUser) {
                 department_name: officer.officer_departments.name,
                 ward_id: officer.ward_id ?? null,
                 ward_name: officer.wards?.name ?? null,
+                // Officers have no direct municipality column — it's derived from
+                // their ward. municipality_officer rows without a ward stay null.
+                municipality_id: officer.wards?.municipality_id ?? null,
+                municipality_name: officer.wards?.municipality?.name ?? null,
             },
         };
     }

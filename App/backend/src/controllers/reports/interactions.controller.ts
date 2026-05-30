@@ -6,6 +6,7 @@ import {
   getCommentsService,
   addCommentService,
   toggleBookmarkService,
+  getReportChangelogService,
 } from "../../services/reports/interactions.service";
 
 // ─── Report Detail ───────────────────────────────────────────────────
@@ -207,6 +208,24 @@ export async function addCommentController(req: Request, res: Response) {
       success: false,
       error: err.message || "Failed to add comment",
     } satisfies ApiResponse);
+  }
+}
+
+// ─── Changelog ───────────────────────────────────────────────────────
+export async function getReportChangelogController(req: Request, res: Response) {
+  try {
+    const reportId = req.params.id;
+    if (!reportId || typeof reportId !== "string" || !reportId.trim()) {
+      return res.status(400).json({ success: false, error: "Invalid report ID" } satisfies ApiResponse);
+    }
+    const changelog = await getReportChangelogService(reportId);
+    return res.json({ success: true, data: { changelog } } satisfies ApiResponse);
+  } catch (err: any) {
+    if (err.message === "Report not found") {
+      return res.status(404).json({ success: false, error: "Report not found" } satisfies ApiResponse);
+    }
+    console.error("❌ getReportChangelogController:", err);
+    return res.status(500).json({ success: false, error: "Server error" } satisfies ApiResponse);
   }
 }
 

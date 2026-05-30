@@ -144,6 +144,74 @@ export async function addCommentService({ reportId, userId, content, }) {
     }
     return created;
 }
+export async function getReportChangelogService(reportId) {
+    const { rows: rr } = await pool.query(`SELECT r.submitted_at, r.created_at,
+            r.escalated_at, r.escalated_to_municipality,
+            r.pathway_reason,
+            r.returned_to_ward_at,
+            u.name AS reporter_name,
+            CASE WHEN r.user_id IS NULL THEN TRUE ELSE FALSE END AS is_anonymous
+     FROM reports r
+     LEFT JOIN users u ON u.id = r.user_id
+     WHERE r.id = $1`, [reportId]);
+    if (!rr.length)
+        throw new Error("Report not found");
+    const r = rr[0];
+    const { rows: logRows } = await pool.query(`SELECT id, actor_name, action, details, created_at
+     FROM activity_log
+     WHERE report_id = $1
+     ORDER BY created_at ASC`, [reportId]);
+    const events = [];
+    // Submission event (always synthesized — nothing logs this in activity_log)
+    events.push({
+        id: "evt_submitted",
+        event_type: "submitted",
+        actor_name: r.is_anonymous ? "Anonymous" : (r.reporter_name ?? "Citizen"),
+        from_status: null,
+        to_status: "incoming",
+        note: null,
+        timestamp: new Date(r.submitted_at ?? r.created_at).toISOString(),
+    });
+    // Activity log entries (status_change, proof_uploaded, comment_added)
+    for (const row of logRows) {
+        const d = (row.details ?? {});
+        events.push({
+            id: String(row.id),
+            event_type: String(row.action),
+            actor_name: row.actor_name ? String(row.actor_name) : "Officer",
+            from_status: d.from_status ? String(d.from_status) : null,
+            to_status: d.to_status ? String(d.to_status) : null,
+            note: d.note ? String(d.note) : null,
+            timestamp: new Date(row.created_at).toISOString(),
+        });
+    }
+    // Escalation event — synthesized if not already logged
+    if (r.escalated_to_municipality && r.escalated_at) {
+        events.push({
+            id: "evt_escalated",
+            event_type: "escalated",
+            actor_name: null,
+            from_status: null,
+            to_status: null,
+            note: r.pathway_reason ? String(r.pathway_reason) : null,
+            timestamp: new Date(r.escalated_at).toISOString(),
+        });
+    }
+    // Returned to ward event
+    if (r.returned_to_ward_at) {
+        events.push({
+            id: "evt_returned_ward",
+            event_type: "returned_to_ward",
+            actor_name: null,
+            from_status: null,
+            to_status: null,
+            note: null,
+            timestamp: new Date(r.returned_to_ward_at).toISOString(),
+        });
+    }
+    events.sort((a, b) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime());
+    return events;
+}
 // ─── Bookmark (toggle) ──────────────────────────────────────────────
 export async function toggleBookmarkService(reportId, // ✅ UUID string
 userId) {

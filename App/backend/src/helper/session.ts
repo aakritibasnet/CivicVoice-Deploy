@@ -43,6 +43,7 @@ export async function createSession(
     id: user.id,
     email: user.email,
     role: user.role,
+    kind: user.isOfficer ? "officer" : "user",
     ward_id: user.ward_id ?? null,
   });
 

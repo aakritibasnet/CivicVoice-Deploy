@@ -31,7 +31,13 @@ export type NotificationType =
   | "task_completed"
   | "task_reassigned"
   | "task_comment"
-  | "task_status_updated";
+  | "task_status_updated"
+  | "chat_message"
+  | "chat_mention"
+  | "chat_escalated"
+  | "chat_announcement"
+  | "chat_sla_overdue"
+  | "chat_closed";
 
 export type NotificationRow = {
   id: string;
@@ -168,6 +174,15 @@ function isTypeEnabled(
     case "task_reassigned":
     case "task_comment":
     case "task_status_updated":
+      return true;
+    // Chat notifications: presence/mute suppression is decided upstream in
+    // chat-notify.service; if we reach here the message is meant to land.
+    case "chat_message":
+    case "chat_mention":
+    case "chat_escalated":
+    case "chat_announcement":
+    case "chat_sla_overdue":
+    case "chat_closed":
       return true;
     default:
       return true;

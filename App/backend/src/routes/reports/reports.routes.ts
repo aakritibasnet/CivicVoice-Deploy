@@ -17,9 +17,11 @@ import {
   getCommentsController,
   addCommentController,
   toggleBookmarkController,
+  getReportChangelogController,
 } from "../../controllers/reports/interactions.controller";
 import { updateReportStatusController } from "../../controllers/reports/status.controller";
 import { toggleFollowController } from "../../controllers/reports/followers.controller";
+import { analyzeImageController } from "../../controllers/ai/analyze.controller";
 
 const reportsRoutes = Router();
 
@@ -51,6 +53,15 @@ reportsRoutes.post(
   createReportController,
 );
 
+// AI Vision auto-fill: analyze a captured photo and suggest report fields.
+// Specific route — MUST stay before the "/:id" route below.
+reportsRoutes.post(
+  "/analyze-image",
+  optionalAuth,
+  uploadReportMedia,
+  analyzeImageController,
+);
+
 // List public reports (no auth required, paginated, with optional bounds)
 reportsRoutes.get("/public", optionalAuth, publicReportsController);
 
@@ -68,6 +79,9 @@ reportsRoutes.post("/claim", requireAuth, claimReportsController);
 // Report detail (optional auth — shows upvote/bookmark status if logged in)
 // ✅ This MUST come after specific routes like /public, /my, /claim
 reportsRoutes.get("/:id", optionalAuth, getReportDetailController);
+
+// Changelog (public — no auth needed)
+reportsRoutes.get("/:id/changelog", getReportChangelogController);
 
 // Upvote (auth required)
 reportsRoutes.post("/:id/upvote", requireAuth, toggleUpvoteController);

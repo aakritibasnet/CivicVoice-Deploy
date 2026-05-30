@@ -31,6 +31,7 @@ export function requireAuth(req, res, next) {
             id: String(userId),
             email: payload.email || "",
             role: payload.role || "citizen",
+            kind: payload.kind,
             ward_id: payload.ward_id ?? null,
         };
         return next();

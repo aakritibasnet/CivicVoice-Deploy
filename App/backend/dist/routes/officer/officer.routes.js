@@ -3,7 +3,7 @@ import { Router } from "express";
 import { requireAuth } from "@/middleware/auth";
 import { requireOfficerRole } from "@/middleware/requireOfficer";
 import { uploadMemory } from "@/lib/upload.memory";
-import { listTasks, taskDetail, changeTaskStatus, uploadProof, listReports, reportDetail, commentOnReport, commentOnTask, listNotifications, unreadCount, markNotifRead, markAllNotifsRead, history, profile, updatePhoto, changePassword, } from "@/controllers/officer/officer.controller";
+import { listTasks, taskDetail, changeTaskStatus, uploadProof, listReports, reportDetail, commentOnReport, commentOnTask, listNotifications, unreadCount, markNotifRead, markAllNotifsRead, history, profile, updatePhoto, changePassword, forceChangePassword, } from "@/controllers/officer/officer.controller";
 const router = Router();
 // All officer routes require auth + officer role
 router.use(requireAuth, requireOfficerRole);
@@ -29,4 +29,5 @@ router.get("/profile", profile);
 router.patch("/profile/photo", uploadMemory.single("image"), updatePhoto);
 // Password
 router.post("/change-password", changePassword);
+router.post("/force-change-password", forceChangePassword);
 export default router;

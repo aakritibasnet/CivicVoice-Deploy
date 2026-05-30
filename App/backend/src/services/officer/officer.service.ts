@@ -1064,6 +1064,39 @@ export async function updateOfficerPhoto(officerId: string, imageUrl: string) {
 
 // ─── Password Change ──────────────────────────────────────────────────
 
+export async function forceChangeOfficerPassword(
+  officerId: string,
+  newPassword: string,
+) {
+  if (!newPassword || newPassword.length < 6) {
+    throw new AppError("New password must be at least 6 characters", 400);
+  }
+
+  const res = await pool.query(
+    `SELECT must_change_password FROM officers WHERE id = $1 AND deleted_at IS NULL`,
+    [officerId],
+  );
+
+  if (res.rows.length === 0) {
+    throw new AppError("Officer not found", 404);
+  }
+
+  if (!res.rows[0].must_change_password) {
+    throw new AppError("Password reset not required for this account", 403);
+  }
+
+  const hash = await bcrypt.hash(newPassword, 12);
+
+  await pool.query(
+    `UPDATE officers
+     SET password_hash = $2, must_change_password = false, password_changed_at = NOW(), updated_at = NOW()
+     WHERE id = $1`,
+    [officerId, hash],
+  );
+
+  return { success: true, message: "Password updated successfully" };
+}
+
 export async function changeOfficerPassword(
   officerId: string,
   oldPassword: string,

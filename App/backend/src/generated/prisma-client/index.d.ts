@@ -208,6 +208,26 @@ export type municipalities = $Result.DefaultSelection<Prisma.$municipalitiesPayl
  * This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
  */
 export type wards = $Result.DefaultSelection<Prisma.$wardsPayload>
+/**
+ * Model chats
+ * 
+ */
+export type chats = $Result.DefaultSelection<Prisma.$chatsPayload>
+/**
+ * Model chat_participants
+ * 
+ */
+export type chat_participants = $Result.DefaultSelection<Prisma.$chat_participantsPayload>
+/**
+ * Model messages
+ * 
+ */
+export type messages = $Result.DefaultSelection<Prisma.$messagesPayload>
+/**
+ * Model message_receipts
+ * 
+ */
+export type message_receipts = $Result.DefaultSelection<Prisma.$message_receiptsPayload>
 
 /**
  * Enums
@@ -268,6 +288,59 @@ export const officer_type: {
 
 export type officer_type = (typeof officer_type)[keyof typeof officer_type]
 
+
+export const chat_type: {
+  officer_ward: 'officer_ward',
+  municipality_internal: 'municipality_internal',
+  ward_municipality: 'ward_municipality',
+  complaint_case: 'complaint_case'
+};
+
+export type chat_type = (typeof chat_type)[keyof typeof chat_type]
+
+
+export const chat_status: {
+  open: 'open',
+  pending: 'pending',
+  escalated: 'escalated',
+  resolved: 'resolved',
+  closed: 'closed',
+  reopened: 'reopened'
+};
+
+export type chat_status = (typeof chat_status)[keyof typeof chat_status]
+
+
+export const chat_priority: {
+  normal: 'normal',
+  important: 'important',
+  urgent: 'urgent',
+  emergency: 'emergency'
+};
+
+export type chat_priority = (typeof chat_priority)[keyof typeof chat_priority]
+
+
+export const chat_role: {
+  admin: 'admin',
+  member: 'member',
+  viewer: 'viewer'
+};
+
+export type chat_role = (typeof chat_role)[keyof typeof chat_role]
+
+
+export const chat_message_type: {
+  text: 'text',
+  image: 'image',
+  file: 'file',
+  audio: 'audio',
+  location: 'location',
+  system: 'system'
+};
+
+export type chat_message_type = (typeof chat_message_type)[keyof typeof chat_message_type]
+
 }
 
 export type pathway_type = $Enums.pathway_type
@@ -293,6 +366,26 @@ export const user_role: typeof $Enums.user_role
 export type officer_type = $Enums.officer_type
 
 export const officer_type: typeof $Enums.officer_type
+
+export type chat_type = $Enums.chat_type
+
+export const chat_type: typeof $Enums.chat_type
+
+export type chat_status = $Enums.chat_status
+
+export const chat_status: typeof $Enums.chat_status
+
+export type chat_priority = $Enums.chat_priority
+
+export const chat_priority: typeof $Enums.chat_priority
+
+export type chat_role = $Enums.chat_role
+
+export const chat_role: typeof $Enums.chat_role
+
+export type chat_message_type = $Enums.chat_message_type
+
+export const chat_message_type: typeof $Enums.chat_message_type
 
 /**
  * ##  Prisma Client ʲˢ
@@ -801,6 +894,46 @@ export class PrismaClient<
     * ```
     */
   get wards(): Prisma.wardsDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.chats`: Exposes CRUD operations for the **chats** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Chats
+    * const chats = await prisma.chats.findMany()
+    * ```
+    */
+  get chats(): Prisma.chatsDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.chat_participants`: Exposes CRUD operations for the **chat_participants** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Chat_participants
+    * const chat_participants = await prisma.chat_participants.findMany()
+    * ```
+    */
+  get chat_participants(): Prisma.chat_participantsDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.messages`: Exposes CRUD operations for the **messages** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Messages
+    * const messages = await prisma.messages.findMany()
+    * ```
+    */
+  get messages(): Prisma.messagesDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.message_receipts`: Exposes CRUD operations for the **message_receipts** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Message_receipts
+    * const message_receipts = await prisma.message_receipts.findMany()
+    * ```
+    */
+  get message_receipts(): Prisma.message_receiptsDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -1280,7 +1413,11 @@ export namespace Prisma {
     officer_departments: 'officer_departments',
     officers: 'officers',
     municipalities: 'municipalities',
-    wards: 'wards'
+    wards: 'wards',
+    chats: 'chats',
+    chat_participants: 'chat_participants',
+    messages: 'messages',
+    message_receipts: 'message_receipts'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1299,7 +1436,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "activity_log" | "analytics_snapshots" | "ward_happiness_events" | "anonymous_report_claims" | "anonymous_reports" | "attachments" | "badges" | "bookmarks" | "comments" | "task_completions" | "report_posts" | "report_ratings" | "report_comments" | "report_comment_reports" | "report_post_bookmarks" | "kanban_columns" | "notification_preferences" | "kanban_user_preferences" | "notifications" | "report_followers" | "push_tokens" | "password_reset_tokens" | "pending_users" | "refresh_tokens" | "officer_refresh_tokens" | "reports" | "sessions" | "spatial_ref_sys" | "system_settings" | "upvotes" | "user_badges" | "user_stats" | "users" | "verification_codes" | "ward_officers" | "officer_departments" | "officers" | "municipalities" | "wards"
+      modelProps: "activity_log" | "analytics_snapshots" | "ward_happiness_events" | "anonymous_report_claims" | "anonymous_reports" | "attachments" | "badges" | "bookmarks" | "comments" | "task_completions" | "report_posts" | "report_ratings" | "report_comments" | "report_comment_reports" | "report_post_bookmarks" | "kanban_columns" | "notification_preferences" | "kanban_user_preferences" | "notifications" | "report_followers" | "push_tokens" | "password_reset_tokens" | "pending_users" | "refresh_tokens" | "officer_refresh_tokens" | "reports" | "sessions" | "spatial_ref_sys" | "system_settings" | "upvotes" | "user_badges" | "user_stats" | "users" | "verification_codes" | "ward_officers" | "officer_departments" | "officers" | "municipalities" | "wards" | "chats" | "chat_participants" | "messages" | "message_receipts"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -4189,6 +4326,302 @@ export namespace Prisma {
           }
         }
       }
+      chats: {
+        payload: Prisma.$chatsPayload<ExtArgs>
+        fields: Prisma.chatsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.chatsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$chatsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.chatsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$chatsPayload>
+          }
+          findFirst: {
+            args: Prisma.chatsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$chatsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.chatsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$chatsPayload>
+          }
+          findMany: {
+            args: Prisma.chatsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$chatsPayload>[]
+          }
+          create: {
+            args: Prisma.chatsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$chatsPayload>
+          }
+          createMany: {
+            args: Prisma.chatsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.chatsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$chatsPayload>[]
+          }
+          delete: {
+            args: Prisma.chatsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$chatsPayload>
+          }
+          update: {
+            args: Prisma.chatsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$chatsPayload>
+          }
+          deleteMany: {
+            args: Prisma.chatsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.chatsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.chatsUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$chatsPayload>[]
+          }
+          upsert: {
+            args: Prisma.chatsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$chatsPayload>
+          }
+          aggregate: {
+            args: Prisma.ChatsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateChats>
+          }
+          groupBy: {
+            args: Prisma.chatsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ChatsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.chatsCountArgs<ExtArgs>
+            result: $Utils.Optional<ChatsCountAggregateOutputType> | number
+          }
+        }
+      }
+      chat_participants: {
+        payload: Prisma.$chat_participantsPayload<ExtArgs>
+        fields: Prisma.chat_participantsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.chat_participantsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$chat_participantsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.chat_participantsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$chat_participantsPayload>
+          }
+          findFirst: {
+            args: Prisma.chat_participantsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$chat_participantsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.chat_participantsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$chat_participantsPayload>
+          }
+          findMany: {
+            args: Prisma.chat_participantsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$chat_participantsPayload>[]
+          }
+          create: {
+            args: Prisma.chat_participantsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$chat_participantsPayload>
+          }
+          createMany: {
+            args: Prisma.chat_participantsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.chat_participantsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$chat_participantsPayload>[]
+          }
+          delete: {
+            args: Prisma.chat_participantsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$chat_participantsPayload>
+          }
+          update: {
+            args: Prisma.chat_participantsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$chat_participantsPayload>
+          }
+          deleteMany: {
+            args: Prisma.chat_participantsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.chat_participantsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.chat_participantsUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$chat_participantsPayload>[]
+          }
+          upsert: {
+            args: Prisma.chat_participantsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$chat_participantsPayload>
+          }
+          aggregate: {
+            args: Prisma.Chat_participantsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateChat_participants>
+          }
+          groupBy: {
+            args: Prisma.chat_participantsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<Chat_participantsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.chat_participantsCountArgs<ExtArgs>
+            result: $Utils.Optional<Chat_participantsCountAggregateOutputType> | number
+          }
+        }
+      }
+      messages: {
+        payload: Prisma.$messagesPayload<ExtArgs>
+        fields: Prisma.messagesFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.messagesFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$messagesPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.messagesFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$messagesPayload>
+          }
+          findFirst: {
+            args: Prisma.messagesFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$messagesPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.messagesFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$messagesPayload>
+          }
+          findMany: {
+            args: Prisma.messagesFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$messagesPayload>[]
+          }
+          create: {
+            args: Prisma.messagesCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$messagesPayload>
+          }
+          createMany: {
+            args: Prisma.messagesCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.messagesCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$messagesPayload>[]
+          }
+          delete: {
+            args: Prisma.messagesDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$messagesPayload>
+          }
+          update: {
+            args: Prisma.messagesUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$messagesPayload>
+          }
+          deleteMany: {
+            args: Prisma.messagesDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.messagesUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.messagesUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$messagesPayload>[]
+          }
+          upsert: {
+            args: Prisma.messagesUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$messagesPayload>
+          }
+          aggregate: {
+            args: Prisma.MessagesAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMessages>
+          }
+          groupBy: {
+            args: Prisma.messagesGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MessagesGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.messagesCountArgs<ExtArgs>
+            result: $Utils.Optional<MessagesCountAggregateOutputType> | number
+          }
+        }
+      }
+      message_receipts: {
+        payload: Prisma.$message_receiptsPayload<ExtArgs>
+        fields: Prisma.message_receiptsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.message_receiptsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$message_receiptsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.message_receiptsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$message_receiptsPayload>
+          }
+          findFirst: {
+            args: Prisma.message_receiptsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$message_receiptsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.message_receiptsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$message_receiptsPayload>
+          }
+          findMany: {
+            args: Prisma.message_receiptsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$message_receiptsPayload>[]
+          }
+          create: {
+            args: Prisma.message_receiptsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$message_receiptsPayload>
+          }
+          createMany: {
+            args: Prisma.message_receiptsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.message_receiptsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$message_receiptsPayload>[]
+          }
+          delete: {
+            args: Prisma.message_receiptsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$message_receiptsPayload>
+          }
+          update: {
+            args: Prisma.message_receiptsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$message_receiptsPayload>
+          }
+          deleteMany: {
+            args: Prisma.message_receiptsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.message_receiptsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.message_receiptsUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$message_receiptsPayload>[]
+          }
+          upsert: {
+            args: Prisma.message_receiptsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$message_receiptsPayload>
+          }
+          aggregate: {
+            args: Prisma.Message_receiptsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMessage_receipts>
+          }
+          groupBy: {
+            args: Prisma.message_receiptsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<Message_receiptsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.message_receiptsCountArgs<ExtArgs>
+            result: $Utils.Optional<Message_receiptsCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -4324,6 +4757,10 @@ export namespace Prisma {
     officers?: officersOmit
     municipalities?: municipalitiesOmit
     wards?: wardsOmit
+    chats?: chatsOmit
+    chat_participants?: chat_participantsOmit
+    messages?: messagesOmit
+    message_receipts?: message_receiptsOmit
   }
 
   /* Types for Logging */
@@ -51052,6 +51489,4337 @@ export namespace Prisma {
 
 
   /**
+   * Model chats
+   */
+
+  export type AggregateChats = {
+    _count: ChatsCountAggregateOutputType | null
+    _min: ChatsMinAggregateOutputType | null
+    _max: ChatsMaxAggregateOutputType | null
+  }
+
+  export type ChatsMinAggregateOutputType = {
+    id: string | null
+    type: $Enums.chat_type | null
+    title: string | null
+    municipality_id: string | null
+    ward_id: string | null
+    department_id: string | null
+    complaint_id: string | null
+    status: $Enums.chat_status | null
+    priority: $Enums.chat_priority | null
+    is_group: boolean | null
+    is_archived: boolean | null
+    created_by_kind: string | null
+    created_by_id: string | null
+    last_message_at: Date | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type ChatsMaxAggregateOutputType = {
+    id: string | null
+    type: $Enums.chat_type | null
+    title: string | null
+    municipality_id: string | null
+    ward_id: string | null
+    department_id: string | null
+    complaint_id: string | null
+    status: $Enums.chat_status | null
+    priority: $Enums.chat_priority | null
+    is_group: boolean | null
+    is_archived: boolean | null
+    created_by_kind: string | null
+    created_by_id: string | null
+    last_message_at: Date | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type ChatsCountAggregateOutputType = {
+    id: number
+    type: number
+    title: number
+    municipality_id: number
+    ward_id: number
+    department_id: number
+    complaint_id: number
+    status: number
+    priority: number
+    is_group: number
+    is_archived: number
+    created_by_kind: number
+    created_by_id: number
+    last_message_at: number
+    created_at: number
+    updated_at: number
+    _all: number
+  }
+
+
+  export type ChatsMinAggregateInputType = {
+    id?: true
+    type?: true
+    title?: true
+    municipality_id?: true
+    ward_id?: true
+    department_id?: true
+    complaint_id?: true
+    status?: true
+    priority?: true
+    is_group?: true
+    is_archived?: true
+    created_by_kind?: true
+    created_by_id?: true
+    last_message_at?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type ChatsMaxAggregateInputType = {
+    id?: true
+    type?: true
+    title?: true
+    municipality_id?: true
+    ward_id?: true
+    department_id?: true
+    complaint_id?: true
+    status?: true
+    priority?: true
+    is_group?: true
+    is_archived?: true
+    created_by_kind?: true
+    created_by_id?: true
+    last_message_at?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type ChatsCountAggregateInputType = {
+    id?: true
+    type?: true
+    title?: true
+    municipality_id?: true
+    ward_id?: true
+    department_id?: true
+    complaint_id?: true
+    status?: true
+    priority?: true
+    is_group?: true
+    is_archived?: true
+    created_by_kind?: true
+    created_by_id?: true
+    last_message_at?: true
+    created_at?: true
+    updated_at?: true
+    _all?: true
+  }
+
+  export type ChatsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which chats to aggregate.
+     */
+    where?: chatsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of chats to fetch.
+     */
+    orderBy?: chatsOrderByWithRelationInput | chatsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: chatsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` chats from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` chats.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned chats
+    **/
+    _count?: true | ChatsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ChatsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ChatsMaxAggregateInputType
+  }
+
+  export type GetChatsAggregateType<T extends ChatsAggregateArgs> = {
+        [P in keyof T & keyof AggregateChats]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateChats[P]>
+      : GetScalarType<T[P], AggregateChats[P]>
+  }
+
+
+
+
+  export type chatsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: chatsWhereInput
+    orderBy?: chatsOrderByWithAggregationInput | chatsOrderByWithAggregationInput[]
+    by: ChatsScalarFieldEnum[] | ChatsScalarFieldEnum
+    having?: chatsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ChatsCountAggregateInputType | true
+    _min?: ChatsMinAggregateInputType
+    _max?: ChatsMaxAggregateInputType
+  }
+
+  export type ChatsGroupByOutputType = {
+    id: string
+    type: $Enums.chat_type
+    title: string | null
+    municipality_id: string | null
+    ward_id: string | null
+    department_id: string | null
+    complaint_id: string | null
+    status: $Enums.chat_status
+    priority: $Enums.chat_priority
+    is_group: boolean
+    is_archived: boolean
+    created_by_kind: string
+    created_by_id: string
+    last_message_at: Date | null
+    created_at: Date
+    updated_at: Date
+    _count: ChatsCountAggregateOutputType | null
+    _min: ChatsMinAggregateOutputType | null
+    _max: ChatsMaxAggregateOutputType | null
+  }
+
+  type GetChatsGroupByPayload<T extends chatsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ChatsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ChatsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ChatsGroupByOutputType[P]>
+            : GetScalarType<T[P], ChatsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type chatsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    type?: boolean
+    title?: boolean
+    municipality_id?: boolean
+    ward_id?: boolean
+    department_id?: boolean
+    complaint_id?: boolean
+    status?: boolean
+    priority?: boolean
+    is_group?: boolean
+    is_archived?: boolean
+    created_by_kind?: boolean
+    created_by_id?: boolean
+    last_message_at?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }, ExtArgs["result"]["chats"]>
+
+  export type chatsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    type?: boolean
+    title?: boolean
+    municipality_id?: boolean
+    ward_id?: boolean
+    department_id?: boolean
+    complaint_id?: boolean
+    status?: boolean
+    priority?: boolean
+    is_group?: boolean
+    is_archived?: boolean
+    created_by_kind?: boolean
+    created_by_id?: boolean
+    last_message_at?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }, ExtArgs["result"]["chats"]>
+
+  export type chatsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    type?: boolean
+    title?: boolean
+    municipality_id?: boolean
+    ward_id?: boolean
+    department_id?: boolean
+    complaint_id?: boolean
+    status?: boolean
+    priority?: boolean
+    is_group?: boolean
+    is_archived?: boolean
+    created_by_kind?: boolean
+    created_by_id?: boolean
+    last_message_at?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }, ExtArgs["result"]["chats"]>
+
+  export type chatsSelectScalar = {
+    id?: boolean
+    type?: boolean
+    title?: boolean
+    municipality_id?: boolean
+    ward_id?: boolean
+    department_id?: boolean
+    complaint_id?: boolean
+    status?: boolean
+    priority?: boolean
+    is_group?: boolean
+    is_archived?: boolean
+    created_by_kind?: boolean
+    created_by_id?: boolean
+    last_message_at?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }
+
+  export type chatsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "type" | "title" | "municipality_id" | "ward_id" | "department_id" | "complaint_id" | "status" | "priority" | "is_group" | "is_archived" | "created_by_kind" | "created_by_id" | "last_message_at" | "created_at" | "updated_at", ExtArgs["result"]["chats"]>
+
+  export type $chatsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "chats"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      type: $Enums.chat_type
+      title: string | null
+      municipality_id: string | null
+      ward_id: string | null
+      department_id: string | null
+      complaint_id: string | null
+      status: $Enums.chat_status
+      priority: $Enums.chat_priority
+      is_group: boolean
+      is_archived: boolean
+      created_by_kind: string
+      created_by_id: string
+      last_message_at: Date | null
+      created_at: Date
+      updated_at: Date
+    }, ExtArgs["result"]["chats"]>
+    composites: {}
+  }
+
+  type chatsGetPayload<S extends boolean | null | undefined | chatsDefaultArgs> = $Result.GetResult<Prisma.$chatsPayload, S>
+
+  type chatsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<chatsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ChatsCountAggregateInputType | true
+    }
+
+  export interface chatsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['chats'], meta: { name: 'chats' } }
+    /**
+     * Find zero or one Chats that matches the filter.
+     * @param {chatsFindUniqueArgs} args - Arguments to find a Chats
+     * @example
+     * // Get one Chats
+     * const chats = await prisma.chats.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends chatsFindUniqueArgs>(args: SelectSubset<T, chatsFindUniqueArgs<ExtArgs>>): Prisma__chatsClient<$Result.GetResult<Prisma.$chatsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Chats that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {chatsFindUniqueOrThrowArgs} args - Arguments to find a Chats
+     * @example
+     * // Get one Chats
+     * const chats = await prisma.chats.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends chatsFindUniqueOrThrowArgs>(args: SelectSubset<T, chatsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__chatsClient<$Result.GetResult<Prisma.$chatsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Chats that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {chatsFindFirstArgs} args - Arguments to find a Chats
+     * @example
+     * // Get one Chats
+     * const chats = await prisma.chats.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends chatsFindFirstArgs>(args?: SelectSubset<T, chatsFindFirstArgs<ExtArgs>>): Prisma__chatsClient<$Result.GetResult<Prisma.$chatsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Chats that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {chatsFindFirstOrThrowArgs} args - Arguments to find a Chats
+     * @example
+     * // Get one Chats
+     * const chats = await prisma.chats.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends chatsFindFirstOrThrowArgs>(args?: SelectSubset<T, chatsFindFirstOrThrowArgs<ExtArgs>>): Prisma__chatsClient<$Result.GetResult<Prisma.$chatsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Chats that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {chatsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Chats
+     * const chats = await prisma.chats.findMany()
+     * 
+     * // Get first 10 Chats
+     * const chats = await prisma.chats.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const chatsWithIdOnly = await prisma.chats.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends chatsFindManyArgs>(args?: SelectSubset<T, chatsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$chatsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Chats.
+     * @param {chatsCreateArgs} args - Arguments to create a Chats.
+     * @example
+     * // Create one Chats
+     * const Chats = await prisma.chats.create({
+     *   data: {
+     *     // ... data to create a Chats
+     *   }
+     * })
+     * 
+     */
+    create<T extends chatsCreateArgs>(args: SelectSubset<T, chatsCreateArgs<ExtArgs>>): Prisma__chatsClient<$Result.GetResult<Prisma.$chatsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Chats.
+     * @param {chatsCreateManyArgs} args - Arguments to create many Chats.
+     * @example
+     * // Create many Chats
+     * const chats = await prisma.chats.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends chatsCreateManyArgs>(args?: SelectSubset<T, chatsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Chats and returns the data saved in the database.
+     * @param {chatsCreateManyAndReturnArgs} args - Arguments to create many Chats.
+     * @example
+     * // Create many Chats
+     * const chats = await prisma.chats.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Chats and only return the `id`
+     * const chatsWithIdOnly = await prisma.chats.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends chatsCreateManyAndReturnArgs>(args?: SelectSubset<T, chatsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$chatsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Chats.
+     * @param {chatsDeleteArgs} args - Arguments to delete one Chats.
+     * @example
+     * // Delete one Chats
+     * const Chats = await prisma.chats.delete({
+     *   where: {
+     *     // ... filter to delete one Chats
+     *   }
+     * })
+     * 
+     */
+    delete<T extends chatsDeleteArgs>(args: SelectSubset<T, chatsDeleteArgs<ExtArgs>>): Prisma__chatsClient<$Result.GetResult<Prisma.$chatsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Chats.
+     * @param {chatsUpdateArgs} args - Arguments to update one Chats.
+     * @example
+     * // Update one Chats
+     * const chats = await prisma.chats.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends chatsUpdateArgs>(args: SelectSubset<T, chatsUpdateArgs<ExtArgs>>): Prisma__chatsClient<$Result.GetResult<Prisma.$chatsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Chats.
+     * @param {chatsDeleteManyArgs} args - Arguments to filter Chats to delete.
+     * @example
+     * // Delete a few Chats
+     * const { count } = await prisma.chats.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends chatsDeleteManyArgs>(args?: SelectSubset<T, chatsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Chats.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {chatsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Chats
+     * const chats = await prisma.chats.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends chatsUpdateManyArgs>(args: SelectSubset<T, chatsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Chats and returns the data updated in the database.
+     * @param {chatsUpdateManyAndReturnArgs} args - Arguments to update many Chats.
+     * @example
+     * // Update many Chats
+     * const chats = await prisma.chats.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Chats and only return the `id`
+     * const chatsWithIdOnly = await prisma.chats.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends chatsUpdateManyAndReturnArgs>(args: SelectSubset<T, chatsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$chatsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Chats.
+     * @param {chatsUpsertArgs} args - Arguments to update or create a Chats.
+     * @example
+     * // Update or create a Chats
+     * const chats = await prisma.chats.upsert({
+     *   create: {
+     *     // ... data to create a Chats
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Chats we want to update
+     *   }
+     * })
+     */
+    upsert<T extends chatsUpsertArgs>(args: SelectSubset<T, chatsUpsertArgs<ExtArgs>>): Prisma__chatsClient<$Result.GetResult<Prisma.$chatsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Chats.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {chatsCountArgs} args - Arguments to filter Chats to count.
+     * @example
+     * // Count the number of Chats
+     * const count = await prisma.chats.count({
+     *   where: {
+     *     // ... the filter for the Chats we want to count
+     *   }
+     * })
+    **/
+    count<T extends chatsCountArgs>(
+      args?: Subset<T, chatsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ChatsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Chats.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChatsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ChatsAggregateArgs>(args: Subset<T, ChatsAggregateArgs>): Prisma.PrismaPromise<GetChatsAggregateType<T>>
+
+    /**
+     * Group by Chats.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {chatsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends chatsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: chatsGroupByArgs['orderBy'] }
+        : { orderBy?: chatsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, chatsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetChatsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the chats model
+   */
+  readonly fields: chatsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for chats.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__chatsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the chats model
+   */
+  interface chatsFieldRefs {
+    readonly id: FieldRef<"chats", 'String'>
+    readonly type: FieldRef<"chats", 'chat_type'>
+    readonly title: FieldRef<"chats", 'String'>
+    readonly municipality_id: FieldRef<"chats", 'String'>
+    readonly ward_id: FieldRef<"chats", 'String'>
+    readonly department_id: FieldRef<"chats", 'String'>
+    readonly complaint_id: FieldRef<"chats", 'String'>
+    readonly status: FieldRef<"chats", 'chat_status'>
+    readonly priority: FieldRef<"chats", 'chat_priority'>
+    readonly is_group: FieldRef<"chats", 'Boolean'>
+    readonly is_archived: FieldRef<"chats", 'Boolean'>
+    readonly created_by_kind: FieldRef<"chats", 'String'>
+    readonly created_by_id: FieldRef<"chats", 'String'>
+    readonly last_message_at: FieldRef<"chats", 'DateTime'>
+    readonly created_at: FieldRef<"chats", 'DateTime'>
+    readonly updated_at: FieldRef<"chats", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * chats findUnique
+   */
+  export type chatsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the chats
+     */
+    select?: chatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the chats
+     */
+    omit?: chatsOmit<ExtArgs> | null
+    /**
+     * Filter, which chats to fetch.
+     */
+    where: chatsWhereUniqueInput
+  }
+
+  /**
+   * chats findUniqueOrThrow
+   */
+  export type chatsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the chats
+     */
+    select?: chatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the chats
+     */
+    omit?: chatsOmit<ExtArgs> | null
+    /**
+     * Filter, which chats to fetch.
+     */
+    where: chatsWhereUniqueInput
+  }
+
+  /**
+   * chats findFirst
+   */
+  export type chatsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the chats
+     */
+    select?: chatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the chats
+     */
+    omit?: chatsOmit<ExtArgs> | null
+    /**
+     * Filter, which chats to fetch.
+     */
+    where?: chatsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of chats to fetch.
+     */
+    orderBy?: chatsOrderByWithRelationInput | chatsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for chats.
+     */
+    cursor?: chatsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` chats from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` chats.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of chats.
+     */
+    distinct?: ChatsScalarFieldEnum | ChatsScalarFieldEnum[]
+  }
+
+  /**
+   * chats findFirstOrThrow
+   */
+  export type chatsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the chats
+     */
+    select?: chatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the chats
+     */
+    omit?: chatsOmit<ExtArgs> | null
+    /**
+     * Filter, which chats to fetch.
+     */
+    where?: chatsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of chats to fetch.
+     */
+    orderBy?: chatsOrderByWithRelationInput | chatsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for chats.
+     */
+    cursor?: chatsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` chats from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` chats.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of chats.
+     */
+    distinct?: ChatsScalarFieldEnum | ChatsScalarFieldEnum[]
+  }
+
+  /**
+   * chats findMany
+   */
+  export type chatsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the chats
+     */
+    select?: chatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the chats
+     */
+    omit?: chatsOmit<ExtArgs> | null
+    /**
+     * Filter, which chats to fetch.
+     */
+    where?: chatsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of chats to fetch.
+     */
+    orderBy?: chatsOrderByWithRelationInput | chatsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing chats.
+     */
+    cursor?: chatsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` chats from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` chats.
+     */
+    skip?: number
+    distinct?: ChatsScalarFieldEnum | ChatsScalarFieldEnum[]
+  }
+
+  /**
+   * chats create
+   */
+  export type chatsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the chats
+     */
+    select?: chatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the chats
+     */
+    omit?: chatsOmit<ExtArgs> | null
+    /**
+     * The data needed to create a chats.
+     */
+    data: XOR<chatsCreateInput, chatsUncheckedCreateInput>
+  }
+
+  /**
+   * chats createMany
+   */
+  export type chatsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many chats.
+     */
+    data: chatsCreateManyInput | chatsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * chats createManyAndReturn
+   */
+  export type chatsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the chats
+     */
+    select?: chatsSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the chats
+     */
+    omit?: chatsOmit<ExtArgs> | null
+    /**
+     * The data used to create many chats.
+     */
+    data: chatsCreateManyInput | chatsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * chats update
+   */
+  export type chatsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the chats
+     */
+    select?: chatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the chats
+     */
+    omit?: chatsOmit<ExtArgs> | null
+    /**
+     * The data needed to update a chats.
+     */
+    data: XOR<chatsUpdateInput, chatsUncheckedUpdateInput>
+    /**
+     * Choose, which chats to update.
+     */
+    where: chatsWhereUniqueInput
+  }
+
+  /**
+   * chats updateMany
+   */
+  export type chatsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update chats.
+     */
+    data: XOR<chatsUpdateManyMutationInput, chatsUncheckedUpdateManyInput>
+    /**
+     * Filter which chats to update
+     */
+    where?: chatsWhereInput
+    /**
+     * Limit how many chats to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * chats updateManyAndReturn
+   */
+  export type chatsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the chats
+     */
+    select?: chatsSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the chats
+     */
+    omit?: chatsOmit<ExtArgs> | null
+    /**
+     * The data used to update chats.
+     */
+    data: XOR<chatsUpdateManyMutationInput, chatsUncheckedUpdateManyInput>
+    /**
+     * Filter which chats to update
+     */
+    where?: chatsWhereInput
+    /**
+     * Limit how many chats to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * chats upsert
+   */
+  export type chatsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the chats
+     */
+    select?: chatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the chats
+     */
+    omit?: chatsOmit<ExtArgs> | null
+    /**
+     * The filter to search for the chats to update in case it exists.
+     */
+    where: chatsWhereUniqueInput
+    /**
+     * In case the chats found by the `where` argument doesn't exist, create a new chats with this data.
+     */
+    create: XOR<chatsCreateInput, chatsUncheckedCreateInput>
+    /**
+     * In case the chats was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<chatsUpdateInput, chatsUncheckedUpdateInput>
+  }
+
+  /**
+   * chats delete
+   */
+  export type chatsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the chats
+     */
+    select?: chatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the chats
+     */
+    omit?: chatsOmit<ExtArgs> | null
+    /**
+     * Filter which chats to delete.
+     */
+    where: chatsWhereUniqueInput
+  }
+
+  /**
+   * chats deleteMany
+   */
+  export type chatsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which chats to delete
+     */
+    where?: chatsWhereInput
+    /**
+     * Limit how many chats to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * chats without action
+   */
+  export type chatsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the chats
+     */
+    select?: chatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the chats
+     */
+    omit?: chatsOmit<ExtArgs> | null
+  }
+
+
+  /**
+   * Model chat_participants
+   */
+
+  export type AggregateChat_participants = {
+    _count: Chat_participantsCountAggregateOutputType | null
+    _min: Chat_participantsMinAggregateOutputType | null
+    _max: Chat_participantsMaxAggregateOutputType | null
+  }
+
+  export type Chat_participantsMinAggregateOutputType = {
+    id: string | null
+    chat_id: string | null
+    party_kind: string | null
+    party_id: string | null
+    role_in_chat: $Enums.chat_role | null
+    last_read_message_id: string | null
+    last_read_at: Date | null
+    muted_until: Date | null
+    notification_level: string | null
+    is_active: boolean | null
+    joined_at: Date | null
+    removed_at: Date | null
+  }
+
+  export type Chat_participantsMaxAggregateOutputType = {
+    id: string | null
+    chat_id: string | null
+    party_kind: string | null
+    party_id: string | null
+    role_in_chat: $Enums.chat_role | null
+    last_read_message_id: string | null
+    last_read_at: Date | null
+    muted_until: Date | null
+    notification_level: string | null
+    is_active: boolean | null
+    joined_at: Date | null
+    removed_at: Date | null
+  }
+
+  export type Chat_participantsCountAggregateOutputType = {
+    id: number
+    chat_id: number
+    party_kind: number
+    party_id: number
+    role_in_chat: number
+    last_read_message_id: number
+    last_read_at: number
+    muted_until: number
+    notification_level: number
+    is_active: number
+    joined_at: number
+    removed_at: number
+    _all: number
+  }
+
+
+  export type Chat_participantsMinAggregateInputType = {
+    id?: true
+    chat_id?: true
+    party_kind?: true
+    party_id?: true
+    role_in_chat?: true
+    last_read_message_id?: true
+    last_read_at?: true
+    muted_until?: true
+    notification_level?: true
+    is_active?: true
+    joined_at?: true
+    removed_at?: true
+  }
+
+  export type Chat_participantsMaxAggregateInputType = {
+    id?: true
+    chat_id?: true
+    party_kind?: true
+    party_id?: true
+    role_in_chat?: true
+    last_read_message_id?: true
+    last_read_at?: true
+    muted_until?: true
+    notification_level?: true
+    is_active?: true
+    joined_at?: true
+    removed_at?: true
+  }
+
+  export type Chat_participantsCountAggregateInputType = {
+    id?: true
+    chat_id?: true
+    party_kind?: true
+    party_id?: true
+    role_in_chat?: true
+    last_read_message_id?: true
+    last_read_at?: true
+    muted_until?: true
+    notification_level?: true
+    is_active?: true
+    joined_at?: true
+    removed_at?: true
+    _all?: true
+  }
+
+  export type Chat_participantsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which chat_participants to aggregate.
+     */
+    where?: chat_participantsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of chat_participants to fetch.
+     */
+    orderBy?: chat_participantsOrderByWithRelationInput | chat_participantsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: chat_participantsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` chat_participants from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` chat_participants.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned chat_participants
+    **/
+    _count?: true | Chat_participantsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Chat_participantsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Chat_participantsMaxAggregateInputType
+  }
+
+  export type GetChat_participantsAggregateType<T extends Chat_participantsAggregateArgs> = {
+        [P in keyof T & keyof AggregateChat_participants]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateChat_participants[P]>
+      : GetScalarType<T[P], AggregateChat_participants[P]>
+  }
+
+
+
+
+  export type chat_participantsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: chat_participantsWhereInput
+    orderBy?: chat_participantsOrderByWithAggregationInput | chat_participantsOrderByWithAggregationInput[]
+    by: Chat_participantsScalarFieldEnum[] | Chat_participantsScalarFieldEnum
+    having?: chat_participantsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Chat_participantsCountAggregateInputType | true
+    _min?: Chat_participantsMinAggregateInputType
+    _max?: Chat_participantsMaxAggregateInputType
+  }
+
+  export type Chat_participantsGroupByOutputType = {
+    id: string
+    chat_id: string
+    party_kind: string
+    party_id: string
+    role_in_chat: $Enums.chat_role
+    last_read_message_id: string | null
+    last_read_at: Date | null
+    muted_until: Date | null
+    notification_level: string
+    is_active: boolean
+    joined_at: Date
+    removed_at: Date | null
+    _count: Chat_participantsCountAggregateOutputType | null
+    _min: Chat_participantsMinAggregateOutputType | null
+    _max: Chat_participantsMaxAggregateOutputType | null
+  }
+
+  type GetChat_participantsGroupByPayload<T extends chat_participantsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Chat_participantsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Chat_participantsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Chat_participantsGroupByOutputType[P]>
+            : GetScalarType<T[P], Chat_participantsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type chat_participantsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    chat_id?: boolean
+    party_kind?: boolean
+    party_id?: boolean
+    role_in_chat?: boolean
+    last_read_message_id?: boolean
+    last_read_at?: boolean
+    muted_until?: boolean
+    notification_level?: boolean
+    is_active?: boolean
+    joined_at?: boolean
+    removed_at?: boolean
+  }, ExtArgs["result"]["chat_participants"]>
+
+  export type chat_participantsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    chat_id?: boolean
+    party_kind?: boolean
+    party_id?: boolean
+    role_in_chat?: boolean
+    last_read_message_id?: boolean
+    last_read_at?: boolean
+    muted_until?: boolean
+    notification_level?: boolean
+    is_active?: boolean
+    joined_at?: boolean
+    removed_at?: boolean
+  }, ExtArgs["result"]["chat_participants"]>
+
+  export type chat_participantsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    chat_id?: boolean
+    party_kind?: boolean
+    party_id?: boolean
+    role_in_chat?: boolean
+    last_read_message_id?: boolean
+    last_read_at?: boolean
+    muted_until?: boolean
+    notification_level?: boolean
+    is_active?: boolean
+    joined_at?: boolean
+    removed_at?: boolean
+  }, ExtArgs["result"]["chat_participants"]>
+
+  export type chat_participantsSelectScalar = {
+    id?: boolean
+    chat_id?: boolean
+    party_kind?: boolean
+    party_id?: boolean
+    role_in_chat?: boolean
+    last_read_message_id?: boolean
+    last_read_at?: boolean
+    muted_until?: boolean
+    notification_level?: boolean
+    is_active?: boolean
+    joined_at?: boolean
+    removed_at?: boolean
+  }
+
+  export type chat_participantsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "chat_id" | "party_kind" | "party_id" | "role_in_chat" | "last_read_message_id" | "last_read_at" | "muted_until" | "notification_level" | "is_active" | "joined_at" | "removed_at", ExtArgs["result"]["chat_participants"]>
+
+  export type $chat_participantsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "chat_participants"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      chat_id: string
+      party_kind: string
+      party_id: string
+      role_in_chat: $Enums.chat_role
+      last_read_message_id: string | null
+      last_read_at: Date | null
+      muted_until: Date | null
+      notification_level: string
+      is_active: boolean
+      joined_at: Date
+      removed_at: Date | null
+    }, ExtArgs["result"]["chat_participants"]>
+    composites: {}
+  }
+
+  type chat_participantsGetPayload<S extends boolean | null | undefined | chat_participantsDefaultArgs> = $Result.GetResult<Prisma.$chat_participantsPayload, S>
+
+  type chat_participantsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<chat_participantsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: Chat_participantsCountAggregateInputType | true
+    }
+
+  export interface chat_participantsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['chat_participants'], meta: { name: 'chat_participants' } }
+    /**
+     * Find zero or one Chat_participants that matches the filter.
+     * @param {chat_participantsFindUniqueArgs} args - Arguments to find a Chat_participants
+     * @example
+     * // Get one Chat_participants
+     * const chat_participants = await prisma.chat_participants.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends chat_participantsFindUniqueArgs>(args: SelectSubset<T, chat_participantsFindUniqueArgs<ExtArgs>>): Prisma__chat_participantsClient<$Result.GetResult<Prisma.$chat_participantsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Chat_participants that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {chat_participantsFindUniqueOrThrowArgs} args - Arguments to find a Chat_participants
+     * @example
+     * // Get one Chat_participants
+     * const chat_participants = await prisma.chat_participants.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends chat_participantsFindUniqueOrThrowArgs>(args: SelectSubset<T, chat_participantsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__chat_participantsClient<$Result.GetResult<Prisma.$chat_participantsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Chat_participants that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {chat_participantsFindFirstArgs} args - Arguments to find a Chat_participants
+     * @example
+     * // Get one Chat_participants
+     * const chat_participants = await prisma.chat_participants.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends chat_participantsFindFirstArgs>(args?: SelectSubset<T, chat_participantsFindFirstArgs<ExtArgs>>): Prisma__chat_participantsClient<$Result.GetResult<Prisma.$chat_participantsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Chat_participants that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {chat_participantsFindFirstOrThrowArgs} args - Arguments to find a Chat_participants
+     * @example
+     * // Get one Chat_participants
+     * const chat_participants = await prisma.chat_participants.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends chat_participantsFindFirstOrThrowArgs>(args?: SelectSubset<T, chat_participantsFindFirstOrThrowArgs<ExtArgs>>): Prisma__chat_participantsClient<$Result.GetResult<Prisma.$chat_participantsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Chat_participants that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {chat_participantsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Chat_participants
+     * const chat_participants = await prisma.chat_participants.findMany()
+     * 
+     * // Get first 10 Chat_participants
+     * const chat_participants = await prisma.chat_participants.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const chat_participantsWithIdOnly = await prisma.chat_participants.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends chat_participantsFindManyArgs>(args?: SelectSubset<T, chat_participantsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$chat_participantsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Chat_participants.
+     * @param {chat_participantsCreateArgs} args - Arguments to create a Chat_participants.
+     * @example
+     * // Create one Chat_participants
+     * const Chat_participants = await prisma.chat_participants.create({
+     *   data: {
+     *     // ... data to create a Chat_participants
+     *   }
+     * })
+     * 
+     */
+    create<T extends chat_participantsCreateArgs>(args: SelectSubset<T, chat_participantsCreateArgs<ExtArgs>>): Prisma__chat_participantsClient<$Result.GetResult<Prisma.$chat_participantsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Chat_participants.
+     * @param {chat_participantsCreateManyArgs} args - Arguments to create many Chat_participants.
+     * @example
+     * // Create many Chat_participants
+     * const chat_participants = await prisma.chat_participants.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends chat_participantsCreateManyArgs>(args?: SelectSubset<T, chat_participantsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Chat_participants and returns the data saved in the database.
+     * @param {chat_participantsCreateManyAndReturnArgs} args - Arguments to create many Chat_participants.
+     * @example
+     * // Create many Chat_participants
+     * const chat_participants = await prisma.chat_participants.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Chat_participants and only return the `id`
+     * const chat_participantsWithIdOnly = await prisma.chat_participants.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends chat_participantsCreateManyAndReturnArgs>(args?: SelectSubset<T, chat_participantsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$chat_participantsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Chat_participants.
+     * @param {chat_participantsDeleteArgs} args - Arguments to delete one Chat_participants.
+     * @example
+     * // Delete one Chat_participants
+     * const Chat_participants = await prisma.chat_participants.delete({
+     *   where: {
+     *     // ... filter to delete one Chat_participants
+     *   }
+     * })
+     * 
+     */
+    delete<T extends chat_participantsDeleteArgs>(args: SelectSubset<T, chat_participantsDeleteArgs<ExtArgs>>): Prisma__chat_participantsClient<$Result.GetResult<Prisma.$chat_participantsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Chat_participants.
+     * @param {chat_participantsUpdateArgs} args - Arguments to update one Chat_participants.
+     * @example
+     * // Update one Chat_participants
+     * const chat_participants = await prisma.chat_participants.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends chat_participantsUpdateArgs>(args: SelectSubset<T, chat_participantsUpdateArgs<ExtArgs>>): Prisma__chat_participantsClient<$Result.GetResult<Prisma.$chat_participantsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Chat_participants.
+     * @param {chat_participantsDeleteManyArgs} args - Arguments to filter Chat_participants to delete.
+     * @example
+     * // Delete a few Chat_participants
+     * const { count } = await prisma.chat_participants.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends chat_participantsDeleteManyArgs>(args?: SelectSubset<T, chat_participantsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Chat_participants.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {chat_participantsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Chat_participants
+     * const chat_participants = await prisma.chat_participants.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends chat_participantsUpdateManyArgs>(args: SelectSubset<T, chat_participantsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Chat_participants and returns the data updated in the database.
+     * @param {chat_participantsUpdateManyAndReturnArgs} args - Arguments to update many Chat_participants.
+     * @example
+     * // Update many Chat_participants
+     * const chat_participants = await prisma.chat_participants.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Chat_participants and only return the `id`
+     * const chat_participantsWithIdOnly = await prisma.chat_participants.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends chat_participantsUpdateManyAndReturnArgs>(args: SelectSubset<T, chat_participantsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$chat_participantsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Chat_participants.
+     * @param {chat_participantsUpsertArgs} args - Arguments to update or create a Chat_participants.
+     * @example
+     * // Update or create a Chat_participants
+     * const chat_participants = await prisma.chat_participants.upsert({
+     *   create: {
+     *     // ... data to create a Chat_participants
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Chat_participants we want to update
+     *   }
+     * })
+     */
+    upsert<T extends chat_participantsUpsertArgs>(args: SelectSubset<T, chat_participantsUpsertArgs<ExtArgs>>): Prisma__chat_participantsClient<$Result.GetResult<Prisma.$chat_participantsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Chat_participants.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {chat_participantsCountArgs} args - Arguments to filter Chat_participants to count.
+     * @example
+     * // Count the number of Chat_participants
+     * const count = await prisma.chat_participants.count({
+     *   where: {
+     *     // ... the filter for the Chat_participants we want to count
+     *   }
+     * })
+    **/
+    count<T extends chat_participantsCountArgs>(
+      args?: Subset<T, chat_participantsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Chat_participantsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Chat_participants.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Chat_participantsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Chat_participantsAggregateArgs>(args: Subset<T, Chat_participantsAggregateArgs>): Prisma.PrismaPromise<GetChat_participantsAggregateType<T>>
+
+    /**
+     * Group by Chat_participants.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {chat_participantsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends chat_participantsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: chat_participantsGroupByArgs['orderBy'] }
+        : { orderBy?: chat_participantsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, chat_participantsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetChat_participantsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the chat_participants model
+   */
+  readonly fields: chat_participantsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for chat_participants.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__chat_participantsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the chat_participants model
+   */
+  interface chat_participantsFieldRefs {
+    readonly id: FieldRef<"chat_participants", 'String'>
+    readonly chat_id: FieldRef<"chat_participants", 'String'>
+    readonly party_kind: FieldRef<"chat_participants", 'String'>
+    readonly party_id: FieldRef<"chat_participants", 'String'>
+    readonly role_in_chat: FieldRef<"chat_participants", 'chat_role'>
+    readonly last_read_message_id: FieldRef<"chat_participants", 'String'>
+    readonly last_read_at: FieldRef<"chat_participants", 'DateTime'>
+    readonly muted_until: FieldRef<"chat_participants", 'DateTime'>
+    readonly notification_level: FieldRef<"chat_participants", 'String'>
+    readonly is_active: FieldRef<"chat_participants", 'Boolean'>
+    readonly joined_at: FieldRef<"chat_participants", 'DateTime'>
+    readonly removed_at: FieldRef<"chat_participants", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * chat_participants findUnique
+   */
+  export type chat_participantsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the chat_participants
+     */
+    select?: chat_participantsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the chat_participants
+     */
+    omit?: chat_participantsOmit<ExtArgs> | null
+    /**
+     * Filter, which chat_participants to fetch.
+     */
+    where: chat_participantsWhereUniqueInput
+  }
+
+  /**
+   * chat_participants findUniqueOrThrow
+   */
+  export type chat_participantsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the chat_participants
+     */
+    select?: chat_participantsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the chat_participants
+     */
+    omit?: chat_participantsOmit<ExtArgs> | null
+    /**
+     * Filter, which chat_participants to fetch.
+     */
+    where: chat_participantsWhereUniqueInput
+  }
+
+  /**
+   * chat_participants findFirst
+   */
+  export type chat_participantsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the chat_participants
+     */
+    select?: chat_participantsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the chat_participants
+     */
+    omit?: chat_participantsOmit<ExtArgs> | null
+    /**
+     * Filter, which chat_participants to fetch.
+     */
+    where?: chat_participantsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of chat_participants to fetch.
+     */
+    orderBy?: chat_participantsOrderByWithRelationInput | chat_participantsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for chat_participants.
+     */
+    cursor?: chat_participantsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` chat_participants from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` chat_participants.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of chat_participants.
+     */
+    distinct?: Chat_participantsScalarFieldEnum | Chat_participantsScalarFieldEnum[]
+  }
+
+  /**
+   * chat_participants findFirstOrThrow
+   */
+  export type chat_participantsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the chat_participants
+     */
+    select?: chat_participantsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the chat_participants
+     */
+    omit?: chat_participantsOmit<ExtArgs> | null
+    /**
+     * Filter, which chat_participants to fetch.
+     */
+    where?: chat_participantsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of chat_participants to fetch.
+     */
+    orderBy?: chat_participantsOrderByWithRelationInput | chat_participantsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for chat_participants.
+     */
+    cursor?: chat_participantsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` chat_participants from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` chat_participants.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of chat_participants.
+     */
+    distinct?: Chat_participantsScalarFieldEnum | Chat_participantsScalarFieldEnum[]
+  }
+
+  /**
+   * chat_participants findMany
+   */
+  export type chat_participantsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the chat_participants
+     */
+    select?: chat_participantsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the chat_participants
+     */
+    omit?: chat_participantsOmit<ExtArgs> | null
+    /**
+     * Filter, which chat_participants to fetch.
+     */
+    where?: chat_participantsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of chat_participants to fetch.
+     */
+    orderBy?: chat_participantsOrderByWithRelationInput | chat_participantsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing chat_participants.
+     */
+    cursor?: chat_participantsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` chat_participants from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` chat_participants.
+     */
+    skip?: number
+    distinct?: Chat_participantsScalarFieldEnum | Chat_participantsScalarFieldEnum[]
+  }
+
+  /**
+   * chat_participants create
+   */
+  export type chat_participantsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the chat_participants
+     */
+    select?: chat_participantsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the chat_participants
+     */
+    omit?: chat_participantsOmit<ExtArgs> | null
+    /**
+     * The data needed to create a chat_participants.
+     */
+    data: XOR<chat_participantsCreateInput, chat_participantsUncheckedCreateInput>
+  }
+
+  /**
+   * chat_participants createMany
+   */
+  export type chat_participantsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many chat_participants.
+     */
+    data: chat_participantsCreateManyInput | chat_participantsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * chat_participants createManyAndReturn
+   */
+  export type chat_participantsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the chat_participants
+     */
+    select?: chat_participantsSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the chat_participants
+     */
+    omit?: chat_participantsOmit<ExtArgs> | null
+    /**
+     * The data used to create many chat_participants.
+     */
+    data: chat_participantsCreateManyInput | chat_participantsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * chat_participants update
+   */
+  export type chat_participantsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the chat_participants
+     */
+    select?: chat_participantsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the chat_participants
+     */
+    omit?: chat_participantsOmit<ExtArgs> | null
+    /**
+     * The data needed to update a chat_participants.
+     */
+    data: XOR<chat_participantsUpdateInput, chat_participantsUncheckedUpdateInput>
+    /**
+     * Choose, which chat_participants to update.
+     */
+    where: chat_participantsWhereUniqueInput
+  }
+
+  /**
+   * chat_participants updateMany
+   */
+  export type chat_participantsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update chat_participants.
+     */
+    data: XOR<chat_participantsUpdateManyMutationInput, chat_participantsUncheckedUpdateManyInput>
+    /**
+     * Filter which chat_participants to update
+     */
+    where?: chat_participantsWhereInput
+    /**
+     * Limit how many chat_participants to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * chat_participants updateManyAndReturn
+   */
+  export type chat_participantsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the chat_participants
+     */
+    select?: chat_participantsSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the chat_participants
+     */
+    omit?: chat_participantsOmit<ExtArgs> | null
+    /**
+     * The data used to update chat_participants.
+     */
+    data: XOR<chat_participantsUpdateManyMutationInput, chat_participantsUncheckedUpdateManyInput>
+    /**
+     * Filter which chat_participants to update
+     */
+    where?: chat_participantsWhereInput
+    /**
+     * Limit how many chat_participants to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * chat_participants upsert
+   */
+  export type chat_participantsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the chat_participants
+     */
+    select?: chat_participantsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the chat_participants
+     */
+    omit?: chat_participantsOmit<ExtArgs> | null
+    /**
+     * The filter to search for the chat_participants to update in case it exists.
+     */
+    where: chat_participantsWhereUniqueInput
+    /**
+     * In case the chat_participants found by the `where` argument doesn't exist, create a new chat_participants with this data.
+     */
+    create: XOR<chat_participantsCreateInput, chat_participantsUncheckedCreateInput>
+    /**
+     * In case the chat_participants was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<chat_participantsUpdateInput, chat_participantsUncheckedUpdateInput>
+  }
+
+  /**
+   * chat_participants delete
+   */
+  export type chat_participantsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the chat_participants
+     */
+    select?: chat_participantsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the chat_participants
+     */
+    omit?: chat_participantsOmit<ExtArgs> | null
+    /**
+     * Filter which chat_participants to delete.
+     */
+    where: chat_participantsWhereUniqueInput
+  }
+
+  /**
+   * chat_participants deleteMany
+   */
+  export type chat_participantsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which chat_participants to delete
+     */
+    where?: chat_participantsWhereInput
+    /**
+     * Limit how many chat_participants to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * chat_participants without action
+   */
+  export type chat_participantsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the chat_participants
+     */
+    select?: chat_participantsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the chat_participants
+     */
+    omit?: chat_participantsOmit<ExtArgs> | null
+  }
+
+
+  /**
+   * Model messages
+   */
+
+  export type AggregateMessages = {
+    _count: MessagesCountAggregateOutputType | null
+    _min: MessagesMinAggregateOutputType | null
+    _max: MessagesMaxAggregateOutputType | null
+  }
+
+  export type MessagesMinAggregateOutputType = {
+    id: string | null
+    chat_id: string | null
+    sender_kind: string | null
+    sender_id: string | null
+    type: $Enums.chat_message_type | null
+    body: string | null
+    reply_to_message_id: string | null
+    priority: $Enums.chat_priority | null
+    client_msg_id: string | null
+    edited_at: Date | null
+    deleted_at: Date | null
+    created_at: Date | null
+  }
+
+  export type MessagesMaxAggregateOutputType = {
+    id: string | null
+    chat_id: string | null
+    sender_kind: string | null
+    sender_id: string | null
+    type: $Enums.chat_message_type | null
+    body: string | null
+    reply_to_message_id: string | null
+    priority: $Enums.chat_priority | null
+    client_msg_id: string | null
+    edited_at: Date | null
+    deleted_at: Date | null
+    created_at: Date | null
+  }
+
+  export type MessagesCountAggregateOutputType = {
+    id: number
+    chat_id: number
+    sender_kind: number
+    sender_id: number
+    type: number
+    body: number
+    reply_to_message_id: number
+    priority: number
+    client_msg_id: number
+    edited_at: number
+    deleted_at: number
+    created_at: number
+    _all: number
+  }
+
+
+  export type MessagesMinAggregateInputType = {
+    id?: true
+    chat_id?: true
+    sender_kind?: true
+    sender_id?: true
+    type?: true
+    body?: true
+    reply_to_message_id?: true
+    priority?: true
+    client_msg_id?: true
+    edited_at?: true
+    deleted_at?: true
+    created_at?: true
+  }
+
+  export type MessagesMaxAggregateInputType = {
+    id?: true
+    chat_id?: true
+    sender_kind?: true
+    sender_id?: true
+    type?: true
+    body?: true
+    reply_to_message_id?: true
+    priority?: true
+    client_msg_id?: true
+    edited_at?: true
+    deleted_at?: true
+    created_at?: true
+  }
+
+  export type MessagesCountAggregateInputType = {
+    id?: true
+    chat_id?: true
+    sender_kind?: true
+    sender_id?: true
+    type?: true
+    body?: true
+    reply_to_message_id?: true
+    priority?: true
+    client_msg_id?: true
+    edited_at?: true
+    deleted_at?: true
+    created_at?: true
+    _all?: true
+  }
+
+  export type MessagesAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which messages to aggregate.
+     */
+    where?: messagesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of messages to fetch.
+     */
+    orderBy?: messagesOrderByWithRelationInput | messagesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: messagesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` messages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` messages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned messages
+    **/
+    _count?: true | MessagesCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MessagesMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MessagesMaxAggregateInputType
+  }
+
+  export type GetMessagesAggregateType<T extends MessagesAggregateArgs> = {
+        [P in keyof T & keyof AggregateMessages]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMessages[P]>
+      : GetScalarType<T[P], AggregateMessages[P]>
+  }
+
+
+
+
+  export type messagesGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: messagesWhereInput
+    orderBy?: messagesOrderByWithAggregationInput | messagesOrderByWithAggregationInput[]
+    by: MessagesScalarFieldEnum[] | MessagesScalarFieldEnum
+    having?: messagesScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MessagesCountAggregateInputType | true
+    _min?: MessagesMinAggregateInputType
+    _max?: MessagesMaxAggregateInputType
+  }
+
+  export type MessagesGroupByOutputType = {
+    id: string
+    chat_id: string
+    sender_kind: string
+    sender_id: string
+    type: $Enums.chat_message_type
+    body: string | null
+    reply_to_message_id: string | null
+    priority: $Enums.chat_priority
+    client_msg_id: string | null
+    edited_at: Date | null
+    deleted_at: Date | null
+    created_at: Date
+    _count: MessagesCountAggregateOutputType | null
+    _min: MessagesMinAggregateOutputType | null
+    _max: MessagesMaxAggregateOutputType | null
+  }
+
+  type GetMessagesGroupByPayload<T extends messagesGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MessagesGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MessagesGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MessagesGroupByOutputType[P]>
+            : GetScalarType<T[P], MessagesGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type messagesSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    chat_id?: boolean
+    sender_kind?: boolean
+    sender_id?: boolean
+    type?: boolean
+    body?: boolean
+    reply_to_message_id?: boolean
+    priority?: boolean
+    client_msg_id?: boolean
+    edited_at?: boolean
+    deleted_at?: boolean
+    created_at?: boolean
+  }, ExtArgs["result"]["messages"]>
+
+  export type messagesSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    chat_id?: boolean
+    sender_kind?: boolean
+    sender_id?: boolean
+    type?: boolean
+    body?: boolean
+    reply_to_message_id?: boolean
+    priority?: boolean
+    client_msg_id?: boolean
+    edited_at?: boolean
+    deleted_at?: boolean
+    created_at?: boolean
+  }, ExtArgs["result"]["messages"]>
+
+  export type messagesSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    chat_id?: boolean
+    sender_kind?: boolean
+    sender_id?: boolean
+    type?: boolean
+    body?: boolean
+    reply_to_message_id?: boolean
+    priority?: boolean
+    client_msg_id?: boolean
+    edited_at?: boolean
+    deleted_at?: boolean
+    created_at?: boolean
+  }, ExtArgs["result"]["messages"]>
+
+  export type messagesSelectScalar = {
+    id?: boolean
+    chat_id?: boolean
+    sender_kind?: boolean
+    sender_id?: boolean
+    type?: boolean
+    body?: boolean
+    reply_to_message_id?: boolean
+    priority?: boolean
+    client_msg_id?: boolean
+    edited_at?: boolean
+    deleted_at?: boolean
+    created_at?: boolean
+  }
+
+  export type messagesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "chat_id" | "sender_kind" | "sender_id" | "type" | "body" | "reply_to_message_id" | "priority" | "client_msg_id" | "edited_at" | "deleted_at" | "created_at", ExtArgs["result"]["messages"]>
+
+  export type $messagesPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "messages"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      chat_id: string
+      sender_kind: string
+      sender_id: string
+      type: $Enums.chat_message_type
+      body: string | null
+      reply_to_message_id: string | null
+      priority: $Enums.chat_priority
+      client_msg_id: string | null
+      edited_at: Date | null
+      deleted_at: Date | null
+      created_at: Date
+    }, ExtArgs["result"]["messages"]>
+    composites: {}
+  }
+
+  type messagesGetPayload<S extends boolean | null | undefined | messagesDefaultArgs> = $Result.GetResult<Prisma.$messagesPayload, S>
+
+  type messagesCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<messagesFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: MessagesCountAggregateInputType | true
+    }
+
+  export interface messagesDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['messages'], meta: { name: 'messages' } }
+    /**
+     * Find zero or one Messages that matches the filter.
+     * @param {messagesFindUniqueArgs} args - Arguments to find a Messages
+     * @example
+     * // Get one Messages
+     * const messages = await prisma.messages.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends messagesFindUniqueArgs>(args: SelectSubset<T, messagesFindUniqueArgs<ExtArgs>>): Prisma__messagesClient<$Result.GetResult<Prisma.$messagesPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Messages that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {messagesFindUniqueOrThrowArgs} args - Arguments to find a Messages
+     * @example
+     * // Get one Messages
+     * const messages = await prisma.messages.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends messagesFindUniqueOrThrowArgs>(args: SelectSubset<T, messagesFindUniqueOrThrowArgs<ExtArgs>>): Prisma__messagesClient<$Result.GetResult<Prisma.$messagesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Messages that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {messagesFindFirstArgs} args - Arguments to find a Messages
+     * @example
+     * // Get one Messages
+     * const messages = await prisma.messages.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends messagesFindFirstArgs>(args?: SelectSubset<T, messagesFindFirstArgs<ExtArgs>>): Prisma__messagesClient<$Result.GetResult<Prisma.$messagesPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Messages that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {messagesFindFirstOrThrowArgs} args - Arguments to find a Messages
+     * @example
+     * // Get one Messages
+     * const messages = await prisma.messages.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends messagesFindFirstOrThrowArgs>(args?: SelectSubset<T, messagesFindFirstOrThrowArgs<ExtArgs>>): Prisma__messagesClient<$Result.GetResult<Prisma.$messagesPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Messages that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {messagesFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Messages
+     * const messages = await prisma.messages.findMany()
+     * 
+     * // Get first 10 Messages
+     * const messages = await prisma.messages.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const messagesWithIdOnly = await prisma.messages.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends messagesFindManyArgs>(args?: SelectSubset<T, messagesFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$messagesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Messages.
+     * @param {messagesCreateArgs} args - Arguments to create a Messages.
+     * @example
+     * // Create one Messages
+     * const Messages = await prisma.messages.create({
+     *   data: {
+     *     // ... data to create a Messages
+     *   }
+     * })
+     * 
+     */
+    create<T extends messagesCreateArgs>(args: SelectSubset<T, messagesCreateArgs<ExtArgs>>): Prisma__messagesClient<$Result.GetResult<Prisma.$messagesPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Messages.
+     * @param {messagesCreateManyArgs} args - Arguments to create many Messages.
+     * @example
+     * // Create many Messages
+     * const messages = await prisma.messages.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends messagesCreateManyArgs>(args?: SelectSubset<T, messagesCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Messages and returns the data saved in the database.
+     * @param {messagesCreateManyAndReturnArgs} args - Arguments to create many Messages.
+     * @example
+     * // Create many Messages
+     * const messages = await prisma.messages.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Messages and only return the `id`
+     * const messagesWithIdOnly = await prisma.messages.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends messagesCreateManyAndReturnArgs>(args?: SelectSubset<T, messagesCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$messagesPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Messages.
+     * @param {messagesDeleteArgs} args - Arguments to delete one Messages.
+     * @example
+     * // Delete one Messages
+     * const Messages = await prisma.messages.delete({
+     *   where: {
+     *     // ... filter to delete one Messages
+     *   }
+     * })
+     * 
+     */
+    delete<T extends messagesDeleteArgs>(args: SelectSubset<T, messagesDeleteArgs<ExtArgs>>): Prisma__messagesClient<$Result.GetResult<Prisma.$messagesPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Messages.
+     * @param {messagesUpdateArgs} args - Arguments to update one Messages.
+     * @example
+     * // Update one Messages
+     * const messages = await prisma.messages.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends messagesUpdateArgs>(args: SelectSubset<T, messagesUpdateArgs<ExtArgs>>): Prisma__messagesClient<$Result.GetResult<Prisma.$messagesPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Messages.
+     * @param {messagesDeleteManyArgs} args - Arguments to filter Messages to delete.
+     * @example
+     * // Delete a few Messages
+     * const { count } = await prisma.messages.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends messagesDeleteManyArgs>(args?: SelectSubset<T, messagesDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Messages.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {messagesUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Messages
+     * const messages = await prisma.messages.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends messagesUpdateManyArgs>(args: SelectSubset<T, messagesUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Messages and returns the data updated in the database.
+     * @param {messagesUpdateManyAndReturnArgs} args - Arguments to update many Messages.
+     * @example
+     * // Update many Messages
+     * const messages = await prisma.messages.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Messages and only return the `id`
+     * const messagesWithIdOnly = await prisma.messages.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends messagesUpdateManyAndReturnArgs>(args: SelectSubset<T, messagesUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$messagesPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Messages.
+     * @param {messagesUpsertArgs} args - Arguments to update or create a Messages.
+     * @example
+     * // Update or create a Messages
+     * const messages = await prisma.messages.upsert({
+     *   create: {
+     *     // ... data to create a Messages
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Messages we want to update
+     *   }
+     * })
+     */
+    upsert<T extends messagesUpsertArgs>(args: SelectSubset<T, messagesUpsertArgs<ExtArgs>>): Prisma__messagesClient<$Result.GetResult<Prisma.$messagesPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Messages.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {messagesCountArgs} args - Arguments to filter Messages to count.
+     * @example
+     * // Count the number of Messages
+     * const count = await prisma.messages.count({
+     *   where: {
+     *     // ... the filter for the Messages we want to count
+     *   }
+     * })
+    **/
+    count<T extends messagesCountArgs>(
+      args?: Subset<T, messagesCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MessagesCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Messages.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MessagesAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MessagesAggregateArgs>(args: Subset<T, MessagesAggregateArgs>): Prisma.PrismaPromise<GetMessagesAggregateType<T>>
+
+    /**
+     * Group by Messages.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {messagesGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends messagesGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: messagesGroupByArgs['orderBy'] }
+        : { orderBy?: messagesGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, messagesGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMessagesGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the messages model
+   */
+  readonly fields: messagesFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for messages.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__messagesClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the messages model
+   */
+  interface messagesFieldRefs {
+    readonly id: FieldRef<"messages", 'String'>
+    readonly chat_id: FieldRef<"messages", 'String'>
+    readonly sender_kind: FieldRef<"messages", 'String'>
+    readonly sender_id: FieldRef<"messages", 'String'>
+    readonly type: FieldRef<"messages", 'chat_message_type'>
+    readonly body: FieldRef<"messages", 'String'>
+    readonly reply_to_message_id: FieldRef<"messages", 'String'>
+    readonly priority: FieldRef<"messages", 'chat_priority'>
+    readonly client_msg_id: FieldRef<"messages", 'String'>
+    readonly edited_at: FieldRef<"messages", 'DateTime'>
+    readonly deleted_at: FieldRef<"messages", 'DateTime'>
+    readonly created_at: FieldRef<"messages", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * messages findUnique
+   */
+  export type messagesFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the messages
+     */
+    select?: messagesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the messages
+     */
+    omit?: messagesOmit<ExtArgs> | null
+    /**
+     * Filter, which messages to fetch.
+     */
+    where: messagesWhereUniqueInput
+  }
+
+  /**
+   * messages findUniqueOrThrow
+   */
+  export type messagesFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the messages
+     */
+    select?: messagesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the messages
+     */
+    omit?: messagesOmit<ExtArgs> | null
+    /**
+     * Filter, which messages to fetch.
+     */
+    where: messagesWhereUniqueInput
+  }
+
+  /**
+   * messages findFirst
+   */
+  export type messagesFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the messages
+     */
+    select?: messagesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the messages
+     */
+    omit?: messagesOmit<ExtArgs> | null
+    /**
+     * Filter, which messages to fetch.
+     */
+    where?: messagesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of messages to fetch.
+     */
+    orderBy?: messagesOrderByWithRelationInput | messagesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for messages.
+     */
+    cursor?: messagesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` messages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` messages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of messages.
+     */
+    distinct?: MessagesScalarFieldEnum | MessagesScalarFieldEnum[]
+  }
+
+  /**
+   * messages findFirstOrThrow
+   */
+  export type messagesFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the messages
+     */
+    select?: messagesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the messages
+     */
+    omit?: messagesOmit<ExtArgs> | null
+    /**
+     * Filter, which messages to fetch.
+     */
+    where?: messagesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of messages to fetch.
+     */
+    orderBy?: messagesOrderByWithRelationInput | messagesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for messages.
+     */
+    cursor?: messagesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` messages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` messages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of messages.
+     */
+    distinct?: MessagesScalarFieldEnum | MessagesScalarFieldEnum[]
+  }
+
+  /**
+   * messages findMany
+   */
+  export type messagesFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the messages
+     */
+    select?: messagesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the messages
+     */
+    omit?: messagesOmit<ExtArgs> | null
+    /**
+     * Filter, which messages to fetch.
+     */
+    where?: messagesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of messages to fetch.
+     */
+    orderBy?: messagesOrderByWithRelationInput | messagesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing messages.
+     */
+    cursor?: messagesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` messages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` messages.
+     */
+    skip?: number
+    distinct?: MessagesScalarFieldEnum | MessagesScalarFieldEnum[]
+  }
+
+  /**
+   * messages create
+   */
+  export type messagesCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the messages
+     */
+    select?: messagesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the messages
+     */
+    omit?: messagesOmit<ExtArgs> | null
+    /**
+     * The data needed to create a messages.
+     */
+    data: XOR<messagesCreateInput, messagesUncheckedCreateInput>
+  }
+
+  /**
+   * messages createMany
+   */
+  export type messagesCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many messages.
+     */
+    data: messagesCreateManyInput | messagesCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * messages createManyAndReturn
+   */
+  export type messagesCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the messages
+     */
+    select?: messagesSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the messages
+     */
+    omit?: messagesOmit<ExtArgs> | null
+    /**
+     * The data used to create many messages.
+     */
+    data: messagesCreateManyInput | messagesCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * messages update
+   */
+  export type messagesUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the messages
+     */
+    select?: messagesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the messages
+     */
+    omit?: messagesOmit<ExtArgs> | null
+    /**
+     * The data needed to update a messages.
+     */
+    data: XOR<messagesUpdateInput, messagesUncheckedUpdateInput>
+    /**
+     * Choose, which messages to update.
+     */
+    where: messagesWhereUniqueInput
+  }
+
+  /**
+   * messages updateMany
+   */
+  export type messagesUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update messages.
+     */
+    data: XOR<messagesUpdateManyMutationInput, messagesUncheckedUpdateManyInput>
+    /**
+     * Filter which messages to update
+     */
+    where?: messagesWhereInput
+    /**
+     * Limit how many messages to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * messages updateManyAndReturn
+   */
+  export type messagesUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the messages
+     */
+    select?: messagesSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the messages
+     */
+    omit?: messagesOmit<ExtArgs> | null
+    /**
+     * The data used to update messages.
+     */
+    data: XOR<messagesUpdateManyMutationInput, messagesUncheckedUpdateManyInput>
+    /**
+     * Filter which messages to update
+     */
+    where?: messagesWhereInput
+    /**
+     * Limit how many messages to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * messages upsert
+   */
+  export type messagesUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the messages
+     */
+    select?: messagesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the messages
+     */
+    omit?: messagesOmit<ExtArgs> | null
+    /**
+     * The filter to search for the messages to update in case it exists.
+     */
+    where: messagesWhereUniqueInput
+    /**
+     * In case the messages found by the `where` argument doesn't exist, create a new messages with this data.
+     */
+    create: XOR<messagesCreateInput, messagesUncheckedCreateInput>
+    /**
+     * In case the messages was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<messagesUpdateInput, messagesUncheckedUpdateInput>
+  }
+
+  /**
+   * messages delete
+   */
+  export type messagesDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the messages
+     */
+    select?: messagesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the messages
+     */
+    omit?: messagesOmit<ExtArgs> | null
+    /**
+     * Filter which messages to delete.
+     */
+    where: messagesWhereUniqueInput
+  }
+
+  /**
+   * messages deleteMany
+   */
+  export type messagesDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which messages to delete
+     */
+    where?: messagesWhereInput
+    /**
+     * Limit how many messages to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * messages without action
+   */
+  export type messagesDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the messages
+     */
+    select?: messagesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the messages
+     */
+    omit?: messagesOmit<ExtArgs> | null
+  }
+
+
+  /**
+   * Model message_receipts
+   */
+
+  export type AggregateMessage_receipts = {
+    _count: Message_receiptsCountAggregateOutputType | null
+    _min: Message_receiptsMinAggregateOutputType | null
+    _max: Message_receiptsMaxAggregateOutputType | null
+  }
+
+  export type Message_receiptsMinAggregateOutputType = {
+    id: string | null
+    message_id: string | null
+    party_kind: string | null
+    party_id: string | null
+    delivered_at: Date | null
+    read_at: Date | null
+    acknowledged_at: Date | null
+  }
+
+  export type Message_receiptsMaxAggregateOutputType = {
+    id: string | null
+    message_id: string | null
+    party_kind: string | null
+    party_id: string | null
+    delivered_at: Date | null
+    read_at: Date | null
+    acknowledged_at: Date | null
+  }
+
+  export type Message_receiptsCountAggregateOutputType = {
+    id: number
+    message_id: number
+    party_kind: number
+    party_id: number
+    delivered_at: number
+    read_at: number
+    acknowledged_at: number
+    _all: number
+  }
+
+
+  export type Message_receiptsMinAggregateInputType = {
+    id?: true
+    message_id?: true
+    party_kind?: true
+    party_id?: true
+    delivered_at?: true
+    read_at?: true
+    acknowledged_at?: true
+  }
+
+  export type Message_receiptsMaxAggregateInputType = {
+    id?: true
+    message_id?: true
+    party_kind?: true
+    party_id?: true
+    delivered_at?: true
+    read_at?: true
+    acknowledged_at?: true
+  }
+
+  export type Message_receiptsCountAggregateInputType = {
+    id?: true
+    message_id?: true
+    party_kind?: true
+    party_id?: true
+    delivered_at?: true
+    read_at?: true
+    acknowledged_at?: true
+    _all?: true
+  }
+
+  export type Message_receiptsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which message_receipts to aggregate.
+     */
+    where?: message_receiptsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of message_receipts to fetch.
+     */
+    orderBy?: message_receiptsOrderByWithRelationInput | message_receiptsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: message_receiptsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` message_receipts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` message_receipts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned message_receipts
+    **/
+    _count?: true | Message_receiptsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Message_receiptsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Message_receiptsMaxAggregateInputType
+  }
+
+  export type GetMessage_receiptsAggregateType<T extends Message_receiptsAggregateArgs> = {
+        [P in keyof T & keyof AggregateMessage_receipts]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMessage_receipts[P]>
+      : GetScalarType<T[P], AggregateMessage_receipts[P]>
+  }
+
+
+
+
+  export type message_receiptsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: message_receiptsWhereInput
+    orderBy?: message_receiptsOrderByWithAggregationInput | message_receiptsOrderByWithAggregationInput[]
+    by: Message_receiptsScalarFieldEnum[] | Message_receiptsScalarFieldEnum
+    having?: message_receiptsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Message_receiptsCountAggregateInputType | true
+    _min?: Message_receiptsMinAggregateInputType
+    _max?: Message_receiptsMaxAggregateInputType
+  }
+
+  export type Message_receiptsGroupByOutputType = {
+    id: string
+    message_id: string
+    party_kind: string
+    party_id: string
+    delivered_at: Date | null
+    read_at: Date | null
+    acknowledged_at: Date | null
+    _count: Message_receiptsCountAggregateOutputType | null
+    _min: Message_receiptsMinAggregateOutputType | null
+    _max: Message_receiptsMaxAggregateOutputType | null
+  }
+
+  type GetMessage_receiptsGroupByPayload<T extends message_receiptsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Message_receiptsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Message_receiptsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Message_receiptsGroupByOutputType[P]>
+            : GetScalarType<T[P], Message_receiptsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type message_receiptsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    message_id?: boolean
+    party_kind?: boolean
+    party_id?: boolean
+    delivered_at?: boolean
+    read_at?: boolean
+    acknowledged_at?: boolean
+  }, ExtArgs["result"]["message_receipts"]>
+
+  export type message_receiptsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    message_id?: boolean
+    party_kind?: boolean
+    party_id?: boolean
+    delivered_at?: boolean
+    read_at?: boolean
+    acknowledged_at?: boolean
+  }, ExtArgs["result"]["message_receipts"]>
+
+  export type message_receiptsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    message_id?: boolean
+    party_kind?: boolean
+    party_id?: boolean
+    delivered_at?: boolean
+    read_at?: boolean
+    acknowledged_at?: boolean
+  }, ExtArgs["result"]["message_receipts"]>
+
+  export type message_receiptsSelectScalar = {
+    id?: boolean
+    message_id?: boolean
+    party_kind?: boolean
+    party_id?: boolean
+    delivered_at?: boolean
+    read_at?: boolean
+    acknowledged_at?: boolean
+  }
+
+  export type message_receiptsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "message_id" | "party_kind" | "party_id" | "delivered_at" | "read_at" | "acknowledged_at", ExtArgs["result"]["message_receipts"]>
+
+  export type $message_receiptsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "message_receipts"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      message_id: string
+      party_kind: string
+      party_id: string
+      delivered_at: Date | null
+      read_at: Date | null
+      acknowledged_at: Date | null
+    }, ExtArgs["result"]["message_receipts"]>
+    composites: {}
+  }
+
+  type message_receiptsGetPayload<S extends boolean | null | undefined | message_receiptsDefaultArgs> = $Result.GetResult<Prisma.$message_receiptsPayload, S>
+
+  type message_receiptsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<message_receiptsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: Message_receiptsCountAggregateInputType | true
+    }
+
+  export interface message_receiptsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['message_receipts'], meta: { name: 'message_receipts' } }
+    /**
+     * Find zero or one Message_receipts that matches the filter.
+     * @param {message_receiptsFindUniqueArgs} args - Arguments to find a Message_receipts
+     * @example
+     * // Get one Message_receipts
+     * const message_receipts = await prisma.message_receipts.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends message_receiptsFindUniqueArgs>(args: SelectSubset<T, message_receiptsFindUniqueArgs<ExtArgs>>): Prisma__message_receiptsClient<$Result.GetResult<Prisma.$message_receiptsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Message_receipts that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {message_receiptsFindUniqueOrThrowArgs} args - Arguments to find a Message_receipts
+     * @example
+     * // Get one Message_receipts
+     * const message_receipts = await prisma.message_receipts.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends message_receiptsFindUniqueOrThrowArgs>(args: SelectSubset<T, message_receiptsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__message_receiptsClient<$Result.GetResult<Prisma.$message_receiptsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Message_receipts that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {message_receiptsFindFirstArgs} args - Arguments to find a Message_receipts
+     * @example
+     * // Get one Message_receipts
+     * const message_receipts = await prisma.message_receipts.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends message_receiptsFindFirstArgs>(args?: SelectSubset<T, message_receiptsFindFirstArgs<ExtArgs>>): Prisma__message_receiptsClient<$Result.GetResult<Prisma.$message_receiptsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Message_receipts that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {message_receiptsFindFirstOrThrowArgs} args - Arguments to find a Message_receipts
+     * @example
+     * // Get one Message_receipts
+     * const message_receipts = await prisma.message_receipts.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends message_receiptsFindFirstOrThrowArgs>(args?: SelectSubset<T, message_receiptsFindFirstOrThrowArgs<ExtArgs>>): Prisma__message_receiptsClient<$Result.GetResult<Prisma.$message_receiptsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Message_receipts that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {message_receiptsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Message_receipts
+     * const message_receipts = await prisma.message_receipts.findMany()
+     * 
+     * // Get first 10 Message_receipts
+     * const message_receipts = await prisma.message_receipts.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const message_receiptsWithIdOnly = await prisma.message_receipts.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends message_receiptsFindManyArgs>(args?: SelectSubset<T, message_receiptsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$message_receiptsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Message_receipts.
+     * @param {message_receiptsCreateArgs} args - Arguments to create a Message_receipts.
+     * @example
+     * // Create one Message_receipts
+     * const Message_receipts = await prisma.message_receipts.create({
+     *   data: {
+     *     // ... data to create a Message_receipts
+     *   }
+     * })
+     * 
+     */
+    create<T extends message_receiptsCreateArgs>(args: SelectSubset<T, message_receiptsCreateArgs<ExtArgs>>): Prisma__message_receiptsClient<$Result.GetResult<Prisma.$message_receiptsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Message_receipts.
+     * @param {message_receiptsCreateManyArgs} args - Arguments to create many Message_receipts.
+     * @example
+     * // Create many Message_receipts
+     * const message_receipts = await prisma.message_receipts.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends message_receiptsCreateManyArgs>(args?: SelectSubset<T, message_receiptsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Message_receipts and returns the data saved in the database.
+     * @param {message_receiptsCreateManyAndReturnArgs} args - Arguments to create many Message_receipts.
+     * @example
+     * // Create many Message_receipts
+     * const message_receipts = await prisma.message_receipts.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Message_receipts and only return the `id`
+     * const message_receiptsWithIdOnly = await prisma.message_receipts.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends message_receiptsCreateManyAndReturnArgs>(args?: SelectSubset<T, message_receiptsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$message_receiptsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Message_receipts.
+     * @param {message_receiptsDeleteArgs} args - Arguments to delete one Message_receipts.
+     * @example
+     * // Delete one Message_receipts
+     * const Message_receipts = await prisma.message_receipts.delete({
+     *   where: {
+     *     // ... filter to delete one Message_receipts
+     *   }
+     * })
+     * 
+     */
+    delete<T extends message_receiptsDeleteArgs>(args: SelectSubset<T, message_receiptsDeleteArgs<ExtArgs>>): Prisma__message_receiptsClient<$Result.GetResult<Prisma.$message_receiptsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Message_receipts.
+     * @param {message_receiptsUpdateArgs} args - Arguments to update one Message_receipts.
+     * @example
+     * // Update one Message_receipts
+     * const message_receipts = await prisma.message_receipts.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends message_receiptsUpdateArgs>(args: SelectSubset<T, message_receiptsUpdateArgs<ExtArgs>>): Prisma__message_receiptsClient<$Result.GetResult<Prisma.$message_receiptsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Message_receipts.
+     * @param {message_receiptsDeleteManyArgs} args - Arguments to filter Message_receipts to delete.
+     * @example
+     * // Delete a few Message_receipts
+     * const { count } = await prisma.message_receipts.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends message_receiptsDeleteManyArgs>(args?: SelectSubset<T, message_receiptsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Message_receipts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {message_receiptsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Message_receipts
+     * const message_receipts = await prisma.message_receipts.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends message_receiptsUpdateManyArgs>(args: SelectSubset<T, message_receiptsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Message_receipts and returns the data updated in the database.
+     * @param {message_receiptsUpdateManyAndReturnArgs} args - Arguments to update many Message_receipts.
+     * @example
+     * // Update many Message_receipts
+     * const message_receipts = await prisma.message_receipts.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Message_receipts and only return the `id`
+     * const message_receiptsWithIdOnly = await prisma.message_receipts.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends message_receiptsUpdateManyAndReturnArgs>(args: SelectSubset<T, message_receiptsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$message_receiptsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Message_receipts.
+     * @param {message_receiptsUpsertArgs} args - Arguments to update or create a Message_receipts.
+     * @example
+     * // Update or create a Message_receipts
+     * const message_receipts = await prisma.message_receipts.upsert({
+     *   create: {
+     *     // ... data to create a Message_receipts
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Message_receipts we want to update
+     *   }
+     * })
+     */
+    upsert<T extends message_receiptsUpsertArgs>(args: SelectSubset<T, message_receiptsUpsertArgs<ExtArgs>>): Prisma__message_receiptsClient<$Result.GetResult<Prisma.$message_receiptsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Message_receipts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {message_receiptsCountArgs} args - Arguments to filter Message_receipts to count.
+     * @example
+     * // Count the number of Message_receipts
+     * const count = await prisma.message_receipts.count({
+     *   where: {
+     *     // ... the filter for the Message_receipts we want to count
+     *   }
+     * })
+    **/
+    count<T extends message_receiptsCountArgs>(
+      args?: Subset<T, message_receiptsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Message_receiptsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Message_receipts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Message_receiptsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Message_receiptsAggregateArgs>(args: Subset<T, Message_receiptsAggregateArgs>): Prisma.PrismaPromise<GetMessage_receiptsAggregateType<T>>
+
+    /**
+     * Group by Message_receipts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {message_receiptsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends message_receiptsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: message_receiptsGroupByArgs['orderBy'] }
+        : { orderBy?: message_receiptsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, message_receiptsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMessage_receiptsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the message_receipts model
+   */
+  readonly fields: message_receiptsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for message_receipts.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__message_receiptsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the message_receipts model
+   */
+  interface message_receiptsFieldRefs {
+    readonly id: FieldRef<"message_receipts", 'String'>
+    readonly message_id: FieldRef<"message_receipts", 'String'>
+    readonly party_kind: FieldRef<"message_receipts", 'String'>
+    readonly party_id: FieldRef<"message_receipts", 'String'>
+    readonly delivered_at: FieldRef<"message_receipts", 'DateTime'>
+    readonly read_at: FieldRef<"message_receipts", 'DateTime'>
+    readonly acknowledged_at: FieldRef<"message_receipts", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * message_receipts findUnique
+   */
+  export type message_receiptsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the message_receipts
+     */
+    select?: message_receiptsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the message_receipts
+     */
+    omit?: message_receiptsOmit<ExtArgs> | null
+    /**
+     * Filter, which message_receipts to fetch.
+     */
+    where: message_receiptsWhereUniqueInput
+  }
+
+  /**
+   * message_receipts findUniqueOrThrow
+   */
+  export type message_receiptsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the message_receipts
+     */
+    select?: message_receiptsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the message_receipts
+     */
+    omit?: message_receiptsOmit<ExtArgs> | null
+    /**
+     * Filter, which message_receipts to fetch.
+     */
+    where: message_receiptsWhereUniqueInput
+  }
+
+  /**
+   * message_receipts findFirst
+   */
+  export type message_receiptsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the message_receipts
+     */
+    select?: message_receiptsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the message_receipts
+     */
+    omit?: message_receiptsOmit<ExtArgs> | null
+    /**
+     * Filter, which message_receipts to fetch.
+     */
+    where?: message_receiptsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of message_receipts to fetch.
+     */
+    orderBy?: message_receiptsOrderByWithRelationInput | message_receiptsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for message_receipts.
+     */
+    cursor?: message_receiptsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` message_receipts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` message_receipts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of message_receipts.
+     */
+    distinct?: Message_receiptsScalarFieldEnum | Message_receiptsScalarFieldEnum[]
+  }
+
+  /**
+   * message_receipts findFirstOrThrow
+   */
+  export type message_receiptsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the message_receipts
+     */
+    select?: message_receiptsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the message_receipts
+     */
+    omit?: message_receiptsOmit<ExtArgs> | null
+    /**
+     * Filter, which message_receipts to fetch.
+     */
+    where?: message_receiptsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of message_receipts to fetch.
+     */
+    orderBy?: message_receiptsOrderByWithRelationInput | message_receiptsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for message_receipts.
+     */
+    cursor?: message_receiptsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` message_receipts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` message_receipts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of message_receipts.
+     */
+    distinct?: Message_receiptsScalarFieldEnum | Message_receiptsScalarFieldEnum[]
+  }
+
+  /**
+   * message_receipts findMany
+   */
+  export type message_receiptsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the message_receipts
+     */
+    select?: message_receiptsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the message_receipts
+     */
+    omit?: message_receiptsOmit<ExtArgs> | null
+    /**
+     * Filter, which message_receipts to fetch.
+     */
+    where?: message_receiptsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of message_receipts to fetch.
+     */
+    orderBy?: message_receiptsOrderByWithRelationInput | message_receiptsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing message_receipts.
+     */
+    cursor?: message_receiptsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` message_receipts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` message_receipts.
+     */
+    skip?: number
+    distinct?: Message_receiptsScalarFieldEnum | Message_receiptsScalarFieldEnum[]
+  }
+
+  /**
+   * message_receipts create
+   */
+  export type message_receiptsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the message_receipts
+     */
+    select?: message_receiptsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the message_receipts
+     */
+    omit?: message_receiptsOmit<ExtArgs> | null
+    /**
+     * The data needed to create a message_receipts.
+     */
+    data: XOR<message_receiptsCreateInput, message_receiptsUncheckedCreateInput>
+  }
+
+  /**
+   * message_receipts createMany
+   */
+  export type message_receiptsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many message_receipts.
+     */
+    data: message_receiptsCreateManyInput | message_receiptsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * message_receipts createManyAndReturn
+   */
+  export type message_receiptsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the message_receipts
+     */
+    select?: message_receiptsSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the message_receipts
+     */
+    omit?: message_receiptsOmit<ExtArgs> | null
+    /**
+     * The data used to create many message_receipts.
+     */
+    data: message_receiptsCreateManyInput | message_receiptsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * message_receipts update
+   */
+  export type message_receiptsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the message_receipts
+     */
+    select?: message_receiptsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the message_receipts
+     */
+    omit?: message_receiptsOmit<ExtArgs> | null
+    /**
+     * The data needed to update a message_receipts.
+     */
+    data: XOR<message_receiptsUpdateInput, message_receiptsUncheckedUpdateInput>
+    /**
+     * Choose, which message_receipts to update.
+     */
+    where: message_receiptsWhereUniqueInput
+  }
+
+  /**
+   * message_receipts updateMany
+   */
+  export type message_receiptsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update message_receipts.
+     */
+    data: XOR<message_receiptsUpdateManyMutationInput, message_receiptsUncheckedUpdateManyInput>
+    /**
+     * Filter which message_receipts to update
+     */
+    where?: message_receiptsWhereInput
+    /**
+     * Limit how many message_receipts to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * message_receipts updateManyAndReturn
+   */
+  export type message_receiptsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the message_receipts
+     */
+    select?: message_receiptsSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the message_receipts
+     */
+    omit?: message_receiptsOmit<ExtArgs> | null
+    /**
+     * The data used to update message_receipts.
+     */
+    data: XOR<message_receiptsUpdateManyMutationInput, message_receiptsUncheckedUpdateManyInput>
+    /**
+     * Filter which message_receipts to update
+     */
+    where?: message_receiptsWhereInput
+    /**
+     * Limit how many message_receipts to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * message_receipts upsert
+   */
+  export type message_receiptsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the message_receipts
+     */
+    select?: message_receiptsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the message_receipts
+     */
+    omit?: message_receiptsOmit<ExtArgs> | null
+    /**
+     * The filter to search for the message_receipts to update in case it exists.
+     */
+    where: message_receiptsWhereUniqueInput
+    /**
+     * In case the message_receipts found by the `where` argument doesn't exist, create a new message_receipts with this data.
+     */
+    create: XOR<message_receiptsCreateInput, message_receiptsUncheckedCreateInput>
+    /**
+     * In case the message_receipts was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<message_receiptsUpdateInput, message_receiptsUncheckedUpdateInput>
+  }
+
+  /**
+   * message_receipts delete
+   */
+  export type message_receiptsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the message_receipts
+     */
+    select?: message_receiptsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the message_receipts
+     */
+    omit?: message_receiptsOmit<ExtArgs> | null
+    /**
+     * Filter which message_receipts to delete.
+     */
+    where: message_receiptsWhereUniqueInput
+  }
+
+  /**
+   * message_receipts deleteMany
+   */
+  export type message_receiptsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which message_receipts to delete
+     */
+    where?: message_receiptsWhereInput
+    /**
+     * Limit how many message_receipts to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * message_receipts without action
+   */
+  export type message_receiptsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the message_receipts
+     */
+    select?: message_receiptsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the message_receipts
+     */
+    omit?: message_receiptsOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -51654,6 +56422,77 @@ export namespace Prisma {
   export type WardsScalarFieldEnum = (typeof WardsScalarFieldEnum)[keyof typeof WardsScalarFieldEnum]
 
 
+  export const ChatsScalarFieldEnum: {
+    id: 'id',
+    type: 'type',
+    title: 'title',
+    municipality_id: 'municipality_id',
+    ward_id: 'ward_id',
+    department_id: 'department_id',
+    complaint_id: 'complaint_id',
+    status: 'status',
+    priority: 'priority',
+    is_group: 'is_group',
+    is_archived: 'is_archived',
+    created_by_kind: 'created_by_kind',
+    created_by_id: 'created_by_id',
+    last_message_at: 'last_message_at',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
+  };
+
+  export type ChatsScalarFieldEnum = (typeof ChatsScalarFieldEnum)[keyof typeof ChatsScalarFieldEnum]
+
+
+  export const Chat_participantsScalarFieldEnum: {
+    id: 'id',
+    chat_id: 'chat_id',
+    party_kind: 'party_kind',
+    party_id: 'party_id',
+    role_in_chat: 'role_in_chat',
+    last_read_message_id: 'last_read_message_id',
+    last_read_at: 'last_read_at',
+    muted_until: 'muted_until',
+    notification_level: 'notification_level',
+    is_active: 'is_active',
+    joined_at: 'joined_at',
+    removed_at: 'removed_at'
+  };
+
+  export type Chat_participantsScalarFieldEnum = (typeof Chat_participantsScalarFieldEnum)[keyof typeof Chat_participantsScalarFieldEnum]
+
+
+  export const MessagesScalarFieldEnum: {
+    id: 'id',
+    chat_id: 'chat_id',
+    sender_kind: 'sender_kind',
+    sender_id: 'sender_id',
+    type: 'type',
+    body: 'body',
+    reply_to_message_id: 'reply_to_message_id',
+    priority: 'priority',
+    client_msg_id: 'client_msg_id',
+    edited_at: 'edited_at',
+    deleted_at: 'deleted_at',
+    created_at: 'created_at'
+  };
+
+  export type MessagesScalarFieldEnum = (typeof MessagesScalarFieldEnum)[keyof typeof MessagesScalarFieldEnum]
+
+
+  export const Message_receiptsScalarFieldEnum: {
+    id: 'id',
+    message_id: 'message_id',
+    party_kind: 'party_kind',
+    party_id: 'party_id',
+    delivered_at: 'delivered_at',
+    read_at: 'read_at',
+    acknowledged_at: 'acknowledged_at'
+  };
+
+  export type Message_receiptsScalarFieldEnum = (typeof Message_receiptsScalarFieldEnum)[keyof typeof Message_receiptsScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -51879,6 +56718,76 @@ export namespace Prisma {
    * Reference to a field of type 'officer_type[]'
    */
   export type ListEnumofficer_typeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'officer_type[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'chat_type'
+   */
+  export type Enumchat_typeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'chat_type'>
+    
+
+
+  /**
+   * Reference to a field of type 'chat_type[]'
+   */
+  export type ListEnumchat_typeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'chat_type[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'chat_status'
+   */
+  export type Enumchat_statusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'chat_status'>
+    
+
+
+  /**
+   * Reference to a field of type 'chat_status[]'
+   */
+  export type ListEnumchat_statusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'chat_status[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'chat_priority'
+   */
+  export type Enumchat_priorityFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'chat_priority'>
+    
+
+
+  /**
+   * Reference to a field of type 'chat_priority[]'
+   */
+  export type ListEnumchat_priorityFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'chat_priority[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'chat_role'
+   */
+  export type Enumchat_roleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'chat_role'>
+    
+
+
+  /**
+   * Reference to a field of type 'chat_role[]'
+   */
+  export type ListEnumchat_roleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'chat_role[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'chat_message_type'
+   */
+  export type Enumchat_message_typeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'chat_message_type'>
+    
+
+
+  /**
+   * Reference to a field of type 'chat_message_type[]'
+   */
+  export type ListEnumchat_message_typeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'chat_message_type[]'>
     
   /**
    * Deep Input Types
@@ -55119,6 +60028,351 @@ export namespace Prisma {
     created_at?: DateTimeWithAggregatesFilter<"wards"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"wards"> | Date | string
     municipality_id?: UuidNullableWithAggregatesFilter<"wards"> | string | null
+  }
+
+  export type chatsWhereInput = {
+    AND?: chatsWhereInput | chatsWhereInput[]
+    OR?: chatsWhereInput[]
+    NOT?: chatsWhereInput | chatsWhereInput[]
+    id?: UuidFilter<"chats"> | string
+    type?: Enumchat_typeFilter<"chats"> | $Enums.chat_type
+    title?: StringNullableFilter<"chats"> | string | null
+    municipality_id?: UuidNullableFilter<"chats"> | string | null
+    ward_id?: UuidNullableFilter<"chats"> | string | null
+    department_id?: UuidNullableFilter<"chats"> | string | null
+    complaint_id?: UuidNullableFilter<"chats"> | string | null
+    status?: Enumchat_statusFilter<"chats"> | $Enums.chat_status
+    priority?: Enumchat_priorityFilter<"chats"> | $Enums.chat_priority
+    is_group?: BoolFilter<"chats"> | boolean
+    is_archived?: BoolFilter<"chats"> | boolean
+    created_by_kind?: StringFilter<"chats"> | string
+    created_by_id?: UuidFilter<"chats"> | string
+    last_message_at?: DateTimeNullableFilter<"chats"> | Date | string | null
+    created_at?: DateTimeFilter<"chats"> | Date | string
+    updated_at?: DateTimeFilter<"chats"> | Date | string
+  }
+
+  export type chatsOrderByWithRelationInput = {
+    id?: SortOrder
+    type?: SortOrder
+    title?: SortOrderInput | SortOrder
+    municipality_id?: SortOrderInput | SortOrder
+    ward_id?: SortOrderInput | SortOrder
+    department_id?: SortOrderInput | SortOrder
+    complaint_id?: SortOrderInput | SortOrder
+    status?: SortOrder
+    priority?: SortOrder
+    is_group?: SortOrder
+    is_archived?: SortOrder
+    created_by_kind?: SortOrder
+    created_by_id?: SortOrder
+    last_message_at?: SortOrderInput | SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type chatsWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: chatsWhereInput | chatsWhereInput[]
+    OR?: chatsWhereInput[]
+    NOT?: chatsWhereInput | chatsWhereInput[]
+    type?: Enumchat_typeFilter<"chats"> | $Enums.chat_type
+    title?: StringNullableFilter<"chats"> | string | null
+    municipality_id?: UuidNullableFilter<"chats"> | string | null
+    ward_id?: UuidNullableFilter<"chats"> | string | null
+    department_id?: UuidNullableFilter<"chats"> | string | null
+    complaint_id?: UuidNullableFilter<"chats"> | string | null
+    status?: Enumchat_statusFilter<"chats"> | $Enums.chat_status
+    priority?: Enumchat_priorityFilter<"chats"> | $Enums.chat_priority
+    is_group?: BoolFilter<"chats"> | boolean
+    is_archived?: BoolFilter<"chats"> | boolean
+    created_by_kind?: StringFilter<"chats"> | string
+    created_by_id?: UuidFilter<"chats"> | string
+    last_message_at?: DateTimeNullableFilter<"chats"> | Date | string | null
+    created_at?: DateTimeFilter<"chats"> | Date | string
+    updated_at?: DateTimeFilter<"chats"> | Date | string
+  }, "id">
+
+  export type chatsOrderByWithAggregationInput = {
+    id?: SortOrder
+    type?: SortOrder
+    title?: SortOrderInput | SortOrder
+    municipality_id?: SortOrderInput | SortOrder
+    ward_id?: SortOrderInput | SortOrder
+    department_id?: SortOrderInput | SortOrder
+    complaint_id?: SortOrderInput | SortOrder
+    status?: SortOrder
+    priority?: SortOrder
+    is_group?: SortOrder
+    is_archived?: SortOrder
+    created_by_kind?: SortOrder
+    created_by_id?: SortOrder
+    last_message_at?: SortOrderInput | SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    _count?: chatsCountOrderByAggregateInput
+    _max?: chatsMaxOrderByAggregateInput
+    _min?: chatsMinOrderByAggregateInput
+  }
+
+  export type chatsScalarWhereWithAggregatesInput = {
+    AND?: chatsScalarWhereWithAggregatesInput | chatsScalarWhereWithAggregatesInput[]
+    OR?: chatsScalarWhereWithAggregatesInput[]
+    NOT?: chatsScalarWhereWithAggregatesInput | chatsScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"chats"> | string
+    type?: Enumchat_typeWithAggregatesFilter<"chats"> | $Enums.chat_type
+    title?: StringNullableWithAggregatesFilter<"chats"> | string | null
+    municipality_id?: UuidNullableWithAggregatesFilter<"chats"> | string | null
+    ward_id?: UuidNullableWithAggregatesFilter<"chats"> | string | null
+    department_id?: UuidNullableWithAggregatesFilter<"chats"> | string | null
+    complaint_id?: UuidNullableWithAggregatesFilter<"chats"> | string | null
+    status?: Enumchat_statusWithAggregatesFilter<"chats"> | $Enums.chat_status
+    priority?: Enumchat_priorityWithAggregatesFilter<"chats"> | $Enums.chat_priority
+    is_group?: BoolWithAggregatesFilter<"chats"> | boolean
+    is_archived?: BoolWithAggregatesFilter<"chats"> | boolean
+    created_by_kind?: StringWithAggregatesFilter<"chats"> | string
+    created_by_id?: UuidWithAggregatesFilter<"chats"> | string
+    last_message_at?: DateTimeNullableWithAggregatesFilter<"chats"> | Date | string | null
+    created_at?: DateTimeWithAggregatesFilter<"chats"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"chats"> | Date | string
+  }
+
+  export type chat_participantsWhereInput = {
+    AND?: chat_participantsWhereInput | chat_participantsWhereInput[]
+    OR?: chat_participantsWhereInput[]
+    NOT?: chat_participantsWhereInput | chat_participantsWhereInput[]
+    id?: UuidFilter<"chat_participants"> | string
+    chat_id?: UuidFilter<"chat_participants"> | string
+    party_kind?: StringFilter<"chat_participants"> | string
+    party_id?: UuidFilter<"chat_participants"> | string
+    role_in_chat?: Enumchat_roleFilter<"chat_participants"> | $Enums.chat_role
+    last_read_message_id?: UuidNullableFilter<"chat_participants"> | string | null
+    last_read_at?: DateTimeNullableFilter<"chat_participants"> | Date | string | null
+    muted_until?: DateTimeNullableFilter<"chat_participants"> | Date | string | null
+    notification_level?: StringFilter<"chat_participants"> | string
+    is_active?: BoolFilter<"chat_participants"> | boolean
+    joined_at?: DateTimeFilter<"chat_participants"> | Date | string
+    removed_at?: DateTimeNullableFilter<"chat_participants"> | Date | string | null
+  }
+
+  export type chat_participantsOrderByWithRelationInput = {
+    id?: SortOrder
+    chat_id?: SortOrder
+    party_kind?: SortOrder
+    party_id?: SortOrder
+    role_in_chat?: SortOrder
+    last_read_message_id?: SortOrderInput | SortOrder
+    last_read_at?: SortOrderInput | SortOrder
+    muted_until?: SortOrderInput | SortOrder
+    notification_level?: SortOrder
+    is_active?: SortOrder
+    joined_at?: SortOrder
+    removed_at?: SortOrderInput | SortOrder
+  }
+
+  export type chat_participantsWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    chat_id_party_kind_party_id?: chat_participantsChat_idParty_kindParty_idCompoundUniqueInput
+    AND?: chat_participantsWhereInput | chat_participantsWhereInput[]
+    OR?: chat_participantsWhereInput[]
+    NOT?: chat_participantsWhereInput | chat_participantsWhereInput[]
+    chat_id?: UuidFilter<"chat_participants"> | string
+    party_kind?: StringFilter<"chat_participants"> | string
+    party_id?: UuidFilter<"chat_participants"> | string
+    role_in_chat?: Enumchat_roleFilter<"chat_participants"> | $Enums.chat_role
+    last_read_message_id?: UuidNullableFilter<"chat_participants"> | string | null
+    last_read_at?: DateTimeNullableFilter<"chat_participants"> | Date | string | null
+    muted_until?: DateTimeNullableFilter<"chat_participants"> | Date | string | null
+    notification_level?: StringFilter<"chat_participants"> | string
+    is_active?: BoolFilter<"chat_participants"> | boolean
+    joined_at?: DateTimeFilter<"chat_participants"> | Date | string
+    removed_at?: DateTimeNullableFilter<"chat_participants"> | Date | string | null
+  }, "id" | "chat_id_party_kind_party_id">
+
+  export type chat_participantsOrderByWithAggregationInput = {
+    id?: SortOrder
+    chat_id?: SortOrder
+    party_kind?: SortOrder
+    party_id?: SortOrder
+    role_in_chat?: SortOrder
+    last_read_message_id?: SortOrderInput | SortOrder
+    last_read_at?: SortOrderInput | SortOrder
+    muted_until?: SortOrderInput | SortOrder
+    notification_level?: SortOrder
+    is_active?: SortOrder
+    joined_at?: SortOrder
+    removed_at?: SortOrderInput | SortOrder
+    _count?: chat_participantsCountOrderByAggregateInput
+    _max?: chat_participantsMaxOrderByAggregateInput
+    _min?: chat_participantsMinOrderByAggregateInput
+  }
+
+  export type chat_participantsScalarWhereWithAggregatesInput = {
+    AND?: chat_participantsScalarWhereWithAggregatesInput | chat_participantsScalarWhereWithAggregatesInput[]
+    OR?: chat_participantsScalarWhereWithAggregatesInput[]
+    NOT?: chat_participantsScalarWhereWithAggregatesInput | chat_participantsScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"chat_participants"> | string
+    chat_id?: UuidWithAggregatesFilter<"chat_participants"> | string
+    party_kind?: StringWithAggregatesFilter<"chat_participants"> | string
+    party_id?: UuidWithAggregatesFilter<"chat_participants"> | string
+    role_in_chat?: Enumchat_roleWithAggregatesFilter<"chat_participants"> | $Enums.chat_role
+    last_read_message_id?: UuidNullableWithAggregatesFilter<"chat_participants"> | string | null
+    last_read_at?: DateTimeNullableWithAggregatesFilter<"chat_participants"> | Date | string | null
+    muted_until?: DateTimeNullableWithAggregatesFilter<"chat_participants"> | Date | string | null
+    notification_level?: StringWithAggregatesFilter<"chat_participants"> | string
+    is_active?: BoolWithAggregatesFilter<"chat_participants"> | boolean
+    joined_at?: DateTimeWithAggregatesFilter<"chat_participants"> | Date | string
+    removed_at?: DateTimeNullableWithAggregatesFilter<"chat_participants"> | Date | string | null
+  }
+
+  export type messagesWhereInput = {
+    AND?: messagesWhereInput | messagesWhereInput[]
+    OR?: messagesWhereInput[]
+    NOT?: messagesWhereInput | messagesWhereInput[]
+    id?: UuidFilter<"messages"> | string
+    chat_id?: UuidFilter<"messages"> | string
+    sender_kind?: StringFilter<"messages"> | string
+    sender_id?: UuidFilter<"messages"> | string
+    type?: Enumchat_message_typeFilter<"messages"> | $Enums.chat_message_type
+    body?: StringNullableFilter<"messages"> | string | null
+    reply_to_message_id?: UuidNullableFilter<"messages"> | string | null
+    priority?: Enumchat_priorityFilter<"messages"> | $Enums.chat_priority
+    client_msg_id?: StringNullableFilter<"messages"> | string | null
+    edited_at?: DateTimeNullableFilter<"messages"> | Date | string | null
+    deleted_at?: DateTimeNullableFilter<"messages"> | Date | string | null
+    created_at?: DateTimeFilter<"messages"> | Date | string
+  }
+
+  export type messagesOrderByWithRelationInput = {
+    id?: SortOrder
+    chat_id?: SortOrder
+    sender_kind?: SortOrder
+    sender_id?: SortOrder
+    type?: SortOrder
+    body?: SortOrderInput | SortOrder
+    reply_to_message_id?: SortOrderInput | SortOrder
+    priority?: SortOrder
+    client_msg_id?: SortOrderInput | SortOrder
+    edited_at?: SortOrderInput | SortOrder
+    deleted_at?: SortOrderInput | SortOrder
+    created_at?: SortOrder
+  }
+
+  export type messagesWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: messagesWhereInput | messagesWhereInput[]
+    OR?: messagesWhereInput[]
+    NOT?: messagesWhereInput | messagesWhereInput[]
+    chat_id?: UuidFilter<"messages"> | string
+    sender_kind?: StringFilter<"messages"> | string
+    sender_id?: UuidFilter<"messages"> | string
+    type?: Enumchat_message_typeFilter<"messages"> | $Enums.chat_message_type
+    body?: StringNullableFilter<"messages"> | string | null
+    reply_to_message_id?: UuidNullableFilter<"messages"> | string | null
+    priority?: Enumchat_priorityFilter<"messages"> | $Enums.chat_priority
+    client_msg_id?: StringNullableFilter<"messages"> | string | null
+    edited_at?: DateTimeNullableFilter<"messages"> | Date | string | null
+    deleted_at?: DateTimeNullableFilter<"messages"> | Date | string | null
+    created_at?: DateTimeFilter<"messages"> | Date | string
+  }, "id">
+
+  export type messagesOrderByWithAggregationInput = {
+    id?: SortOrder
+    chat_id?: SortOrder
+    sender_kind?: SortOrder
+    sender_id?: SortOrder
+    type?: SortOrder
+    body?: SortOrderInput | SortOrder
+    reply_to_message_id?: SortOrderInput | SortOrder
+    priority?: SortOrder
+    client_msg_id?: SortOrderInput | SortOrder
+    edited_at?: SortOrderInput | SortOrder
+    deleted_at?: SortOrderInput | SortOrder
+    created_at?: SortOrder
+    _count?: messagesCountOrderByAggregateInput
+    _max?: messagesMaxOrderByAggregateInput
+    _min?: messagesMinOrderByAggregateInput
+  }
+
+  export type messagesScalarWhereWithAggregatesInput = {
+    AND?: messagesScalarWhereWithAggregatesInput | messagesScalarWhereWithAggregatesInput[]
+    OR?: messagesScalarWhereWithAggregatesInput[]
+    NOT?: messagesScalarWhereWithAggregatesInput | messagesScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"messages"> | string
+    chat_id?: UuidWithAggregatesFilter<"messages"> | string
+    sender_kind?: StringWithAggregatesFilter<"messages"> | string
+    sender_id?: UuidWithAggregatesFilter<"messages"> | string
+    type?: Enumchat_message_typeWithAggregatesFilter<"messages"> | $Enums.chat_message_type
+    body?: StringNullableWithAggregatesFilter<"messages"> | string | null
+    reply_to_message_id?: UuidNullableWithAggregatesFilter<"messages"> | string | null
+    priority?: Enumchat_priorityWithAggregatesFilter<"messages"> | $Enums.chat_priority
+    client_msg_id?: StringNullableWithAggregatesFilter<"messages"> | string | null
+    edited_at?: DateTimeNullableWithAggregatesFilter<"messages"> | Date | string | null
+    deleted_at?: DateTimeNullableWithAggregatesFilter<"messages"> | Date | string | null
+    created_at?: DateTimeWithAggregatesFilter<"messages"> | Date | string
+  }
+
+  export type message_receiptsWhereInput = {
+    AND?: message_receiptsWhereInput | message_receiptsWhereInput[]
+    OR?: message_receiptsWhereInput[]
+    NOT?: message_receiptsWhereInput | message_receiptsWhereInput[]
+    id?: UuidFilter<"message_receipts"> | string
+    message_id?: UuidFilter<"message_receipts"> | string
+    party_kind?: StringFilter<"message_receipts"> | string
+    party_id?: UuidFilter<"message_receipts"> | string
+    delivered_at?: DateTimeNullableFilter<"message_receipts"> | Date | string | null
+    read_at?: DateTimeNullableFilter<"message_receipts"> | Date | string | null
+    acknowledged_at?: DateTimeNullableFilter<"message_receipts"> | Date | string | null
+  }
+
+  export type message_receiptsOrderByWithRelationInput = {
+    id?: SortOrder
+    message_id?: SortOrder
+    party_kind?: SortOrder
+    party_id?: SortOrder
+    delivered_at?: SortOrderInput | SortOrder
+    read_at?: SortOrderInput | SortOrder
+    acknowledged_at?: SortOrderInput | SortOrder
+  }
+
+  export type message_receiptsWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    message_id_party_kind_party_id?: message_receiptsMessage_idParty_kindParty_idCompoundUniqueInput
+    AND?: message_receiptsWhereInput | message_receiptsWhereInput[]
+    OR?: message_receiptsWhereInput[]
+    NOT?: message_receiptsWhereInput | message_receiptsWhereInput[]
+    message_id?: UuidFilter<"message_receipts"> | string
+    party_kind?: StringFilter<"message_receipts"> | string
+    party_id?: UuidFilter<"message_receipts"> | string
+    delivered_at?: DateTimeNullableFilter<"message_receipts"> | Date | string | null
+    read_at?: DateTimeNullableFilter<"message_receipts"> | Date | string | null
+    acknowledged_at?: DateTimeNullableFilter<"message_receipts"> | Date | string | null
+  }, "id" | "message_id_party_kind_party_id">
+
+  export type message_receiptsOrderByWithAggregationInput = {
+    id?: SortOrder
+    message_id?: SortOrder
+    party_kind?: SortOrder
+    party_id?: SortOrder
+    delivered_at?: SortOrderInput | SortOrder
+    read_at?: SortOrderInput | SortOrder
+    acknowledged_at?: SortOrderInput | SortOrder
+    _count?: message_receiptsCountOrderByAggregateInput
+    _max?: message_receiptsMaxOrderByAggregateInput
+    _min?: message_receiptsMinOrderByAggregateInput
+  }
+
+  export type message_receiptsScalarWhereWithAggregatesInput = {
+    AND?: message_receiptsScalarWhereWithAggregatesInput | message_receiptsScalarWhereWithAggregatesInput[]
+    OR?: message_receiptsScalarWhereWithAggregatesInput[]
+    NOT?: message_receiptsScalarWhereWithAggregatesInput | message_receiptsScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"message_receipts"> | string
+    message_id?: UuidWithAggregatesFilter<"message_receipts"> | string
+    party_kind?: StringWithAggregatesFilter<"message_receipts"> | string
+    party_id?: UuidWithAggregatesFilter<"message_receipts"> | string
+    delivered_at?: DateTimeNullableWithAggregatesFilter<"message_receipts"> | Date | string | null
+    read_at?: DateTimeNullableWithAggregatesFilter<"message_receipts"> | Date | string | null
+    acknowledged_at?: DateTimeNullableWithAggregatesFilter<"message_receipts"> | Date | string | null
   }
 
   export type activity_logCreateInput = {
@@ -58611,6 +63865,419 @@ export namespace Prisma {
     municipality_id?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type chatsCreateInput = {
+    id?: string
+    type: $Enums.chat_type
+    title?: string | null
+    municipality_id?: string | null
+    ward_id?: string | null
+    department_id?: string | null
+    complaint_id?: string | null
+    status?: $Enums.chat_status
+    priority?: $Enums.chat_priority
+    is_group?: boolean
+    is_archived?: boolean
+    created_by_kind: string
+    created_by_id: string
+    last_message_at?: Date | string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type chatsUncheckedCreateInput = {
+    id?: string
+    type: $Enums.chat_type
+    title?: string | null
+    municipality_id?: string | null
+    ward_id?: string | null
+    department_id?: string | null
+    complaint_id?: string | null
+    status?: $Enums.chat_status
+    priority?: $Enums.chat_priority
+    is_group?: boolean
+    is_archived?: boolean
+    created_by_kind: string
+    created_by_id: string
+    last_message_at?: Date | string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type chatsUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: Enumchat_typeFieldUpdateOperationsInput | $Enums.chat_type
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    municipality_id?: NullableStringFieldUpdateOperationsInput | string | null
+    ward_id?: NullableStringFieldUpdateOperationsInput | string | null
+    department_id?: NullableStringFieldUpdateOperationsInput | string | null
+    complaint_id?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: Enumchat_statusFieldUpdateOperationsInput | $Enums.chat_status
+    priority?: Enumchat_priorityFieldUpdateOperationsInput | $Enums.chat_priority
+    is_group?: BoolFieldUpdateOperationsInput | boolean
+    is_archived?: BoolFieldUpdateOperationsInput | boolean
+    created_by_kind?: StringFieldUpdateOperationsInput | string
+    created_by_id?: StringFieldUpdateOperationsInput | string
+    last_message_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type chatsUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: Enumchat_typeFieldUpdateOperationsInput | $Enums.chat_type
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    municipality_id?: NullableStringFieldUpdateOperationsInput | string | null
+    ward_id?: NullableStringFieldUpdateOperationsInput | string | null
+    department_id?: NullableStringFieldUpdateOperationsInput | string | null
+    complaint_id?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: Enumchat_statusFieldUpdateOperationsInput | $Enums.chat_status
+    priority?: Enumchat_priorityFieldUpdateOperationsInput | $Enums.chat_priority
+    is_group?: BoolFieldUpdateOperationsInput | boolean
+    is_archived?: BoolFieldUpdateOperationsInput | boolean
+    created_by_kind?: StringFieldUpdateOperationsInput | string
+    created_by_id?: StringFieldUpdateOperationsInput | string
+    last_message_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type chatsCreateManyInput = {
+    id?: string
+    type: $Enums.chat_type
+    title?: string | null
+    municipality_id?: string | null
+    ward_id?: string | null
+    department_id?: string | null
+    complaint_id?: string | null
+    status?: $Enums.chat_status
+    priority?: $Enums.chat_priority
+    is_group?: boolean
+    is_archived?: boolean
+    created_by_kind: string
+    created_by_id: string
+    last_message_at?: Date | string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type chatsUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: Enumchat_typeFieldUpdateOperationsInput | $Enums.chat_type
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    municipality_id?: NullableStringFieldUpdateOperationsInput | string | null
+    ward_id?: NullableStringFieldUpdateOperationsInput | string | null
+    department_id?: NullableStringFieldUpdateOperationsInput | string | null
+    complaint_id?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: Enumchat_statusFieldUpdateOperationsInput | $Enums.chat_status
+    priority?: Enumchat_priorityFieldUpdateOperationsInput | $Enums.chat_priority
+    is_group?: BoolFieldUpdateOperationsInput | boolean
+    is_archived?: BoolFieldUpdateOperationsInput | boolean
+    created_by_kind?: StringFieldUpdateOperationsInput | string
+    created_by_id?: StringFieldUpdateOperationsInput | string
+    last_message_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type chatsUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: Enumchat_typeFieldUpdateOperationsInput | $Enums.chat_type
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    municipality_id?: NullableStringFieldUpdateOperationsInput | string | null
+    ward_id?: NullableStringFieldUpdateOperationsInput | string | null
+    department_id?: NullableStringFieldUpdateOperationsInput | string | null
+    complaint_id?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: Enumchat_statusFieldUpdateOperationsInput | $Enums.chat_status
+    priority?: Enumchat_priorityFieldUpdateOperationsInput | $Enums.chat_priority
+    is_group?: BoolFieldUpdateOperationsInput | boolean
+    is_archived?: BoolFieldUpdateOperationsInput | boolean
+    created_by_kind?: StringFieldUpdateOperationsInput | string
+    created_by_id?: StringFieldUpdateOperationsInput | string
+    last_message_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type chat_participantsCreateInput = {
+    id?: string
+    chat_id: string
+    party_kind: string
+    party_id: string
+    role_in_chat?: $Enums.chat_role
+    last_read_message_id?: string | null
+    last_read_at?: Date | string | null
+    muted_until?: Date | string | null
+    notification_level?: string
+    is_active?: boolean
+    joined_at?: Date | string
+    removed_at?: Date | string | null
+  }
+
+  export type chat_participantsUncheckedCreateInput = {
+    id?: string
+    chat_id: string
+    party_kind: string
+    party_id: string
+    role_in_chat?: $Enums.chat_role
+    last_read_message_id?: string | null
+    last_read_at?: Date | string | null
+    muted_until?: Date | string | null
+    notification_level?: string
+    is_active?: boolean
+    joined_at?: Date | string
+    removed_at?: Date | string | null
+  }
+
+  export type chat_participantsUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    chat_id?: StringFieldUpdateOperationsInput | string
+    party_kind?: StringFieldUpdateOperationsInput | string
+    party_id?: StringFieldUpdateOperationsInput | string
+    role_in_chat?: Enumchat_roleFieldUpdateOperationsInput | $Enums.chat_role
+    last_read_message_id?: NullableStringFieldUpdateOperationsInput | string | null
+    last_read_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    muted_until?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    notification_level?: StringFieldUpdateOperationsInput | string
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    joined_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    removed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type chat_participantsUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    chat_id?: StringFieldUpdateOperationsInput | string
+    party_kind?: StringFieldUpdateOperationsInput | string
+    party_id?: StringFieldUpdateOperationsInput | string
+    role_in_chat?: Enumchat_roleFieldUpdateOperationsInput | $Enums.chat_role
+    last_read_message_id?: NullableStringFieldUpdateOperationsInput | string | null
+    last_read_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    muted_until?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    notification_level?: StringFieldUpdateOperationsInput | string
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    joined_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    removed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type chat_participantsCreateManyInput = {
+    id?: string
+    chat_id: string
+    party_kind: string
+    party_id: string
+    role_in_chat?: $Enums.chat_role
+    last_read_message_id?: string | null
+    last_read_at?: Date | string | null
+    muted_until?: Date | string | null
+    notification_level?: string
+    is_active?: boolean
+    joined_at?: Date | string
+    removed_at?: Date | string | null
+  }
+
+  export type chat_participantsUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    chat_id?: StringFieldUpdateOperationsInput | string
+    party_kind?: StringFieldUpdateOperationsInput | string
+    party_id?: StringFieldUpdateOperationsInput | string
+    role_in_chat?: Enumchat_roleFieldUpdateOperationsInput | $Enums.chat_role
+    last_read_message_id?: NullableStringFieldUpdateOperationsInput | string | null
+    last_read_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    muted_until?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    notification_level?: StringFieldUpdateOperationsInput | string
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    joined_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    removed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type chat_participantsUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    chat_id?: StringFieldUpdateOperationsInput | string
+    party_kind?: StringFieldUpdateOperationsInput | string
+    party_id?: StringFieldUpdateOperationsInput | string
+    role_in_chat?: Enumchat_roleFieldUpdateOperationsInput | $Enums.chat_role
+    last_read_message_id?: NullableStringFieldUpdateOperationsInput | string | null
+    last_read_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    muted_until?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    notification_level?: StringFieldUpdateOperationsInput | string
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    joined_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    removed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type messagesCreateInput = {
+    id?: string
+    chat_id: string
+    sender_kind: string
+    sender_id: string
+    type?: $Enums.chat_message_type
+    body?: string | null
+    reply_to_message_id?: string | null
+    priority?: $Enums.chat_priority
+    client_msg_id?: string | null
+    edited_at?: Date | string | null
+    deleted_at?: Date | string | null
+    created_at?: Date | string
+  }
+
+  export type messagesUncheckedCreateInput = {
+    id?: string
+    chat_id: string
+    sender_kind: string
+    sender_id: string
+    type?: $Enums.chat_message_type
+    body?: string | null
+    reply_to_message_id?: string | null
+    priority?: $Enums.chat_priority
+    client_msg_id?: string | null
+    edited_at?: Date | string | null
+    deleted_at?: Date | string | null
+    created_at?: Date | string
+  }
+
+  export type messagesUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    chat_id?: StringFieldUpdateOperationsInput | string
+    sender_kind?: StringFieldUpdateOperationsInput | string
+    sender_id?: StringFieldUpdateOperationsInput | string
+    type?: Enumchat_message_typeFieldUpdateOperationsInput | $Enums.chat_message_type
+    body?: NullableStringFieldUpdateOperationsInput | string | null
+    reply_to_message_id?: NullableStringFieldUpdateOperationsInput | string | null
+    priority?: Enumchat_priorityFieldUpdateOperationsInput | $Enums.chat_priority
+    client_msg_id?: NullableStringFieldUpdateOperationsInput | string | null
+    edited_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type messagesUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    chat_id?: StringFieldUpdateOperationsInput | string
+    sender_kind?: StringFieldUpdateOperationsInput | string
+    sender_id?: StringFieldUpdateOperationsInput | string
+    type?: Enumchat_message_typeFieldUpdateOperationsInput | $Enums.chat_message_type
+    body?: NullableStringFieldUpdateOperationsInput | string | null
+    reply_to_message_id?: NullableStringFieldUpdateOperationsInput | string | null
+    priority?: Enumchat_priorityFieldUpdateOperationsInput | $Enums.chat_priority
+    client_msg_id?: NullableStringFieldUpdateOperationsInput | string | null
+    edited_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type messagesCreateManyInput = {
+    id?: string
+    chat_id: string
+    sender_kind: string
+    sender_id: string
+    type?: $Enums.chat_message_type
+    body?: string | null
+    reply_to_message_id?: string | null
+    priority?: $Enums.chat_priority
+    client_msg_id?: string | null
+    edited_at?: Date | string | null
+    deleted_at?: Date | string | null
+    created_at?: Date | string
+  }
+
+  export type messagesUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    chat_id?: StringFieldUpdateOperationsInput | string
+    sender_kind?: StringFieldUpdateOperationsInput | string
+    sender_id?: StringFieldUpdateOperationsInput | string
+    type?: Enumchat_message_typeFieldUpdateOperationsInput | $Enums.chat_message_type
+    body?: NullableStringFieldUpdateOperationsInput | string | null
+    reply_to_message_id?: NullableStringFieldUpdateOperationsInput | string | null
+    priority?: Enumchat_priorityFieldUpdateOperationsInput | $Enums.chat_priority
+    client_msg_id?: NullableStringFieldUpdateOperationsInput | string | null
+    edited_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type messagesUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    chat_id?: StringFieldUpdateOperationsInput | string
+    sender_kind?: StringFieldUpdateOperationsInput | string
+    sender_id?: StringFieldUpdateOperationsInput | string
+    type?: Enumchat_message_typeFieldUpdateOperationsInput | $Enums.chat_message_type
+    body?: NullableStringFieldUpdateOperationsInput | string | null
+    reply_to_message_id?: NullableStringFieldUpdateOperationsInput | string | null
+    priority?: Enumchat_priorityFieldUpdateOperationsInput | $Enums.chat_priority
+    client_msg_id?: NullableStringFieldUpdateOperationsInput | string | null
+    edited_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type message_receiptsCreateInput = {
+    id?: string
+    message_id: string
+    party_kind: string
+    party_id: string
+    delivered_at?: Date | string | null
+    read_at?: Date | string | null
+    acknowledged_at?: Date | string | null
+  }
+
+  export type message_receiptsUncheckedCreateInput = {
+    id?: string
+    message_id: string
+    party_kind: string
+    party_id: string
+    delivered_at?: Date | string | null
+    read_at?: Date | string | null
+    acknowledged_at?: Date | string | null
+  }
+
+  export type message_receiptsUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    message_id?: StringFieldUpdateOperationsInput | string
+    party_kind?: StringFieldUpdateOperationsInput | string
+    party_id?: StringFieldUpdateOperationsInput | string
+    delivered_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    read_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    acknowledged_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type message_receiptsUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    message_id?: StringFieldUpdateOperationsInput | string
+    party_kind?: StringFieldUpdateOperationsInput | string
+    party_id?: StringFieldUpdateOperationsInput | string
+    delivered_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    read_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    acknowledged_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type message_receiptsCreateManyInput = {
+    id?: string
+    message_id: string
+    party_kind: string
+    party_id: string
+    delivered_at?: Date | string | null
+    read_at?: Date | string | null
+    acknowledged_at?: Date | string | null
+  }
+
+  export type message_receiptsUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    message_id?: StringFieldUpdateOperationsInput | string
+    party_kind?: StringFieldUpdateOperationsInput | string
+    party_id?: StringFieldUpdateOperationsInput | string
+    delivered_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    read_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    acknowledged_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type message_receiptsUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    message_id?: StringFieldUpdateOperationsInput | string
+    party_kind?: StringFieldUpdateOperationsInput | string
+    party_id?: StringFieldUpdateOperationsInput | string
+    delivered_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    read_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    acknowledged_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
   export type UuidFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -61099,6 +66766,280 @@ export namespace Prisma {
 
   export type wardsSumOrderByAggregateInput = {
     default_deadline_days?: SortOrder
+  }
+
+  export type Enumchat_typeFilter<$PrismaModel = never> = {
+    equals?: $Enums.chat_type | Enumchat_typeFieldRefInput<$PrismaModel>
+    in?: $Enums.chat_type[] | ListEnumchat_typeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.chat_type[] | ListEnumchat_typeFieldRefInput<$PrismaModel>
+    not?: NestedEnumchat_typeFilter<$PrismaModel> | $Enums.chat_type
+  }
+
+  export type Enumchat_statusFilter<$PrismaModel = never> = {
+    equals?: $Enums.chat_status | Enumchat_statusFieldRefInput<$PrismaModel>
+    in?: $Enums.chat_status[] | ListEnumchat_statusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.chat_status[] | ListEnumchat_statusFieldRefInput<$PrismaModel>
+    not?: NestedEnumchat_statusFilter<$PrismaModel> | $Enums.chat_status
+  }
+
+  export type Enumchat_priorityFilter<$PrismaModel = never> = {
+    equals?: $Enums.chat_priority | Enumchat_priorityFieldRefInput<$PrismaModel>
+    in?: $Enums.chat_priority[] | ListEnumchat_priorityFieldRefInput<$PrismaModel>
+    notIn?: $Enums.chat_priority[] | ListEnumchat_priorityFieldRefInput<$PrismaModel>
+    not?: NestedEnumchat_priorityFilter<$PrismaModel> | $Enums.chat_priority
+  }
+
+  export type chatsCountOrderByAggregateInput = {
+    id?: SortOrder
+    type?: SortOrder
+    title?: SortOrder
+    municipality_id?: SortOrder
+    ward_id?: SortOrder
+    department_id?: SortOrder
+    complaint_id?: SortOrder
+    status?: SortOrder
+    priority?: SortOrder
+    is_group?: SortOrder
+    is_archived?: SortOrder
+    created_by_kind?: SortOrder
+    created_by_id?: SortOrder
+    last_message_at?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type chatsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    type?: SortOrder
+    title?: SortOrder
+    municipality_id?: SortOrder
+    ward_id?: SortOrder
+    department_id?: SortOrder
+    complaint_id?: SortOrder
+    status?: SortOrder
+    priority?: SortOrder
+    is_group?: SortOrder
+    is_archived?: SortOrder
+    created_by_kind?: SortOrder
+    created_by_id?: SortOrder
+    last_message_at?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type chatsMinOrderByAggregateInput = {
+    id?: SortOrder
+    type?: SortOrder
+    title?: SortOrder
+    municipality_id?: SortOrder
+    ward_id?: SortOrder
+    department_id?: SortOrder
+    complaint_id?: SortOrder
+    status?: SortOrder
+    priority?: SortOrder
+    is_group?: SortOrder
+    is_archived?: SortOrder
+    created_by_kind?: SortOrder
+    created_by_id?: SortOrder
+    last_message_at?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type Enumchat_typeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.chat_type | Enumchat_typeFieldRefInput<$PrismaModel>
+    in?: $Enums.chat_type[] | ListEnumchat_typeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.chat_type[] | ListEnumchat_typeFieldRefInput<$PrismaModel>
+    not?: NestedEnumchat_typeWithAggregatesFilter<$PrismaModel> | $Enums.chat_type
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumchat_typeFilter<$PrismaModel>
+    _max?: NestedEnumchat_typeFilter<$PrismaModel>
+  }
+
+  export type Enumchat_statusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.chat_status | Enumchat_statusFieldRefInput<$PrismaModel>
+    in?: $Enums.chat_status[] | ListEnumchat_statusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.chat_status[] | ListEnumchat_statusFieldRefInput<$PrismaModel>
+    not?: NestedEnumchat_statusWithAggregatesFilter<$PrismaModel> | $Enums.chat_status
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumchat_statusFilter<$PrismaModel>
+    _max?: NestedEnumchat_statusFilter<$PrismaModel>
+  }
+
+  export type Enumchat_priorityWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.chat_priority | Enumchat_priorityFieldRefInput<$PrismaModel>
+    in?: $Enums.chat_priority[] | ListEnumchat_priorityFieldRefInput<$PrismaModel>
+    notIn?: $Enums.chat_priority[] | ListEnumchat_priorityFieldRefInput<$PrismaModel>
+    not?: NestedEnumchat_priorityWithAggregatesFilter<$PrismaModel> | $Enums.chat_priority
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumchat_priorityFilter<$PrismaModel>
+    _max?: NestedEnumchat_priorityFilter<$PrismaModel>
+  }
+
+  export type Enumchat_roleFilter<$PrismaModel = never> = {
+    equals?: $Enums.chat_role | Enumchat_roleFieldRefInput<$PrismaModel>
+    in?: $Enums.chat_role[] | ListEnumchat_roleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.chat_role[] | ListEnumchat_roleFieldRefInput<$PrismaModel>
+    not?: NestedEnumchat_roleFilter<$PrismaModel> | $Enums.chat_role
+  }
+
+  export type chat_participantsChat_idParty_kindParty_idCompoundUniqueInput = {
+    chat_id: string
+    party_kind: string
+    party_id: string
+  }
+
+  export type chat_participantsCountOrderByAggregateInput = {
+    id?: SortOrder
+    chat_id?: SortOrder
+    party_kind?: SortOrder
+    party_id?: SortOrder
+    role_in_chat?: SortOrder
+    last_read_message_id?: SortOrder
+    last_read_at?: SortOrder
+    muted_until?: SortOrder
+    notification_level?: SortOrder
+    is_active?: SortOrder
+    joined_at?: SortOrder
+    removed_at?: SortOrder
+  }
+
+  export type chat_participantsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    chat_id?: SortOrder
+    party_kind?: SortOrder
+    party_id?: SortOrder
+    role_in_chat?: SortOrder
+    last_read_message_id?: SortOrder
+    last_read_at?: SortOrder
+    muted_until?: SortOrder
+    notification_level?: SortOrder
+    is_active?: SortOrder
+    joined_at?: SortOrder
+    removed_at?: SortOrder
+  }
+
+  export type chat_participantsMinOrderByAggregateInput = {
+    id?: SortOrder
+    chat_id?: SortOrder
+    party_kind?: SortOrder
+    party_id?: SortOrder
+    role_in_chat?: SortOrder
+    last_read_message_id?: SortOrder
+    last_read_at?: SortOrder
+    muted_until?: SortOrder
+    notification_level?: SortOrder
+    is_active?: SortOrder
+    joined_at?: SortOrder
+    removed_at?: SortOrder
+  }
+
+  export type Enumchat_roleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.chat_role | Enumchat_roleFieldRefInput<$PrismaModel>
+    in?: $Enums.chat_role[] | ListEnumchat_roleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.chat_role[] | ListEnumchat_roleFieldRefInput<$PrismaModel>
+    not?: NestedEnumchat_roleWithAggregatesFilter<$PrismaModel> | $Enums.chat_role
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumchat_roleFilter<$PrismaModel>
+    _max?: NestedEnumchat_roleFilter<$PrismaModel>
+  }
+
+  export type Enumchat_message_typeFilter<$PrismaModel = never> = {
+    equals?: $Enums.chat_message_type | Enumchat_message_typeFieldRefInput<$PrismaModel>
+    in?: $Enums.chat_message_type[] | ListEnumchat_message_typeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.chat_message_type[] | ListEnumchat_message_typeFieldRefInput<$PrismaModel>
+    not?: NestedEnumchat_message_typeFilter<$PrismaModel> | $Enums.chat_message_type
+  }
+
+  export type messagesCountOrderByAggregateInput = {
+    id?: SortOrder
+    chat_id?: SortOrder
+    sender_kind?: SortOrder
+    sender_id?: SortOrder
+    type?: SortOrder
+    body?: SortOrder
+    reply_to_message_id?: SortOrder
+    priority?: SortOrder
+    client_msg_id?: SortOrder
+    edited_at?: SortOrder
+    deleted_at?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type messagesMaxOrderByAggregateInput = {
+    id?: SortOrder
+    chat_id?: SortOrder
+    sender_kind?: SortOrder
+    sender_id?: SortOrder
+    type?: SortOrder
+    body?: SortOrder
+    reply_to_message_id?: SortOrder
+    priority?: SortOrder
+    client_msg_id?: SortOrder
+    edited_at?: SortOrder
+    deleted_at?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type messagesMinOrderByAggregateInput = {
+    id?: SortOrder
+    chat_id?: SortOrder
+    sender_kind?: SortOrder
+    sender_id?: SortOrder
+    type?: SortOrder
+    body?: SortOrder
+    reply_to_message_id?: SortOrder
+    priority?: SortOrder
+    client_msg_id?: SortOrder
+    edited_at?: SortOrder
+    deleted_at?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type Enumchat_message_typeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.chat_message_type | Enumchat_message_typeFieldRefInput<$PrismaModel>
+    in?: $Enums.chat_message_type[] | ListEnumchat_message_typeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.chat_message_type[] | ListEnumchat_message_typeFieldRefInput<$PrismaModel>
+    not?: NestedEnumchat_message_typeWithAggregatesFilter<$PrismaModel> | $Enums.chat_message_type
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumchat_message_typeFilter<$PrismaModel>
+    _max?: NestedEnumchat_message_typeFilter<$PrismaModel>
+  }
+
+  export type message_receiptsMessage_idParty_kindParty_idCompoundUniqueInput = {
+    message_id: string
+    party_kind: string
+    party_id: string
+  }
+
+  export type message_receiptsCountOrderByAggregateInput = {
+    id?: SortOrder
+    message_id?: SortOrder
+    party_kind?: SortOrder
+    party_id?: SortOrder
+    delivered_at?: SortOrder
+    read_at?: SortOrder
+    acknowledged_at?: SortOrder
+  }
+
+  export type message_receiptsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    message_id?: SortOrder
+    party_kind?: SortOrder
+    party_id?: SortOrder
+    delivered_at?: SortOrder
+    read_at?: SortOrder
+    acknowledged_at?: SortOrder
+  }
+
+  export type message_receiptsMinOrderByAggregateInput = {
+    id?: SortOrder
+    message_id?: SortOrder
+    party_kind?: SortOrder
+    party_id?: SortOrder
+    delivered_at?: SortOrder
+    read_at?: SortOrder
+    acknowledged_at?: SortOrder
   }
 
   export type usersCreateNestedOneWithoutActivity_logInput = {
@@ -64664,6 +70605,26 @@ export namespace Prisma {
     deleteMany?: ward_officersScalarWhereInput | ward_officersScalarWhereInput[]
   }
 
+  export type Enumchat_typeFieldUpdateOperationsInput = {
+    set?: $Enums.chat_type
+  }
+
+  export type Enumchat_statusFieldUpdateOperationsInput = {
+    set?: $Enums.chat_status
+  }
+
+  export type Enumchat_priorityFieldUpdateOperationsInput = {
+    set?: $Enums.chat_priority
+  }
+
+  export type Enumchat_roleFieldUpdateOperationsInput = {
+    set?: $Enums.chat_role
+  }
+
+  export type Enumchat_message_typeFieldUpdateOperationsInput = {
+    set?: $Enums.chat_message_type
+  }
+
   export type NestedUuidFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -65120,6 +71081,91 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumofficer_typeFilter<$PrismaModel>
     _max?: NestedEnumofficer_typeFilter<$PrismaModel>
+  }
+
+  export type NestedEnumchat_typeFilter<$PrismaModel = never> = {
+    equals?: $Enums.chat_type | Enumchat_typeFieldRefInput<$PrismaModel>
+    in?: $Enums.chat_type[] | ListEnumchat_typeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.chat_type[] | ListEnumchat_typeFieldRefInput<$PrismaModel>
+    not?: NestedEnumchat_typeFilter<$PrismaModel> | $Enums.chat_type
+  }
+
+  export type NestedEnumchat_statusFilter<$PrismaModel = never> = {
+    equals?: $Enums.chat_status | Enumchat_statusFieldRefInput<$PrismaModel>
+    in?: $Enums.chat_status[] | ListEnumchat_statusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.chat_status[] | ListEnumchat_statusFieldRefInput<$PrismaModel>
+    not?: NestedEnumchat_statusFilter<$PrismaModel> | $Enums.chat_status
+  }
+
+  export type NestedEnumchat_priorityFilter<$PrismaModel = never> = {
+    equals?: $Enums.chat_priority | Enumchat_priorityFieldRefInput<$PrismaModel>
+    in?: $Enums.chat_priority[] | ListEnumchat_priorityFieldRefInput<$PrismaModel>
+    notIn?: $Enums.chat_priority[] | ListEnumchat_priorityFieldRefInput<$PrismaModel>
+    not?: NestedEnumchat_priorityFilter<$PrismaModel> | $Enums.chat_priority
+  }
+
+  export type NestedEnumchat_typeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.chat_type | Enumchat_typeFieldRefInput<$PrismaModel>
+    in?: $Enums.chat_type[] | ListEnumchat_typeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.chat_type[] | ListEnumchat_typeFieldRefInput<$PrismaModel>
+    not?: NestedEnumchat_typeWithAggregatesFilter<$PrismaModel> | $Enums.chat_type
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumchat_typeFilter<$PrismaModel>
+    _max?: NestedEnumchat_typeFilter<$PrismaModel>
+  }
+
+  export type NestedEnumchat_statusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.chat_status | Enumchat_statusFieldRefInput<$PrismaModel>
+    in?: $Enums.chat_status[] | ListEnumchat_statusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.chat_status[] | ListEnumchat_statusFieldRefInput<$PrismaModel>
+    not?: NestedEnumchat_statusWithAggregatesFilter<$PrismaModel> | $Enums.chat_status
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumchat_statusFilter<$PrismaModel>
+    _max?: NestedEnumchat_statusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumchat_priorityWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.chat_priority | Enumchat_priorityFieldRefInput<$PrismaModel>
+    in?: $Enums.chat_priority[] | ListEnumchat_priorityFieldRefInput<$PrismaModel>
+    notIn?: $Enums.chat_priority[] | ListEnumchat_priorityFieldRefInput<$PrismaModel>
+    not?: NestedEnumchat_priorityWithAggregatesFilter<$PrismaModel> | $Enums.chat_priority
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumchat_priorityFilter<$PrismaModel>
+    _max?: NestedEnumchat_priorityFilter<$PrismaModel>
+  }
+
+  export type NestedEnumchat_roleFilter<$PrismaModel = never> = {
+    equals?: $Enums.chat_role | Enumchat_roleFieldRefInput<$PrismaModel>
+    in?: $Enums.chat_role[] | ListEnumchat_roleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.chat_role[] | ListEnumchat_roleFieldRefInput<$PrismaModel>
+    not?: NestedEnumchat_roleFilter<$PrismaModel> | $Enums.chat_role
+  }
+
+  export type NestedEnumchat_roleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.chat_role | Enumchat_roleFieldRefInput<$PrismaModel>
+    in?: $Enums.chat_role[] | ListEnumchat_roleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.chat_role[] | ListEnumchat_roleFieldRefInput<$PrismaModel>
+    not?: NestedEnumchat_roleWithAggregatesFilter<$PrismaModel> | $Enums.chat_role
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumchat_roleFilter<$PrismaModel>
+    _max?: NestedEnumchat_roleFilter<$PrismaModel>
+  }
+
+  export type NestedEnumchat_message_typeFilter<$PrismaModel = never> = {
+    equals?: $Enums.chat_message_type | Enumchat_message_typeFieldRefInput<$PrismaModel>
+    in?: $Enums.chat_message_type[] | ListEnumchat_message_typeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.chat_message_type[] | ListEnumchat_message_typeFieldRefInput<$PrismaModel>
+    not?: NestedEnumchat_message_typeFilter<$PrismaModel> | $Enums.chat_message_type
+  }
+
+  export type NestedEnumchat_message_typeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.chat_message_type | Enumchat_message_typeFieldRefInput<$PrismaModel>
+    in?: $Enums.chat_message_type[] | ListEnumchat_message_typeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.chat_message_type[] | ListEnumchat_message_typeFieldRefInput<$PrismaModel>
+    not?: NestedEnumchat_message_typeWithAggregatesFilter<$PrismaModel> | $Enums.chat_message_type
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumchat_message_typeFilter<$PrismaModel>
+    _max?: NestedEnumchat_message_typeFilter<$PrismaModel>
   }
 
   export type usersCreateWithoutActivity_logInput = {

@@ -1,4 +1,4 @@
-import { getReportDetailService, toggleUpvoteService, getCommentsService, addCommentService, toggleBookmarkService, } from "../../services/reports/interactions.service";
+import { getReportDetailService, toggleUpvoteService, getCommentsService, addCommentService, toggleBookmarkService, getReportChangelogService, } from "../../services/reports/interactions.service";
 // ─── Report Detail ───────────────────────────────────────────────────
 export async function getReportDetailController(req, res) {
     try {
@@ -164,6 +164,24 @@ export async function addCommentController(req, res) {
             success: false,
             error: err.message || "Failed to add comment",
         });
+    }
+}
+// ─── Changelog ───────────────────────────────────────────────────────
+export async function getReportChangelogController(req, res) {
+    try {
+        const reportId = req.params.id;
+        if (!reportId || typeof reportId !== "string" || !reportId.trim()) {
+            return res.status(400).json({ success: false, error: "Invalid report ID" });
+        }
+        const changelog = await getReportChangelogService(reportId);
+        return res.json({ success: true, data: { changelog } });
+    }
+    catch (err) {
+        if (err.message === "Report not found") {
+            return res.status(404).json({ success: false, error: "Report not found" });
+        }
+        console.error("❌ getReportChangelogController:", err);
+        return res.status(500).json({ success: false, error: "Server error" });
     }
 }
 // ─── Bookmark ────────────────────────────────────────────────────────

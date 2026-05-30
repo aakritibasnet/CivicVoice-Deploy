@@ -2,7 +2,7 @@ import { detectWard, detectMunicipality, getWardBoundaries, getMunicipalityBound
 import { pool } from "@/db/pool";
 export async function listWardsController(req, res, next) {
     try {
-        const { rows } = await pool.query(`SELECT id, name AS ward_name, ward_code FROM wards WHERE is_active = true ORDER BY name ASC`);
+        const { rows } = await pool.query(`SELECT id, name AS ward_name, ward_code, municipality_id FROM wards WHERE is_active = true ORDER BY name ASC`);
         return res.json({ wards: rows });
     }
     catch (err) {

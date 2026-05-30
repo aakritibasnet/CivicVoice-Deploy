@@ -1,4 +1,4 @@
-import { getOfficerTasks, getTaskDetail, updateTaskStatus, uploadTaskProof, getOfficerReports, getOfficerReportDetail, addReportComment, addTaskComment, getOfficerNotifications, getOfficerUnreadCount, markOfficerNotificationRead, markAllOfficerNotificationsRead, getOfficerHistory, getOfficerProfile, updateOfficerPhoto, changeOfficerPassword, getOfficerPublicTag, } from "@/services/officer/officer.service";
+import { getOfficerTasks, getTaskDetail, updateTaskStatus, uploadTaskProof, getOfficerReports, getOfficerReportDetail, addReportComment, addTaskComment, getOfficerNotifications, getOfficerUnreadCount, markOfficerNotificationRead, markAllOfficerNotificationsRead, getOfficerHistory, getOfficerProfile, updateOfficerPhoto, changeOfficerPassword, forceChangeOfficerPassword, getOfficerPublicTag, } from "@/services/officer/officer.service";
 import { uploadBufferToCloudinary } from "@/lib/upload.cloudinary";
 // ─── Tasks ─────────────────────────────────────────────────────────────
 export async function listTasks(req, res, next) {
@@ -197,6 +197,20 @@ export async function updatePhoto(req, res, next) {
         });
         const imageUrl = uploaded.secure_url;
         const result = await updateOfficerPhoto(officerId, imageUrl);
+        return res.json({ success: true, data: result });
+    }
+    catch (err) {
+        next(err);
+    }
+}
+export async function forceChangePassword(req, res, next) {
+    try {
+        const officerId = req.user.id;
+        const { new_password } = req.body;
+        if (!new_password) {
+            return res.status(400).json({ success: false, error: "new_password is required" });
+        }
+        const result = await forceChangeOfficerPassword(officerId, new_password);
         return res.json({ success: true, data: result });
     }
     catch (err) {

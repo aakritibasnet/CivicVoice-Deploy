@@ -14,7 +14,7 @@ export async function listWardsController(
 ) {
   try {
     const { rows } = await pool.query(
-      `SELECT id, name AS ward_name, ward_code FROM wards WHERE is_active = true ORDER BY name ASC`,
+      `SELECT id, name AS ward_name, ward_code, municipality_id FROM wards WHERE is_active = true ORDER BY name ASC`,
     );
     return res.json({ wards: rows });
   } catch (err) {
