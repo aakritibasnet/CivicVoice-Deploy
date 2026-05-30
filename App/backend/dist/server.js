@@ -1,19 +1,14 @@
+"use strict";
 var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __require = /* @__PURE__ */ ((x) => typeof require !== "undefined" ? require : typeof Proxy !== "undefined" ? new Proxy(x, {
-  get: (a, b) => (typeof require !== "undefined" ? require : a)[b]
-}) : x)(function(x) {
-  if (typeof require !== "undefined") return require.apply(this, arguments);
-  throw Error('Dynamic require of "' + x + '" is not supported');
-});
 var __esm = (fn, res) => function __init() {
   return fn && (res = (0, fn[__getOwnPropNames(fn)[0]])(fn = 0)), res;
 };
-var __commonJS = (cb, mod) => function __require2() {
+var __commonJS = (cb, mod) => function __require() {
   return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
 };
 var __export = (target, all) => {
@@ -38,25 +33,37 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
 ));
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
+// node_modules/tsup/assets/cjs_shims.js
+var getImportMetaUrl, importMetaUrl;
+var init_cjs_shims = __esm({
+  "node_modules/tsup/assets/cjs_shims.js"() {
+    "use strict";
+    getImportMetaUrl = () => typeof document === "undefined" ? new URL(`file:${__filename}`).href : document.currentScript && document.currentScript.tagName.toUpperCase() === "SCRIPT" ? document.currentScript.src : new URL("main.js", document.baseURI).href;
+    importMetaUrl = /* @__PURE__ */ getImportMetaUrl();
+  }
+});
+
 // src/lib/env.ts
-import dotenv from "dotenv";
-import { dirname, resolve } from "path";
-import { fileURLToPath } from "url";
-var envDir;
+var import_dotenv, import_node_path, import_node_url, envDir;
 var init_env = __esm({
   "src/lib/env.ts"() {
     "use strict";
-    envDir = dirname(fileURLToPath(import.meta.url));
-    dotenv.config({
-      path: resolve(envDir, "../../.env")
+    init_cjs_shims();
+    import_dotenv = __toESM(require("dotenv"));
+    import_node_path = require("path");
+    import_node_url = require("url");
+    envDir = (0, import_node_path.dirname)((0, import_node_url.fileURLToPath)(importMetaUrl));
+    import_dotenv.default.config({
+      path: (0, import_node_path.resolve)(envDir, "../../.env")
     });
   }
 });
 
 // src/generated/prisma-client/runtime/library.js
 var require_library = __commonJS({
-  "src/generated/prisma-client/runtime/library.js"(exports, module) {
+  "src/generated/prisma-client/runtime/library.js"(exports2, module2) {
     "use strict";
+    init_cjs_shims();
     var yu = Object.create;
     var jt = Object.defineProperty;
     var bu = Object.getOwnPropertyDescriptor;
@@ -83,7 +90,7 @@ var require_library = __commonJS({
     });
     var as = ue((Ng, ss) => {
       "use strict";
-      var Fc = __require("os"), os = __require("tty"), de = hi(), { env: G } = process, Qe;
+      var Fc = require("os"), os = require("tty"), de = hi(), { env: G } = process, Qe;
       de("no-color") || de("no-colors") || de("color=false") || de("color=never") ? Qe = 0 : (de("color") || de("colors") || de("color=true") || de("color=always")) && (Qe = 1);
       "FORCE_COLOR" in G && (G.FORCE_COLOR === "true" ? Qe = 1 : G.FORCE_COLOR === "false" ? Qe = 0 : Qe = G.FORCE_COLOR.length === 0 ? 1 : Math.min(parseInt(G.FORCE_COLOR, 10), 3));
       function yi(e) {
@@ -200,7 +207,7 @@ var require_library = __commonJS({
     });
     var As = ue((Bh, _e) => {
       "use strict";
-      var Fi = __require("fs"), Mi = __require("path"), np = __require("os"), ip = __require("crypto"), op = vs(), Ts = op.version, sp = /(?:^|^)\s*(?:export\s+)?([\w.-]+)(?:\s*=\s*?|:\s+?)(\s*'(?:\\'|[^'])*'|\s*"(?:\\"|[^"])*"|\s*`(?:\\`|[^`])*`|[^#\r\n]+)?\s*(?:#.*)?(?:$|$)/mg;
+      var Fi = require("fs"), Mi = require("path"), np = require("os"), ip = require("crypto"), op = vs(), Ts = op.version, sp = /(?:^|^)\s*(?:export\s+)?([\w.-]+)(?:\s*=\s*?|:\s+?)(\s*'(?:\\'|[^'])*'|\s*"(?:\\"|[^"])*"|\s*`(?:\\`|[^`])*`|[^#\r\n]+)?\s*(?:#.*)?(?:$|$)/mg;
       function ap(e) {
         let r = {}, t = e.toString();
         t = t.replace(/\r\n?/mg, `
@@ -395,7 +402,7 @@ var require_library = __commonJS({
     });
     var jf = {};
     tr(jf, { DMMF: () => ct, Debug: () => N, Decimal: () => Fe, Extensions: () => ni, MetricsClient: () => Lr, PrismaClientInitializationError: () => P, PrismaClientKnownRequestError: () => z5, PrismaClientRustPanicError: () => ae, PrismaClientUnknownRequestError: () => V, PrismaClientValidationError: () => Z, Public: () => ii, Sql: () => ie, createParam: () => va, defineDmmfProperty: () => Ca, deserializeJsonResponse: () => Vr, deserializeRawResult: () => Xn, dmmfToRuntimeDataModel: () => Ns, empty: () => Oa, getPrismaClient: () => fu, getRuntime: () => Kn, join: () => Da, makeStrictEnum: () => gu, makeTypedQueryFactory: () => Ia, objectEnumValues: () => On, raw: () => no, serializeJsonQuery: () => $n, skip: () => Mn, sqltag: () => io3, warnEnvConflicts: () => hu, warnOnce: () => at });
-    module.exports = vu(jf);
+    module2.exports = vu(jf);
     var ni = {};
     tr(ni, { defineExtension: () => ko, getExtensionContext: () => _o });
     function ko(e) {
@@ -501,7 +508,7 @@ var require_library = __commonJS({
       Yr.length = 0;
     }
     var gr = N;
-    var Go = O(__require("fs"));
+    var Go = O(require("fs"));
     function ai() {
       let e = process.env.PRISMA_QUERY_ENGINE_LIBRARY;
       if (!(e && Go.default.existsSync(e)) && process.arch === "ia32") throw new Error('The default query engine type (Node-API, "library") is currently not supported for 32bit Node. Please set `engineType = "binary"` in the "generator" block of your "schema.prisma" file (or use the environment variables "PRISMA_CLIENT_ENGINE_TYPE=binary" and/or "PRISMA_CLI_QUERY_ENGINE_TYPE=binary".)');
@@ -512,9 +519,9 @@ var require_library = __commonJS({
       let t = r === "url";
       return e.includes("windows") ? t ? "query_engine.dll.node" : `query_engine-${e}.dll.node` : e.includes("darwin") ? t ? `${Ut}.dylib.node` : `${Ut}-${e}.dylib.node` : t ? `${Ut}.so.node` : `${Ut}-${e}.so.node`;
     }
-    var Ko = O(__require("child_process"));
-    var mi = O(__require("fs/promises"));
-    var Ht = O(__require("os"));
+    var Ko = O(require("child_process"));
+    var mi = O(require("fs/promises"));
+    var Ht = O(require("os"));
     var Oe = /* @__PURE__ */ Symbol.for("@ts-pattern/matcher");
     var Gu = /* @__PURE__ */ Symbol.for("@ts-pattern/isVariadic");
     var Wt = "@ts-pattern/anonymous-select-key";
@@ -683,7 +690,7 @@ var require_library = __commonJS({
         return this;
       }
     };
-    var Ho = __require("util");
+    var Ho = require("util");
     var Ju = { warn: Ie("prisma:warn") };
     var Ku = { warn: () => !process.env.PRISMA_DISABLE_WARNINGS };
     function Jt(e, ...r) {
@@ -843,7 +850,7 @@ ${c}`);
     }
     var Xt = {};
     tr(Xt, { beep: () => kc, clearScreen: () => Cc, clearTerminal: () => Ic, cursorBackward: () => mc, cursorDown: () => pc, cursorForward: () => dc, cursorGetPosition: () => hc, cursorHide: () => Ec, cursorLeft: () => ts, cursorMove: () => cc, cursorNextLine: () => yc, cursorPrevLine: () => bc, cursorRestorePosition: () => gc, cursorSavePosition: () => fc, cursorShow: () => wc, cursorTo: () => uc, cursorUp: () => rs, enterAlternativeScreen: () => Dc, eraseDown: () => Tc, eraseEndLine: () => vc, eraseLine: () => ns, eraseLines: () => xc, eraseScreen: () => gi, eraseStartLine: () => Pc, eraseUp: () => Sc, exitAlternativeScreen: () => Oc, iTerm: () => Lc, image: () => Nc, link: () => _c, scrollDown: () => Ac, scrollUp: () => Rc });
-    var Zt = O(__require("process"), 1);
+    var Zt = O(require("process"), 1);
     var zt = globalThis.window?.document !== void 0;
     var gg = globalThis.process?.versions?.node !== void 0;
     var hg = globalThis.process?.versions?.bun !== void 0;
@@ -998,7 +1005,7 @@ ${c}`);
       };
     }
     var Wc = O(on());
-    var M = O(__require("path"));
+    var M = O(require("path"));
     var Jc = O(on());
     var wh = N("prisma:engines");
     function ms() {
@@ -1028,7 +1035,7 @@ ${c}`);
     M.default.join(__dirname, "../libquery_engine-rhel-openssl-1.1.x.so.node");
     M.default.join(__dirname, "../libquery_engine-rhel-openssl-3.0.x.so.node");
     M.default.join(__dirname, "../query_engine-windows.dll.node");
-    var Si = O(__require("fs"));
+    var Si = O(require("fs"));
     var fs = gr("chmodPlusX");
     function Ri(e) {
       if (process.platform === "win32") return;
@@ -1132,13 +1139,13 @@ ${(0, ws.default)(Hc(n), 2)}
       if (typeof e != "string") throw new TypeError(`Expected a \`string\`, got \`${typeof e}\``);
       return e.replace(rp, "");
     }
-    var it = O(__require("path"));
+    var it = O(require("path"));
     function Li(e) {
       return it.default.sep === it.default.posix.sep ? e : e.split(it.default.sep).join(it.default.posix.sep);
     }
     var qi = O(As());
-    var un = O(__require("fs"));
-    var xr = O(__require("path"));
+    var un = O(require("fs"));
+    var xr = O(require("path"));
     function Cs(e) {
       let r = e.ignoreProcessEnv ? {} : process.env, t = (n) => n.match(/(.?\${(?:[a-zA-Z0-9_]+)?})/g)?.reduce(function(o, s) {
         let a = /(.?)\${([a-zA-Z0-9_]+)?}/g.exec(s);
@@ -2184,7 +2191,7 @@ Env vars from ${Y(l)} overwrite the ones from ${Y(a)}
     }
     var Rr = ((b) => (b.findUnique = "findUnique", b.findUniqueOrThrow = "findUniqueOrThrow", b.findFirst = "findFirst", b.findFirstOrThrow = "findFirstOrThrow", b.findMany = "findMany", b.create = "create", b.createMany = "createMany", b.createManyAndReturn = "createManyAndReturn", b.update = "update", b.updateMany = "updateMany", b.updateManyAndReturn = "updateManyAndReturn", b.upsert = "upsert", b.delete = "delete", b.deleteMany = "deleteMany", b.groupBy = "groupBy", b.count = "count", b.aggregate = "aggregate", b.findRaw = "findRaw", b.aggregateRaw = "aggregateRaw", b))(Rr || {});
     var Xs = O(Di());
-    var Zs = O(__require("fs"));
+    var Zs = O(require("fs"));
     var Hs = { keyword: De, entity: De, value: (e) => W(nr(e)), punctuation: nr, directive: De, function: De, variable: (e) => W(nr(e)), string: (e) => W(qe(e)), boolean: Ie, number: De, comment: Hr };
     var dd = (e) => e;
     var vn = {};
@@ -3505,10 +3512,10 @@ Note that ${s.bold("include")} statements only accept relation fields.`, a;
       return e != null && e[qn] === qn;
     }
     var cu = O(Ti());
-    var pu = __require("async_hooks");
-    var du = __require("events");
-    var mu = O(__require("fs"));
-    var ri = O(__require("path"));
+    var pu = require("async_hooks");
+    var du = require("events");
+    var mu = O(require("fs"));
+    var ri = O(require("path"));
     var ie = class e {
       constructor(r, t) {
         if (r.length - 1 !== t.length) throw r.length === 0 ? new TypeError("Expected at least 1 string") : new TypeError(`Expected ${r.length} strings to have ${r.length - 1} values`);
@@ -3987,8 +3994,8 @@ Learn how: https://pris.ly/d/${ol[r]}-build`;
     function al(e, r) {
       return e ? e.datasources ? e.datasources : e.datasourceUrl ? { [r[0]]: { url: e.datasourceUrl } } : {} : {};
     }
-    var dl = O(__require("fs"));
-    var St = O(__require("path"));
+    var dl = O(require("fs"));
+    var St = O(require("path"));
     function Qn(e) {
       let { runtimeBinaryTarget: r } = e;
       return `Add "${r}" to \`binaryTargets\` in the "schema.prisma" file and run \`prisma generate\` after saving it:
@@ -4675,8 +4682,8 @@ ${r}`, R(t, true));
     function Ol(e) {
       if (e?.kind === "itx") return e.options.id;
     }
-    var wo = O(__require("os"));
-    var kl = O(__require("path"));
+    var wo = O(require("os"));
+    var kl = O(require("path"));
     var Eo = /* @__PURE__ */ Symbol("PrismaLibraryEngineCache");
     function ff() {
       let e = globalThis;
@@ -5720,9 +5727,10 @@ ${n}`;
 
 // src/generated/prisma-client/index.js
 var require_prisma_client = __commonJS({
-  "src/generated/prisma-client/index.js"(exports) {
+  "src/generated/prisma-client/index.js"(exports2) {
     "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
+    init_cjs_shims();
+    Object.defineProperty(exports2, "__esModule", { value: true });
     var {
       PrismaClientKnownRequestError: PrismaClientKnownRequestError2,
       PrismaClientUnknownRequestError: PrismaClientUnknownRequestError2,
@@ -5747,8 +5755,8 @@ var require_prisma_client = __commonJS({
       createParam: createParam2
     } = require_library();
     var Prisma = {};
-    exports.Prisma = Prisma;
-    exports.$Enums = {};
+    exports2.Prisma = Prisma;
+    exports2.$Enums = {};
     Prisma.prismaVersion = {
       client: "6.19.2",
       engine: "c2990dca591cba766e3b7ef5d9e8a84796e47ab7"
@@ -5774,14 +5782,14 @@ var require_prisma_client = __commonJS({
       JsonNull: objectEnumValues2.classes.JsonNull,
       AnyNull: objectEnumValues2.classes.AnyNull
     };
-    var path = __require("path");
-    exports.Prisma.TransactionIsolationLevel = makeStrictEnum2({
+    var path = require("path");
+    exports2.Prisma.TransactionIsolationLevel = makeStrictEnum2({
       ReadUncommitted: "ReadUncommitted",
       ReadCommitted: "ReadCommitted",
       RepeatableRead: "RepeatableRead",
       Serializable: "Serializable"
     });
-    exports.Prisma.Activity_logScalarFieldEnum = {
+    exports2.Prisma.Activity_logScalarFieldEnum = {
       id: "id",
       report_id: "report_id",
       actor_id: "actor_id",
@@ -5790,13 +5798,13 @@ var require_prisma_client = __commonJS({
       details: "details",
       created_at: "created_at"
     };
-    exports.Prisma.Analytics_snapshotsScalarFieldEnum = {
+    exports2.Prisma.Analytics_snapshotsScalarFieldEnum = {
       id: "id",
       snapshot_date: "snapshot_date",
       metrics: "metrics",
       created_at: "created_at"
     };
-    exports.Prisma.Ward_happiness_eventsScalarFieldEnum = {
+    exports2.Prisma.Ward_happiness_eventsScalarFieldEnum = {
       id: "id",
       event_key: "event_key",
       ward_id: "ward_id",
@@ -5806,20 +5814,20 @@ var require_prisma_client = __commonJS({
       details: "details",
       created_at: "created_at"
     };
-    exports.Prisma.Anonymous_report_claimsScalarFieldEnum = {
+    exports2.Prisma.Anonymous_report_claimsScalarFieldEnum = {
       id: "id",
       report_id: "report_id",
       device_id: "device_id",
       claimed_by: "claimed_by",
       claimed_at: "claimed_at"
     };
-    exports.Prisma.Anonymous_reportsScalarFieldEnum = {
+    exports2.Prisma.Anonymous_reportsScalarFieldEnum = {
       id: "id",
       report_id: "report_id",
       device_id: "device_id",
       created_at: "created_at"
     };
-    exports.Prisma.AttachmentsScalarFieldEnum = {
+    exports2.Prisma.AttachmentsScalarFieldEnum = {
       id: "id",
       report_id: "report_id",
       filename: "filename",
@@ -5830,7 +5838,7 @@ var require_prisma_client = __commonJS({
       uploaded_by: "uploaded_by",
       created_at: "created_at"
     };
-    exports.Prisma.BadgesScalarFieldEnum = {
+    exports2.Prisma.BadgesScalarFieldEnum = {
       id: "id",
       name: "name",
       description: "description",
@@ -5840,13 +5848,13 @@ var require_prisma_client = __commonJS({
       criteria_value: "criteria_value",
       created_at: "created_at"
     };
-    exports.Prisma.BookmarksScalarFieldEnum = {
+    exports2.Prisma.BookmarksScalarFieldEnum = {
       id: "id",
       report_id: "report_id",
       user_id: "user_id",
       created_at: "created_at"
     };
-    exports.Prisma.CommentsScalarFieldEnum = {
+    exports2.Prisma.CommentsScalarFieldEnum = {
       id: "id",
       report_id: "report_id",
       user_id: "user_id",
@@ -5856,7 +5864,7 @@ var require_prisma_client = __commonJS({
       created_at: "created_at",
       updated_at: "updated_at"
     };
-    exports.Prisma.Task_completionsScalarFieldEnum = {
+    exports2.Prisma.Task_completionsScalarFieldEnum = {
       id: "id",
       task_id: "task_id",
       completed_by_user_id: "completed_by_user_id",
@@ -5868,7 +5876,7 @@ var require_prisma_client = __commonJS({
       created_at: "created_at",
       updated_at: "updated_at"
     };
-    exports.Prisma.Report_postsScalarFieldEnum = {
+    exports2.Prisma.Report_postsScalarFieldEnum = {
       id: "id",
       task_id: "task_id",
       completion_id: "completion_id",
@@ -5894,7 +5902,7 @@ var require_prisma_client = __commonJS({
       created_at: "created_at",
       updated_at: "updated_at"
     };
-    exports.Prisma.Report_ratingsScalarFieldEnum = {
+    exports2.Prisma.Report_ratingsScalarFieldEnum = {
       id: "id",
       post_id: "post_id",
       user_id: "user_id",
@@ -5902,7 +5910,7 @@ var require_prisma_client = __commonJS({
       created_at: "created_at",
       updated_at: "updated_at"
     };
-    exports.Prisma.Report_commentsScalarFieldEnum = {
+    exports2.Prisma.Report_commentsScalarFieldEnum = {
       id: "id",
       post_id: "post_id",
       user_id: "user_id",
@@ -5913,20 +5921,20 @@ var require_prisma_client = __commonJS({
       created_at: "created_at",
       updated_at: "updated_at"
     };
-    exports.Prisma.Report_comment_reportsScalarFieldEnum = {
+    exports2.Prisma.Report_comment_reportsScalarFieldEnum = {
       id: "id",
       comment_id: "comment_id",
       user_id: "user_id",
       reason: "reason",
       created_at: "created_at"
     };
-    exports.Prisma.Report_post_bookmarksScalarFieldEnum = {
+    exports2.Prisma.Report_post_bookmarksScalarFieldEnum = {
       id: "id",
       post_id: "post_id",
       user_id: "user_id",
       created_at: "created_at"
     };
-    exports.Prisma.Kanban_columnsScalarFieldEnum = {
+    exports2.Prisma.Kanban_columnsScalarFieldEnum = {
       id: "id",
       name: "name",
       position: "position",
@@ -5939,7 +5947,7 @@ var require_prisma_client = __commonJS({
       created_at: "created_at",
       updated_at: "updated_at"
     };
-    exports.Prisma.Notification_preferencesScalarFieldEnum = {
+    exports2.Prisma.Notification_preferencesScalarFieldEnum = {
       user_id: "user_id",
       notify_status_changes: "notify_status_changes",
       notify_comments: "notify_comments",
@@ -5948,7 +5956,7 @@ var require_prisma_client = __commonJS({
       notify_nearby_resolved: "notify_nearby_resolved",
       updated_at: "updated_at"
     };
-    exports.Prisma.Kanban_user_preferencesScalarFieldEnum = {
+    exports2.Prisma.Kanban_user_preferencesScalarFieldEnum = {
       id: "id",
       user_id: "user_id",
       collapsed_columns: "collapsed_columns",
@@ -5956,7 +5964,7 @@ var require_prisma_client = __commonJS({
       created_at: "created_at",
       updated_at: "updated_at"
     };
-    exports.Prisma.NotificationsScalarFieldEnum = {
+    exports2.Prisma.NotificationsScalarFieldEnum = {
       id: "id",
       user_id: "user_id",
       officer_id: "officer_id",
@@ -5969,13 +5977,13 @@ var require_prisma_client = __commonJS({
       is_read: "is_read",
       created_at: "created_at"
     };
-    exports.Prisma.Report_followersScalarFieldEnum = {
+    exports2.Prisma.Report_followersScalarFieldEnum = {
       id: "id",
       report_id: "report_id",
       user_id: "user_id",
       created_at: "created_at"
     };
-    exports.Prisma.Push_tokensScalarFieldEnum = {
+    exports2.Prisma.Push_tokensScalarFieldEnum = {
       id: "id",
       user_id: "user_id",
       officer_id: "officer_id",
@@ -5984,7 +5992,7 @@ var require_prisma_client = __commonJS({
       created_at: "created_at",
       updated_at: "updated_at"
     };
-    exports.Prisma.Password_reset_tokensScalarFieldEnum = {
+    exports2.Prisma.Password_reset_tokensScalarFieldEnum = {
       id: "id",
       user_id: "user_id",
       token_hash: "token_hash",
@@ -5992,7 +6000,7 @@ var require_prisma_client = __commonJS({
       used_at: "used_at",
       created_at: "created_at"
     };
-    exports.Prisma.Pending_usersScalarFieldEnum = {
+    exports2.Prisma.Pending_usersScalarFieldEnum = {
       id: "id",
       name: "name",
       email: "email",
@@ -6001,7 +6009,7 @@ var require_prisma_client = __commonJS({
       created_at: "created_at",
       updated_at: "updated_at"
     };
-    exports.Prisma.Refresh_tokensScalarFieldEnum = {
+    exports2.Prisma.Refresh_tokensScalarFieldEnum = {
       id: "id",
       user_id: "user_id",
       token_hash: "token_hash",
@@ -6009,7 +6017,7 @@ var require_prisma_client = __commonJS({
       created_at: "created_at",
       revoked_at: "revoked_at"
     };
-    exports.Prisma.Officer_refresh_tokensScalarFieldEnum = {
+    exports2.Prisma.Officer_refresh_tokensScalarFieldEnum = {
       id: "id",
       officer_id: "officer_id",
       token_hash: "token_hash",
@@ -6017,7 +6025,7 @@ var require_prisma_client = __commonJS({
       created_at: "created_at",
       revoked_at: "revoked_at"
     };
-    exports.Prisma.ReportsScalarFieldEnum = {
+    exports2.Prisma.ReportsScalarFieldEnum = {
       id: "id",
       title: "title",
       description: "description",
@@ -6080,7 +6088,7 @@ var require_prisma_client = __commonJS({
       comment_count: "comment_count",
       device_id: "device_id"
     };
-    exports.Prisma.SessionsScalarFieldEnum = {
+    exports2.Prisma.SessionsScalarFieldEnum = {
       id: "id",
       user_id: "user_id",
       refresh_token: "refresh_token",
@@ -6089,33 +6097,33 @@ var require_prisma_client = __commonJS({
       expires_at: "expires_at",
       created_at: "created_at"
     };
-    exports.Prisma.Spatial_ref_sysScalarFieldEnum = {
+    exports2.Prisma.Spatial_ref_sysScalarFieldEnum = {
       srid: "srid",
       auth_name: "auth_name",
       auth_srid: "auth_srid",
       srtext: "srtext",
       proj4text: "proj4text"
     };
-    exports.Prisma.System_settingsScalarFieldEnum = {
+    exports2.Prisma.System_settingsScalarFieldEnum = {
       key: "key",
       value: "value",
       description: "description",
       updated_at: "updated_at"
     };
-    exports.Prisma.UpvotesScalarFieldEnum = {
+    exports2.Prisma.UpvotesScalarFieldEnum = {
       id: "id",
       report_id: "report_id",
       user_id: "user_id",
       officer_id: "officer_id",
       created_at: "created_at"
     };
-    exports.Prisma.User_badgesScalarFieldEnum = {
+    exports2.Prisma.User_badgesScalarFieldEnum = {
       id: "id",
       user_id: "user_id",
       badge_id: "badge_id",
       earned_at: "earned_at"
     };
-    exports.Prisma.User_statsScalarFieldEnum = {
+    exports2.Prisma.User_statsScalarFieldEnum = {
       user_id: "user_id",
       total_reports: "total_reports",
       resolved_reports: "resolved_reports",
@@ -6126,7 +6134,7 @@ var require_prisma_client = __commonJS({
       impact_score: "impact_score",
       updated_at: "updated_at"
     };
-    exports.Prisma.UsersScalarFieldEnum = {
+    exports2.Prisma.UsersScalarFieldEnum = {
       id: "id",
       name: "name",
       email: "email",
@@ -6141,7 +6149,7 @@ var require_prisma_client = __commonJS({
       ward_id: "ward_id",
       municipality_id: "municipality_id"
     };
-    exports.Prisma.Verification_codesScalarFieldEnum = {
+    exports2.Prisma.Verification_codesScalarFieldEnum = {
       id: "id",
       email: "email",
       target: "target",
@@ -6152,7 +6160,7 @@ var require_prisma_client = __commonJS({
       used_at: "used_at",
       created_at: "created_at"
     };
-    exports.Prisma.Ward_officersScalarFieldEnum = {
+    exports2.Prisma.Ward_officersScalarFieldEnum = {
       id: "id",
       ward_id: "ward_id",
       name: "name",
@@ -6161,7 +6169,7 @@ var require_prisma_client = __commonJS({
       designation: "designation",
       created_at: "created_at"
     };
-    exports.Prisma.Officer_departmentsScalarFieldEnum = {
+    exports2.Prisma.Officer_departmentsScalarFieldEnum = {
       id: "id",
       slug: "slug",
       name: "name",
@@ -6169,7 +6177,7 @@ var require_prisma_client = __commonJS({
       created_at: "created_at",
       updated_at: "updated_at"
     };
-    exports.Prisma.OfficersScalarFieldEnum = {
+    exports2.Prisma.OfficersScalarFieldEnum = {
       id: "id",
       first_name: "first_name",
       last_name: "last_name",
@@ -6186,7 +6194,7 @@ var require_prisma_client = __commonJS({
       updated_at: "updated_at",
       deleted_at: "deleted_at"
     };
-    exports.Prisma.MunicipalitiesScalarFieldEnum = {
+    exports2.Prisma.MunicipalitiesScalarFieldEnum = {
       id: "id",
       name: "name",
       name_ne: "name_ne",
@@ -6201,7 +6209,7 @@ var require_prisma_client = __commonJS({
       created_at: "created_at",
       updated_at: "updated_at"
     };
-    exports.Prisma.WardsScalarFieldEnum = {
+    exports2.Prisma.WardsScalarFieldEnum = {
       id: "id",
       name: "name",
       ward_code: "ward_code",
@@ -6214,7 +6222,7 @@ var require_prisma_client = __commonJS({
       updated_at: "updated_at",
       municipality_id: "municipality_id"
     };
-    exports.Prisma.ChatsScalarFieldEnum = {
+    exports2.Prisma.ChatsScalarFieldEnum = {
       id: "id",
       type: "type",
       title: "title",
@@ -6233,7 +6241,7 @@ var require_prisma_client = __commonJS({
       created_at: "created_at",
       updated_at: "updated_at"
     };
-    exports.Prisma.Chat_participantsScalarFieldEnum = {
+    exports2.Prisma.Chat_participantsScalarFieldEnum = {
       id: "id",
       chat_id: "chat_id",
       party_kind: "party_kind",
@@ -6247,7 +6255,7 @@ var require_prisma_client = __commonJS({
       joined_at: "joined_at",
       removed_at: "removed_at"
     };
-    exports.Prisma.MessagesScalarFieldEnum = {
+    exports2.Prisma.MessagesScalarFieldEnum = {
       id: "id",
       chat_id: "chat_id",
       sender_kind: "sender_kind",
@@ -6261,7 +6269,7 @@ var require_prisma_client = __commonJS({
       deleted_at: "deleted_at",
       created_at: "created_at"
     };
-    exports.Prisma.Message_receiptsScalarFieldEnum = {
+    exports2.Prisma.Message_receiptsScalarFieldEnum = {
       id: "id",
       message_id: "message_id",
       party_kind: "party_kind",
@@ -6270,7 +6278,7 @@ var require_prisma_client = __commonJS({
       read_at: "read_at",
       acknowledged_at: "acknowledged_at"
     };
-    exports.Prisma.Chat_notification_prefsScalarFieldEnum = {
+    exports2.Prisma.Chat_notification_prefsScalarFieldEnum = {
       party_kind: "party_kind",
       party_id: "party_id",
       push_enabled: "push_enabled",
@@ -6281,14 +6289,14 @@ var require_prisma_client = __commonJS({
       mention_override: "mention_override",
       updated_at: "updated_at"
     };
-    exports.Prisma.Chat_mentionsScalarFieldEnum = {
+    exports2.Prisma.Chat_mentionsScalarFieldEnum = {
       id: "id",
       message_id: "message_id",
       mentioned_kind: "mentioned_kind",
       mentioned_id: "mentioned_id",
       created_at: "created_at"
     };
-    exports.Prisma.Message_reactionsScalarFieldEnum = {
+    exports2.Prisma.Message_reactionsScalarFieldEnum = {
       id: "id",
       message_id: "message_id",
       party_kind: "party_kind",
@@ -6296,7 +6304,7 @@ var require_prisma_client = __commonJS({
       emoji: "emoji",
       created_at: "created_at"
     };
-    exports.Prisma.Message_attachmentsScalarFieldEnum = {
+    exports2.Prisma.Message_attachmentsScalarFieldEnum = {
       id: "id",
       message_id: "message_id",
       file_name: "file_name",
@@ -6310,7 +6318,7 @@ var require_prisma_client = __commonJS({
       uploaded_by_id: "uploaded_by_id",
       created_at: "created_at"
     };
-    exports.Prisma.Chat_audit_logScalarFieldEnum = {
+    exports2.Prisma.Chat_audit_logScalarFieldEnum = {
       id: "id",
       chat_id: "chat_id",
       actor_kind: "actor_kind",
@@ -6319,14 +6327,14 @@ var require_prisma_client = __commonJS({
       metadata: "metadata",
       created_at: "created_at"
     };
-    exports.Prisma.Chat_sla_configsScalarFieldEnum = {
+    exports2.Prisma.Chat_sla_configsScalarFieldEnum = {
       chat_id: "chat_id",
       resolve_by_hours: "resolve_by_hours",
       escalate_by_hours: "escalate_by_hours",
       created_at: "created_at",
       updated_at: "updated_at"
     };
-    exports.Prisma.Chat_sla_timersScalarFieldEnum = {
+    exports2.Prisma.Chat_sla_timersScalarFieldEnum = {
       id: "id",
       chat_id: "chat_id",
       started_at: "started_at",
@@ -6336,7 +6344,7 @@ var require_prisma_client = __commonJS({
       resolved_at: "resolved_at",
       created_at: "created_at"
     };
-    exports.Prisma.Chat_announcementsScalarFieldEnum = {
+    exports2.Prisma.Chat_announcementsScalarFieldEnum = {
       id: "id",
       sender_kind: "sender_kind",
       sender_id: "sender_id",
@@ -6347,69 +6355,69 @@ var require_prisma_client = __commonJS({
       sent_count: "sent_count",
       created_at: "created_at"
     };
-    exports.Prisma.SortOrder = {
+    exports2.Prisma.SortOrder = {
       asc: "asc",
       desc: "desc"
     };
-    exports.Prisma.NullableJsonNullValueInput = {
+    exports2.Prisma.NullableJsonNullValueInput = {
       DbNull: Prisma.DbNull,
       JsonNull: Prisma.JsonNull
     };
-    exports.Prisma.JsonNullValueInput = {
+    exports2.Prisma.JsonNullValueInput = {
       JsonNull: Prisma.JsonNull
     };
-    exports.Prisma.QueryMode = {
+    exports2.Prisma.QueryMode = {
       default: "default",
       insensitive: "insensitive"
     };
-    exports.Prisma.JsonNullValueFilter = {
+    exports2.Prisma.JsonNullValueFilter = {
       DbNull: Prisma.DbNull,
       JsonNull: Prisma.JsonNull,
       AnyNull: Prisma.AnyNull
     };
-    exports.Prisma.NullsOrder = {
+    exports2.Prisma.NullsOrder = {
       first: "first",
       last: "last"
     };
-    exports.pathway_type = exports.$Enums.pathway_type = {
+    exports2.pathway_type = exports2.$Enums.pathway_type = {
       escalated: "escalated",
       forwarded: "forwarded"
     };
-    exports.priority_level = exports.$Enums.priority_level = {
+    exports2.priority_level = exports2.$Enums.priority_level = {
       low: "low",
       medium: "medium",
       high: "high",
       critical: "critical"
     };
-    exports.assignment_level = exports.$Enums.assignment_level = {
+    exports2.assignment_level = exports2.$Enums.assignment_level = {
       ward: "ward",
       municipality: "municipality"
     };
-    exports.report_status = exports.$Enums.report_status = {
+    exports2.report_status = exports2.$Enums.report_status = {
       incoming: "incoming",
       in_progress: "in_progress",
       completed: "completed",
       returned: "returned",
       invalid: "invalid"
     };
-    exports.user_role = exports.$Enums.user_role = {
+    exports2.user_role = exports2.$Enums.user_role = {
       ward: "ward",
       municipality: "municipality",
       admin: "admin",
       citizen: "citizen",
       officer: "officer"
     };
-    exports.officer_type = exports.$Enums.officer_type = {
+    exports2.officer_type = exports2.$Enums.officer_type = {
       ward_officer: "ward_officer",
       municipality_officer: "municipality_officer"
     };
-    exports.chat_type = exports.$Enums.chat_type = {
+    exports2.chat_type = exports2.$Enums.chat_type = {
       officer_ward: "officer_ward",
       municipality_internal: "municipality_internal",
       ward_municipality: "ward_municipality",
       complaint_case: "complaint_case"
     };
-    exports.chat_status = exports.$Enums.chat_status = {
+    exports2.chat_status = exports2.$Enums.chat_status = {
       open: "open",
       pending: "pending",
       escalated: "escalated",
@@ -6417,18 +6425,18 @@ var require_prisma_client = __commonJS({
       closed: "closed",
       reopened: "reopened"
     };
-    exports.chat_priority = exports.$Enums.chat_priority = {
+    exports2.chat_priority = exports2.$Enums.chat_priority = {
       normal: "normal",
       important: "important",
       urgent: "urgent",
       emergency: "emergency"
     };
-    exports.chat_role = exports.$Enums.chat_role = {
+    exports2.chat_role = exports2.$Enums.chat_role = {
       admin: "admin",
       member: "member",
       viewer: "viewer"
     };
-    exports.chat_message_type = exports.$Enums.chat_message_type = {
+    exports2.chat_message_type = exports2.$Enums.chat_message_type = {
       text: "text",
       image: "image",
       file: "file",
@@ -6436,12 +6444,12 @@ var require_prisma_client = __commonJS({
       location: "location",
       system: "system"
     };
-    exports.chat_scan_status = exports.$Enums.chat_scan_status = {
+    exports2.chat_scan_status = exports2.$Enums.chat_scan_status = {
       pending: "pending",
       clean: "clean",
       infected: "infected"
     };
-    exports.Prisma.ModelName = {
+    exports2.Prisma.ModelName = {
       activity_log: "activity_log",
       analytics_snapshots: "analytics_snapshots",
       ward_happiness_events: "ward_happiness_events",
@@ -6543,7 +6551,7 @@ var require_prisma_client = __commonJS({
       "inlineSchemaHash": "a9528a5873d798f3a809a5b611789e79d1e3bb488ac32398b2892214fce69ce9",
       "copyEngine": true
     };
-    var fs = __require("fs");
+    var fs = require("fs");
     config.dirname = __dirname;
     if (!fs.existsSync(path.join(__dirname, "schema.prisma"))) {
       const alternativePaths = [
@@ -6557,7 +6565,7 @@ var require_prisma_client = __commonJS({
       config.isBundled = true;
     }
     config.runtimeDataModel = JSON.parse('{"models":{"activity_log":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"dbgenerated","args":["gen_random_uuid()"]},"isGenerated":false,"isUpdatedAt":false},{"name":"report_id","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"actor_id","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"actor_name","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["255"]],"isGenerated":false,"isUpdatedAt":false},{"name":"action","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["100"]],"isGenerated":false,"isUpdatedAt":false},{"name":"details","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Json","nativeType":null,"default":"{}","isGenerated":false,"isUpdatedAt":false},{"name":"created_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"users","kind":"object","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"users","nativeType":null,"relationName":"activity_logTousers","relationFromFields":["actor_id"],"relationToFields":["id"],"relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false},{"name":"reports","kind":"object","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"reports","nativeType":null,"relationName":"activity_logToreports","relationFromFields":["report_id"],"relationToFields":["id"],"relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"analytics_snapshots":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"dbgenerated","args":["gen_random_uuid()"]},"isGenerated":false,"isUpdatedAt":false},{"name":"snapshot_date","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":["Date",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"metrics","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Json","nativeType":null,"default":"{}","isGenerated":false,"isUpdatedAt":false},{"name":"created_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"ward_happiness_events":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"dbgenerated","args":["gen_random_uuid()"]},"isGenerated":false,"isUpdatedAt":false},{"name":"event_key","kind":"scalar","isList":false,"isRequired":true,"isUnique":true,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["255"]],"isGenerated":false,"isUpdatedAt":false},{"name":"ward_id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"report_id","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"event_type","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["80"]],"isGenerated":false,"isUpdatedAt":false},{"name":"penalty_points","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Int","nativeType":null,"default":0,"isGenerated":false,"isUpdatedAt":false},{"name":"details","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Json","nativeType":null,"default":"{}","isGenerated":false,"isUpdatedAt":false},{"name":"created_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"reports","kind":"object","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"reports","nativeType":null,"relationName":"reportsToward_happiness_events","relationFromFields":["report_id"],"relationToFields":["id"],"relationOnDelete":"SetNull","relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false},{"name":"wards","kind":"object","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"wards","nativeType":null,"relationName":"ward_happiness_eventsTowards","relationFromFields":["ward_id"],"relationToFields":["id"],"relationOnDelete":"Cascade","relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"anonymous_report_claims":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"dbgenerated","args":["gen_random_uuid()"]},"isGenerated":false,"isUpdatedAt":false},{"name":"report_id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"device_id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["255"]],"isGenerated":false,"isUpdatedAt":false},{"name":"claimed_by","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"claimed_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"users","kind":"object","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"users","nativeType":null,"relationName":"anonymous_report_claimsTousers","relationFromFields":["claimed_by"],"relationToFields":["id"],"relationOnDelete":"Cascade","relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false},{"name":"reports","kind":"object","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"reports","nativeType":null,"relationName":"anonymous_report_claimsToreports","relationFromFields":["report_id"],"relationToFields":["id"],"relationOnDelete":"Cascade","relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"anonymous_reports":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"dbgenerated","args":["gen_random_uuid()"]},"isGenerated":false,"isUpdatedAt":false},{"name":"report_id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"device_id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["255"]],"isGenerated":false,"isUpdatedAt":false},{"name":"created_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"reports","kind":"object","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"reports","nativeType":null,"relationName":"anonymous_reportsToreports","relationFromFields":["report_id"],"relationToFields":["id"],"relationOnDelete":"Cascade","relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false}],"primaryKey":null,"uniqueFields":[["report_id","device_id"]],"uniqueIndexes":[{"name":null,"fields":["report_id","device_id"]}],"isGenerated":false},"attachments":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"dbgenerated","args":["gen_random_uuid()"]},"isGenerated":false,"isUpdatedAt":false},{"name":"report_id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"filename","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["500"]],"isGenerated":false,"isUpdatedAt":false},{"name":"url","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["1000"]],"isGenerated":false,"isUpdatedAt":false},{"name":"mime_type","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["100"]],"isGenerated":false,"isUpdatedAt":false},{"name":"size_bytes","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"BigInt","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"stage","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["VarChar",["50"]],"default":"submission","isGenerated":false,"isUpdatedAt":false},{"name":"uploaded_by","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"created_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"reports","kind":"object","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"reports","nativeType":null,"relationName":"attachmentsToreports","relationFromFields":["report_id"],"relationToFields":["id"],"relationOnDelete":"Cascade","relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false},{"name":"users","kind":"object","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"users","nativeType":null,"relationName":"attachmentsTousers","relationFromFields":["uploaded_by"],"relationToFields":["id"],"relationOnDelete":"NoAction","relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"badges":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"dbgenerated","args":["gen_random_uuid()"]},"isGenerated":false,"isUpdatedAt":false},{"name":"name","kind":"scalar","isList":false,"isRequired":true,"isUnique":true,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["100"]],"isGenerated":false,"isUpdatedAt":false},{"name":"description","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"icon_name","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["VarChar",["100"]],"default":"ribbon-outline","isGenerated":false,"isUpdatedAt":false},{"name":"tier","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["VarChar",["20"]],"default":"bronze","isGenerated":false,"isUpdatedAt":false},{"name":"criteria_type","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["50"]],"isGenerated":false,"isUpdatedAt":false},{"name":"criteria_value","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Int","nativeType":null,"default":1,"isGenerated":false,"isUpdatedAt":false},{"name":"created_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"user_badges","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"user_badges","nativeType":null,"relationName":"badgesTouser_badges","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false,"documentation":"This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info."},"bookmarks":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"dbgenerated","args":["gen_random_uuid()"]},"isGenerated":false,"isUpdatedAt":false},{"name":"report_id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"user_id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"created_at","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"reports","kind":"object","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"reports","nativeType":null,"relationName":"bookmarksToreports","relationFromFields":["report_id"],"relationToFields":["id"],"relationOnDelete":"Cascade","relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false},{"name":"users","kind":"object","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"users","nativeType":null,"relationName":"bookmarksTousers","relationFromFields":["user_id"],"relationToFields":["id"],"relationOnDelete":"Cascade","relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false}],"primaryKey":null,"uniqueFields":[["report_id","user_id"]],"uniqueIndexes":[{"name":null,"fields":["report_id","user_id"]}],"isGenerated":false},"comments":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"dbgenerated","args":["gen_random_uuid()"]},"isGenerated":false,"isUpdatedAt":false},{"name":"report_id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"user_id","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"officer_id","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"public_tag","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["100"]],"isGenerated":false,"isUpdatedAt":false},{"name":"content","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"created_at","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"updated_at","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"reports","kind":"object","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"reports","nativeType":null,"relationName":"commentsToreports","relationFromFields":["report_id"],"relationToFields":["id"],"relationOnDelete":"Cascade","relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false},{"name":"officers","kind":"object","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"officers","nativeType":null,"relationName":"comments_officer","relationFromFields":["officer_id"],"relationToFields":["id"],"relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false},{"name":"users","kind":"object","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"users","nativeType":null,"relationName":"commentsTousers","relationFromFields":["user_id"],"relationToFields":["id"],"relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"task_completions":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"dbgenerated","args":["gen_random_uuid()"]},"isGenerated":false,"isUpdatedAt":false},{"name":"task_id","kind":"scalar","isList":false,"isRequired":true,"isUnique":true,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"completed_by_user_id","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"completed_by_officer_id","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"description","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"before_image_url","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["2048"]],"isGenerated":false,"isUpdatedAt":false},{"name":"after_image_url","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["2048"]],"isGenerated":false,"isUpdatedAt":false},{"name":"completed_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"created_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"updated_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"reports","kind":"object","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"reports","nativeType":null,"relationName":"reportsTotask_completions","relationFromFields":["task_id"],"relationToFields":["id"],"relationOnDelete":"Cascade","relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false},{"name":"completed_by_user","kind":"object","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"users","nativeType":null,"relationName":"task_completions_completed_by_user","relationFromFields":["completed_by_user_id"],"relationToFields":["id"],"relationOnDelete":"SetNull","relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false},{"name":"completed_by_officer","kind":"object","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"officers","nativeType":null,"relationName":"officersTotask_completions","relationFromFields":["completed_by_officer_id"],"relationToFields":["id"],"relationOnDelete":"SetNull","relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false},{"name":"report_posts","kind":"object","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"report_posts","nativeType":null,"relationName":"report_postsTotask_completions","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"report_posts":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"dbgenerated","args":["gen_random_uuid()"]},"isGenerated":false,"isUpdatedAt":false},{"name":"task_id","kind":"scalar","isList":false,"isRequired":true,"isUnique":true,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"completion_id","kind":"scalar","isList":false,"isRequired":true,"isUnique":true,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"ward_id","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"source_user_id","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"title","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["500"]],"isGenerated":false,"isUpdatedAt":false},{"name":"description","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"category","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["100"]],"isGenerated":false,"isUpdatedAt":false},{"name":"priority","kind":"enum","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"priority_level","nativeType":null,"default":"medium","isGenerated":false,"isUpdatedAt":false},{"name":"before_image_url","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["2048"]],"isGenerated":false,"isUpdatedAt":false},{"name":"after_image_url","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["2048"]],"isGenerated":false,"isUpdatedAt":false},{"name":"ward_name_snapshot","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["255"]],"isGenerated":false,"isUpdatedAt":false},{"name":"completed_by_name_snapshot","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["255"]],"isGenerated":false,"isUpdatedAt":false},{"name":"completed_by_role_snapshot","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["50"]],"isGenerated":false,"isUpdatedAt":false},{"name":"task_snapshot","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Json","nativeType":null,"default":"{}","isGenerated":false,"isUpdatedAt":false},{"name":"completion_snapshot","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Json","nativeType":null,"default":"{}","isGenerated":false,"isUpdatedAt":false},{"name":"rating_average","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Float","nativeType":null,"default":0,"isGenerated":false,"isUpdatedAt":false},{"name":"rating_count","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Int","nativeType":null,"default":0,"isGenerated":false,"isUpdatedAt":false},{"name":"comment_count","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Int","nativeType":null,"default":0,"isGenerated":false,"isUpdatedAt":false},{"name":"bookmark_count","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Int","nativeType":null,"default":0,"isGenerated":false,"isUpdatedAt":false},{"name":"edited_count","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Int","nativeType":null,"default":0,"isGenerated":false,"isUpdatedAt":false},{"name":"completed_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":["Timestamptz",["6"]],"isGenerated":false,"isUpdatedAt":false},{"name":"created_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"updated_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"reports","kind":"object","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"reports","nativeType":null,"relationName":"report_postsToreports","relationFromFields":["task_id"],"relationToFields":["id"],"relationOnDelete":"Cascade","relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false},{"name":"task_completions","kind":"object","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"task_completions","nativeType":null,"relationName":"report_postsTotask_completions","relationFromFields":["completion_id"],"relationToFields":["id"],"relationOnDelete":"Cascade","relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false},{"name":"wards","kind":"object","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"wards","nativeType":null,"relationName":"report_postsTowards","relationFromFields":["ward_id"],"relationToFields":["id"],"relationOnDelete":"SetNull","relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false},{"name":"source_user","kind":"object","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"users","nativeType":null,"relationName":"report_posts_source_user","relationFromFields":["source_user_id"],"relationToFields":["id"],"relationOnDelete":"SetNull","relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false},{"name":"report_ratings","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"report_ratings","nativeType":null,"relationName":"report_postsToreport_ratings","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"report_comments","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"report_comments","nativeType":null,"relationName":"report_commentsToreport_posts","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"report_post_bookmarks","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"report_post_bookmarks","nativeType":null,"relationName":"report_post_bookmarksToreport_posts","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"report_ratings":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"dbgenerated","args":["gen_random_uuid()"]},"isGenerated":false,"isUpdatedAt":false},{"name":"post_id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"user_id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"rating","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"Int","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"created_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"updated_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"report_posts","kind":"object","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"report_posts","nativeType":null,"relationName":"report_postsToreport_ratings","relationFromFields":["post_id"],"relationToFields":["id"],"relationOnDelete":"Cascade","relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false},{"name":"users","kind":"object","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"users","nativeType":null,"relationName":"report_ratings_user","relationFromFields":["user_id"],"relationToFields":["id"],"relationOnDelete":"Cascade","relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false}],"primaryKey":null,"uniqueFields":[["post_id","user_id"]],"uniqueIndexes":[{"name":null,"fields":["post_id","user_id"]}],"isGenerated":false},"report_comments":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"dbgenerated","args":["gen_random_uuid()"]},"isGenerated":false,"isUpdatedAt":false},{"name":"post_id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"user_id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"parent_id","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"content","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"anonymous_name","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["80"]],"isGenerated":false,"isUpdatedAt":false},{"name":"reply_count","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Int","nativeType":null,"default":0,"isGenerated":false,"isUpdatedAt":false},{"name":"created_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"updated_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"report_posts","kind":"object","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"report_posts","nativeType":null,"relationName":"report_commentsToreport_posts","relationFromFields":["post_id"],"relationToFields":["id"],"relationOnDelete":"Cascade","relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false},{"name":"users","kind":"object","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"users","nativeType":null,"relationName":"report_comments_user","relationFromFields":["user_id"],"relationToFields":["id"],"relationOnDelete":"Cascade","relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false},{"name":"parent","kind":"object","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"report_comments","nativeType":null,"relationName":"report_comment_replies","relationFromFields":["parent_id"],"relationToFields":["id"],"relationOnDelete":"NoAction","relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false},{"name":"replies","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"report_comments","nativeType":null,"relationName":"report_comment_replies","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"report_comment_reports","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"report_comment_reports","nativeType":null,"relationName":"report_comment_reportsToreport_comments","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"report_comment_reports":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"dbgenerated","args":["gen_random_uuid()"]},"isGenerated":false,"isUpdatedAt":false},{"name":"comment_id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"user_id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"reason","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"created_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"report_comments","kind":"object","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"report_comments","nativeType":null,"relationName":"report_comment_reportsToreport_comments","relationFromFields":["comment_id"],"relationToFields":["id"],"relationOnDelete":"Cascade","relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false},{"name":"users","kind":"object","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"users","nativeType":null,"relationName":"report_comment_reports_user","relationFromFields":["user_id"],"relationToFields":["id"],"relationOnDelete":"Cascade","relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false}],"primaryKey":null,"uniqueFields":[["comment_id","user_id"]],"uniqueIndexes":[{"name":null,"fields":["comment_id","user_id"]}],"isGenerated":false},"report_post_bookmarks":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"dbgenerated","args":["gen_random_uuid()"]},"isGenerated":false,"isUpdatedAt":false},{"name":"post_id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"user_id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"created_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"report_posts","kind":"object","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"report_posts","nativeType":null,"relationName":"report_post_bookmarksToreport_posts","relationFromFields":["post_id"],"relationToFields":["id"],"relationOnDelete":"Cascade","relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false},{"name":"users","kind":"object","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"users","nativeType":null,"relationName":"report_post_bookmarks_user","relationFromFields":["user_id"],"relationToFields":["id"],"relationOnDelete":"Cascade","relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false}],"primaryKey":null,"uniqueFields":[["post_id","user_id"]],"uniqueIndexes":[{"name":null,"fields":["post_id","user_id"]}],"isGenerated":false},"kanban_columns":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"dbgenerated","args":["gen_random_uuid()"]},"isGenerated":false,"isUpdatedAt":false},{"name":"name","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["100"]],"isGenerated":false,"isUpdatedAt":false},{"name":"position","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Int","nativeType":null,"default":0,"isGenerated":false,"isUpdatedAt":false},{"name":"color","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["VarChar",["20"]],"default":"#6b7280","isGenerated":false,"isUpdatedAt":false},{"name":"deadline_days","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"Int","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"is_terminal","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Boolean","nativeType":null,"default":false,"isGenerated":false,"isUpdatedAt":false},{"name":"mapped_status","kind":"enum","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"report_status","nativeType":null,"default":"incoming","isGenerated":false,"isUpdatedAt":false},{"name":"is_default","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Boolean","nativeType":null,"default":false,"isGenerated":false,"isUpdatedAt":false},{"name":"role_access","kind":"enum","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"user_role","nativeType":null,"default":[],"isGenerated":false,"isUpdatedAt":false},{"name":"created_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"updated_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"reports","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"reports","nativeType":null,"relationName":"kanban_columnsToreports","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"notification_preferences":{"dbName":null,"schema":null,"fields":[{"name":"user_id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"notify_status_changes","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Boolean","nativeType":null,"default":true,"isGenerated":false,"isUpdatedAt":false},{"name":"notify_comments","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Boolean","nativeType":null,"default":true,"isGenerated":false,"isUpdatedAt":false},{"name":"notify_upvote_milestones","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Boolean","nativeType":null,"default":true,"isGenerated":false,"isUpdatedAt":false},{"name":"notify_badge_earned","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Boolean","nativeType":null,"default":true,"isGenerated":false,"isUpdatedAt":false},{"name":"notify_nearby_resolved","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Boolean","nativeType":null,"default":false,"isGenerated":false,"isUpdatedAt":false},{"name":"updated_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"users","kind":"object","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"users","nativeType":null,"relationName":"notification_preferencesTousers","relationFromFields":["user_id"],"relationToFields":["id"],"relationOnDelete":"Cascade","relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"kanban_user_preferences":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"dbgenerated","args":["gen_random_uuid()"]},"isGenerated":false,"isUpdatedAt":false},{"name":"user_id","kind":"scalar","isList":false,"isRequired":true,"isUnique":true,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"collapsed_columns","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Json","nativeType":null,"default":"[]","isGenerated":false,"isUpdatedAt":false},{"name":"column_order","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"Json","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"created_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"updated_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"users","kind":"object","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"users","nativeType":null,"relationName":"kanban_user_preferencesTousers","relationFromFields":["user_id"],"relationToFields":["id"],"relationOnDelete":"Cascade","relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false}],"primaryKey":null,"uniqueFields":[["user_id"]],"uniqueIndexes":[{"name":null,"fields":["user_id"]}],"isGenerated":false},"notifications":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"dbgenerated","args":["gen_random_uuid()"]},"isGenerated":false,"isUpdatedAt":false},{"name":"user_id","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"officer_id","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"report_id","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"title","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["255"]],"isGenerated":false,"isUpdatedAt":false},{"name":"message","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"type","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["VarChar",["50"]],"default":"info","isGenerated":false,"isUpdatedAt":false},{"name":"link","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["500"]],"isGenerated":false,"isUpdatedAt":false},{"name":"metadata","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Json","nativeType":null,"default":"{}","isGenerated":false,"isUpdatedAt":false},{"name":"is_read","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Boolean","nativeType":null,"default":false,"isGenerated":false,"isUpdatedAt":false},{"name":"created_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"officers","kind":"object","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"officers","nativeType":null,"relationName":"notifications_officer","relationFromFields":["officer_id"],"relationToFields":["id"],"relationOnDelete":"Cascade","relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false},{"name":"users","kind":"object","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"users","nativeType":null,"relationName":"notificationsTousers","relationFromFields":["user_id"],"relationToFields":["id"],"relationOnDelete":"Cascade","relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false},{"name":"reports","kind":"object","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"reports","nativeType":null,"relationName":"notificationsToreports","relationFromFields":["report_id"],"relationToFields":["id"],"relationOnDelete":"Cascade","relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"report_followers":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"dbgenerated","args":["gen_random_uuid()"]},"isGenerated":false,"isUpdatedAt":false},{"name":"report_id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"user_id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"created_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"reports","kind":"object","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"reports","nativeType":null,"relationName":"report_followersToreports","relationFromFields":["report_id"],"relationToFields":["id"],"relationOnDelete":"Cascade","relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false},{"name":"users","kind":"object","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"users","nativeType":null,"relationName":"report_followersTousers","relationFromFields":["user_id"],"relationToFields":["id"],"relationOnDelete":"Cascade","relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false}],"primaryKey":null,"uniqueFields":[["report_id","user_id"]],"uniqueIndexes":[{"name":null,"fields":["report_id","user_id"]}],"isGenerated":false},"push_tokens":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"dbgenerated","args":["gen_random_uuid()"]},"isGenerated":false,"isUpdatedAt":false},{"name":"user_id","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"officer_id","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"token","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["255"]],"isGenerated":false,"isUpdatedAt":false},{"name":"platform","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["20"]],"isGenerated":false,"isUpdatedAt":false},{"name":"created_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"updated_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"officers","kind":"object","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"officers","nativeType":null,"relationName":"push_tokens_officer","relationFromFields":["officer_id"],"relationToFields":["id"],"relationOnDelete":"Cascade","relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false},{"name":"users","kind":"object","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"users","nativeType":null,"relationName":"push_tokensTousers","relationFromFields":["user_id"],"relationToFields":["id"],"relationOnDelete":"Cascade","relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false}],"primaryKey":null,"uniqueFields":[["user_id","token"],["officer_id","token"]],"uniqueIndexes":[{"name":null,"fields":["user_id","token"]},{"name":null,"fields":["officer_id","token"]}],"isGenerated":false},"password_reset_tokens":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"dbgenerated","args":["gen_random_uuid()"]},"isGenerated":false,"isUpdatedAt":false},{"name":"user_id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"token_hash","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["255"]],"isGenerated":false,"isUpdatedAt":false},{"name":"expires_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":["Timestamptz",["6"]],"isGenerated":false,"isUpdatedAt":false},{"name":"used_at","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":["Timestamptz",["6"]],"isGenerated":false,"isUpdatedAt":false},{"name":"created_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"users","kind":"object","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"users","nativeType":null,"relationName":"password_reset_tokensTousers","relationFromFields":["user_id"],"relationToFields":["id"],"relationOnDelete":"Cascade","relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"pending_users":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"dbgenerated","args":["gen_random_uuid()"]},"isGenerated":false,"isUpdatedAt":false},{"name":"name","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["255"]],"isGenerated":false,"isUpdatedAt":false},{"name":"email","kind":"scalar","isList":false,"isRequired":true,"isUnique":true,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["255"]],"isGenerated":false,"isUpdatedAt":false},{"name":"password_hash","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["255"]],"isGenerated":false,"isUpdatedAt":false},{"name":"role","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["VarChar",["50"]],"default":"citizen","isGenerated":false,"isUpdatedAt":false},{"name":"created_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"updated_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"refresh_tokens":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"dbgenerated","args":["gen_random_uuid()"]},"isGenerated":false,"isUpdatedAt":false},{"name":"user_id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"token_hash","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["255"]],"isGenerated":false,"isUpdatedAt":false},{"name":"expires_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":["Timestamptz",["6"]],"isGenerated":false,"isUpdatedAt":false},{"name":"created_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"revoked_at","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":["Timestamptz",["6"]],"isGenerated":false,"isUpdatedAt":false},{"name":"users","kind":"object","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"users","nativeType":null,"relationName":"refresh_tokensTousers","relationFromFields":["user_id"],"relationToFields":["id"],"relationOnDelete":"Cascade","relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false,"documentation":"This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments"},"officer_refresh_tokens":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"dbgenerated","args":["gen_random_uuid()"]},"isGenerated":false,"isUpdatedAt":false},{"name":"officer_id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"token_hash","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["255"]],"isGenerated":false,"isUpdatedAt":false},{"name":"expires_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":["Timestamptz",["6"]],"isGenerated":false,"isUpdatedAt":false},{"name":"created_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"revoked_at","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":["Timestamptz",["6"]],"isGenerated":false,"isUpdatedAt":false},{"name":"officers","kind":"object","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"officers","nativeType":null,"relationName":"officer_refresh_tokensToofficers","relationFromFields":["officer_id"],"relationToFields":["id"],"relationOnDelete":"Cascade","relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"reports":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"dbgenerated","args":["gen_random_uuid()"]},"isGenerated":false,"isUpdatedAt":false},{"name":"title","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["500"]],"isGenerated":false,"isUpdatedAt":false},{"name":"description","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"category","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["100"]],"isGenerated":false,"isUpdatedAt":false},{"name":"subcategory","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["100"]],"isGenerated":false,"isUpdatedAt":false},{"name":"location_lat","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"Float","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"location_lng","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"Float","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"address_text","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"citizen_name","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["255"]],"isGenerated":false,"isUpdatedAt":false},{"name":"citizen_contact","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["255"]],"isGenerated":false,"isUpdatedAt":false},{"name":"submitted_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"photo_urls","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Json","nativeType":null,"default":"[]","isGenerated":false,"isUpdatedAt":false},{"name":"ward_id","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"ward_officer_id","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"ward_work_attempted","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"ward_notes","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"ward_received_at","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":["Timestamptz",["6"]],"isGenerated":false,"isUpdatedAt":false},{"name":"incoming_seen_at","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":["Timestamptz",["6"]],"isGenerated":false,"isUpdatedAt":false},{"name":"incoming_ack_deadline_at","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":["Timestamptz",["6"]],"isGenerated":false,"isUpdatedAt":false},{"name":"ward_active_started_at","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":["Timestamptz",["6"]],"isGenerated":false,"isUpdatedAt":false},{"name":"ward_deadline_at","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":["Timestamptz",["6"]],"isGenerated":false,"isUpdatedAt":false},{"name":"ward_deadline_reason","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"pathway_type","kind":"enum","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"pathway_type","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"pathway_reason","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"days_overdue","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"Int","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"forwarding_officer_id","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"pathway_timestamp","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"kanban_column_id","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"assigned_officer_id","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"assigned_department_id","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"assigned_field_officer_id","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"municipality_notes","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"priority","kind":"enum","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"priority_level","nativeType":null,"default":"medium","isGenerated":false,"isUpdatedAt":false},{"name":"estimated_completion_date","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":["Date",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"actual_completion_date","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":["Date",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"resolution_description","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"resolution_photo_urls","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Json","nativeType":null,"default":"[]","isGenerated":false,"isUpdatedAt":false},{"name":"resolution_document_urls","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Json","nativeType":null,"default":"[]","isGenerated":false,"isUpdatedAt":false},{"name":"return_reasoning","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"return_instructions","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"assigned_level","kind":"enum","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"assignment_level","nativeType":null,"default":"ward","isGenerated":false,"isUpdatedAt":false},{"name":"escalated_to_municipality","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Boolean","nativeType":null,"default":false,"isGenerated":false,"isUpdatedAt":false},{"name":"escalated_at","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":["Timestamptz",["6"]],"isGenerated":false,"isUpdatedAt":false},{"name":"escalation_type","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["80"]],"isGenerated":false,"isUpdatedAt":false},{"name":"escalation_source","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["80"]],"isGenerated":false,"isUpdatedAt":false},{"name":"returned_to_ward_at","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":["Timestamptz",["6"]],"isGenerated":false,"isUpdatedAt":false},{"name":"status","kind":"enum","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"report_status","nativeType":null,"default":"incoming","isGenerated":false,"isUpdatedAt":false},{"name":"status_history","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Json","nativeType":null,"default":"[]","isGenerated":false,"isUpdatedAt":false},{"name":"municipality_received_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"municipality_deadline_at","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":["Timestamptz",["6"]],"isGenerated":false,"isUpdatedAt":false},{"name":"created_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"updated_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"user_id","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"is_public","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Boolean","nativeType":null,"default":true,"isGenerated":false,"isUpdatedAt":false},{"name":"media_url","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"media_public_id","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["255"]],"isGenerated":false,"isUpdatedAt":false},{"name":"media_type","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["VarChar",["20"]],"default":"photo","isGenerated":false,"isUpdatedAt":false},{"name":"location_accuracy_m","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"Float","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"upvote_count","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Int","nativeType":null,"default":0,"isGenerated":false,"isUpdatedAt":false},{"name":"comment_count","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Int","nativeType":null,"default":0,"isGenerated":false,"isUpdatedAt":false},{"name":"device_id","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["255"]],"isGenerated":false,"isUpdatedAt":false},{"name":"activity_log","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"activity_log","nativeType":null,"relationName":"activity_logToreports","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"anonymous_report_claims","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"anonymous_report_claims","nativeType":null,"relationName":"anonymous_report_claimsToreports","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"anonymous_reports","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"anonymous_reports","nativeType":null,"relationName":"anonymous_reportsToreports","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"attachments","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"attachments","nativeType":null,"relationName":"attachmentsToreports","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"bookmarks","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"bookmarks","nativeType":null,"relationName":"bookmarksToreports","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"comments","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"comments","nativeType":null,"relationName":"commentsToreports","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"notifications","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"notifications","nativeType":null,"relationName":"notificationsToreports","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"report_followers","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"report_followers","nativeType":null,"relationName":"report_followersToreports","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"task_completion","kind":"object","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"task_completions","nativeType":null,"relationName":"reportsTotask_completions","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"report_post","kind":"object","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"report_posts","nativeType":null,"relationName":"report_postsToreports","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"ward_happiness_events","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"ward_happiness_events","nativeType":null,"relationName":"reportsToward_happiness_events","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"assigned_department","kind":"object","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"officer_departments","nativeType":null,"relationName":"ReportAssignedDepartment","relationFromFields":["assigned_department_id"],"relationToFields":["id"],"relationOnDelete":"SetNull","relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false},{"name":"assigned_field_officer","kind":"object","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"officers","nativeType":null,"relationName":"ReportAssignedFieldOfficer","relationFromFields":["assigned_field_officer_id"],"relationToFields":["id"],"relationOnDelete":"SetNull","relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false},{"name":"users_reports_assigned_officer_idTousers","kind":"object","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"users","nativeType":null,"relationName":"reports_assigned_officer_idTousers","relationFromFields":["assigned_officer_id"],"relationToFields":["id"],"relationOnDelete":"NoAction","relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false},{"name":"ward_officers_reports_forwarding_officer_idToward_officers","kind":"object","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"ward_officers","nativeType":null,"relationName":"reports_forwarding_officer_idToward_officers","relationFromFields":["forwarding_officer_id"],"relationToFields":["id"],"relationOnDelete":"NoAction","relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false},{"name":"kanban_columns","kind":"object","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"kanban_columns","nativeType":null,"relationName":"kanban_columnsToreports","relationFromFields":["kanban_column_id"],"relationToFields":["id"],"relationOnDelete":"NoAction","relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false},{"name":"users_reports_user_idTousers","kind":"object","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"users","nativeType":null,"relationName":"reports_user_idTousers","relationFromFields":["user_id"],"relationToFields":["id"],"relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false},{"name":"wards","kind":"object","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"wards","nativeType":null,"relationName":"reportsTowards","relationFromFields":["ward_id"],"relationToFields":["id"],"relationOnDelete":"NoAction","relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false},{"name":"ward_officers_reports_ward_officer_idToward_officers","kind":"object","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"ward_officers","nativeType":null,"relationName":"reports_ward_officer_idToward_officers","relationFromFields":["ward_officer_id"],"relationToFields":["id"],"relationOnDelete":"NoAction","relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false},{"name":"upvotes","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"upvotes","nativeType":null,"relationName":"reportsToupvotes","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"sessions":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"dbgenerated","args":["gen_random_uuid()"]},"isGenerated":false,"isUpdatedAt":false},{"name":"user_id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"refresh_token","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"user_agent","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"ip_address","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["45"]],"isGenerated":false,"isUpdatedAt":false},{"name":"expires_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":["Timestamptz",["6"]],"isGenerated":false,"isUpdatedAt":false},{"name":"created_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"users","kind":"object","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"users","nativeType":null,"relationName":"sessionsTousers","relationFromFields":["user_id"],"relationToFields":["id"],"relationOnDelete":"Cascade","relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false}],"primaryKey":null,"uniqueFields":[["user_id","refresh_token"]],"uniqueIndexes":[{"name":null,"fields":["user_id","refresh_token"]}],"isGenerated":false},"spatial_ref_sys":{"dbName":null,"schema":null,"fields":[{"name":"srid","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":false,"type":"Int","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"auth_name","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["256"]],"isGenerated":false,"isUpdatedAt":false},{"name":"auth_srid","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"Int","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"srtext","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["2048"]],"isGenerated":false,"isUpdatedAt":false},{"name":"proj4text","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["2048"]],"isGenerated":false,"isUpdatedAt":false}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false,"documentation":"This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info."},"system_settings":{"dbName":null,"schema":null,"fields":[{"name":"key","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["100"]],"isGenerated":false,"isUpdatedAt":false},{"name":"value","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"description","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["500"]],"isGenerated":false,"isUpdatedAt":false},{"name":"updated_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"upvotes":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"dbgenerated","args":["gen_random_uuid()"]},"isGenerated":false,"isUpdatedAt":false},{"name":"report_id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"user_id","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"officer_id","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"created_at","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"reports","kind":"object","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"reports","nativeType":null,"relationName":"reportsToupvotes","relationFromFields":["report_id"],"relationToFields":["id"],"relationOnDelete":"Cascade","relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false},{"name":"officers","kind":"object","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"officers","nativeType":null,"relationName":"upvotes_officer","relationFromFields":["officer_id"],"relationToFields":["id"],"relationOnDelete":"Cascade","relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false},{"name":"users","kind":"object","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"users","nativeType":null,"relationName":"upvotesTousers","relationFromFields":["user_id"],"relationToFields":["id"],"relationOnDelete":"Cascade","relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false}],"primaryKey":null,"uniqueFields":[["report_id","user_id"],["report_id","officer_id"]],"uniqueIndexes":[{"name":null,"fields":["report_id","user_id"]},{"name":null,"fields":["report_id","officer_id"]}],"isGenerated":false},"user_badges":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"dbgenerated","args":["gen_random_uuid()"]},"isGenerated":false,"isUpdatedAt":false},{"name":"user_id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"badge_id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"earned_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"badges","kind":"object","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"badges","nativeType":null,"relationName":"badgesTouser_badges","relationFromFields":["badge_id"],"relationToFields":["id"],"relationOnDelete":"Cascade","relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false},{"name":"users","kind":"object","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"users","nativeType":null,"relationName":"user_badgesTousers","relationFromFields":["user_id"],"relationToFields":["id"],"relationOnDelete":"Cascade","relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false}],"primaryKey":null,"uniqueFields":[["user_id","badge_id"]],"uniqueIndexes":[{"name":null,"fields":["user_id","badge_id"]}],"isGenerated":false},"user_stats":{"dbName":null,"schema":null,"fields":[{"name":"user_id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"total_reports","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Int","nativeType":null,"default":0,"isGenerated":false,"isUpdatedAt":false},{"name":"resolved_reports","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Int","nativeType":null,"default":0,"isGenerated":false,"isUpdatedAt":false},{"name":"total_upvotes_received","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Int","nativeType":null,"default":0,"isGenerated":false,"isUpdatedAt":false},{"name":"current_streak_days","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Int","nativeType":null,"default":0,"isGenerated":false,"isUpdatedAt":false},{"name":"longest_streak_days","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Int","nativeType":null,"default":0,"isGenerated":false,"isUpdatedAt":false},{"name":"last_report_date","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":["Date",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"impact_score","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Int","nativeType":null,"default":0,"isGenerated":false,"isUpdatedAt":false},{"name":"updated_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"users","kind":"object","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"users","nativeType":null,"relationName":"user_statsTousers","relationFromFields":["user_id"],"relationToFields":["id"],"relationOnDelete":"Cascade","relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"users":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"dbgenerated","args":["gen_random_uuid()"]},"isGenerated":false,"isUpdatedAt":false},{"name":"name","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["255"]],"isGenerated":false,"isUpdatedAt":false},{"name":"email","kind":"scalar","isList":false,"isRequired":true,"isUnique":true,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["255"]],"isGenerated":false,"isUpdatedAt":false},{"name":"password_hash","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["255"]],"isGenerated":false,"isUpdatedAt":false},{"name":"role","kind":"enum","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"user_role","nativeType":null,"default":"officer","isGenerated":false,"isUpdatedAt":false},{"name":"is_active","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Boolean","nativeType":null,"default":true,"isGenerated":false,"isUpdatedAt":false},{"name":"must_change_password","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Boolean","nativeType":null,"default":false,"isGenerated":false,"isUpdatedAt":false},{"name":"last_login_at","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":["Timestamptz",["6"]],"isGenerated":false,"isUpdatedAt":false},{"name":"created_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"updated_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"deleted_at","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":["Timestamptz",["6"]],"isGenerated":false,"isUpdatedAt":false},{"name":"ward_id","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"municipality_id","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"municipality","kind":"object","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"municipalities","nativeType":null,"relationName":"municipalitiesTousers","relationFromFields":["municipality_id"],"relationToFields":["id"],"relationOnDelete":"NoAction","relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false},{"name":"activity_log","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"activity_log","nativeType":null,"relationName":"activity_logTousers","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"anonymous_report_claims","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"anonymous_report_claims","nativeType":null,"relationName":"anonymous_report_claimsTousers","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"attachments","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"attachments","nativeType":null,"relationName":"attachmentsTousers","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"bookmarks","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"bookmarks","nativeType":null,"relationName":"bookmarksTousers","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"comments","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"comments","nativeType":null,"relationName":"commentsTousers","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"kanban_user_preferences","kind":"object","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"kanban_user_preferences","nativeType":null,"relationName":"kanban_user_preferencesTousers","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"notification_preferences","kind":"object","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"notification_preferences","nativeType":null,"relationName":"notification_preferencesTousers","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"notifications","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"notifications","nativeType":null,"relationName":"notificationsTousers","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"push_tokens","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"push_tokens","nativeType":null,"relationName":"push_tokensTousers","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"password_reset_tokens","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"password_reset_tokens","nativeType":null,"relationName":"password_reset_tokensTousers","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"report_followers","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"report_followers","nativeType":null,"relationName":"report_followersTousers","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"task_completions_completed","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"task_completions","nativeType":null,"relationName":"task_completions_completed_by_user","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"report_posts_source","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"report_posts","nativeType":null,"relationName":"report_posts_source_user","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"report_ratings","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"report_ratings","nativeType":null,"relationName":"report_ratings_user","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"report_comments","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"report_comments","nativeType":null,"relationName":"report_comments_user","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"report_comment_reports","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"report_comment_reports","nativeType":null,"relationName":"report_comment_reports_user","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"report_post_bookmarks","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"report_post_bookmarks","nativeType":null,"relationName":"report_post_bookmarks_user","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"refresh_tokens","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"refresh_tokens","nativeType":null,"relationName":"refresh_tokensTousers","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"reports_reports_assigned_officer_idTousers","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"reports","nativeType":null,"relationName":"reports_assigned_officer_idTousers","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"reports_reports_user_idTousers","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"reports","nativeType":null,"relationName":"reports_user_idTousers","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"sessions","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"sessions","nativeType":null,"relationName":"sessionsTousers","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"upvotes","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"upvotes","nativeType":null,"relationName":"upvotesTousers","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"user_badges","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"user_badges","nativeType":null,"relationName":"user_badgesTousers","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"user_stats","kind":"object","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"user_stats","nativeType":null,"relationName":"user_statsTousers","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false,"documentation":"This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments"},"verification_codes":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"dbgenerated","args":["gen_random_uuid()"]},"isGenerated":false,"isUpdatedAt":false},{"name":"email","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["255"]],"isGenerated":false,"isUpdatedAt":false},{"name":"target","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["255"]],"isGenerated":false,"isUpdatedAt":false},{"name":"purpose","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["50"]],"isGenerated":false,"isUpdatedAt":false},{"name":"code_hash","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["255"]],"isGenerated":false,"isUpdatedAt":false},{"name":"expires_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":["Timestamptz",["6"]],"isGenerated":false,"isUpdatedAt":false},{"name":"meta","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"Json","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"used_at","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":["Timestamptz",["6"]],"isGenerated":false,"isUpdatedAt":false},{"name":"created_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"ward_officers":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"dbgenerated","args":["gen_random_uuid()"]},"isGenerated":false,"isUpdatedAt":false},{"name":"ward_id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"name","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["255"]],"isGenerated":false,"isUpdatedAt":false},{"name":"email","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["255"]],"isGenerated":false,"isUpdatedAt":false},{"name":"phone","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["50"]],"isGenerated":false,"isUpdatedAt":false},{"name":"designation","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["100"]],"isGenerated":false,"isUpdatedAt":false},{"name":"created_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"reports_reports_forwarding_officer_idToward_officers","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"reports","nativeType":null,"relationName":"reports_forwarding_officer_idToward_officers","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"reports_reports_ward_officer_idToward_officers","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"reports","nativeType":null,"relationName":"reports_ward_officer_idToward_officers","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"wards","kind":"object","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"wards","nativeType":null,"relationName":"ward_officersTowards","relationFromFields":["ward_id"],"relationToFields":["id"],"relationOnDelete":"Cascade","relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"officer_departments":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"dbgenerated","args":["gen_random_uuid()"]},"isGenerated":false,"isUpdatedAt":false},{"name":"slug","kind":"scalar","isList":false,"isRequired":true,"isUnique":true,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["100"]],"isGenerated":false,"isUpdatedAt":false},{"name":"name","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["255"]],"isGenerated":false,"isUpdatedAt":false},{"name":"description","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"created_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"updated_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"officers","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"officers","nativeType":null,"relationName":"officer_departmentsToofficers","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"reports","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"reports","nativeType":null,"relationName":"ReportAssignedDepartment","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"officers":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"dbgenerated","args":["gen_random_uuid()"]},"isGenerated":false,"isUpdatedAt":false},{"name":"first_name","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["255"]],"isGenerated":false,"isUpdatedAt":false},{"name":"last_name","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["255"]],"isGenerated":false,"isUpdatedAt":false},{"name":"email","kind":"scalar","isList":false,"isRequired":false,"isUnique":true,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["255"]],"isGenerated":false,"isUpdatedAt":false},{"name":"password_hash","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["255"]],"isGenerated":false,"isUpdatedAt":false},{"name":"must_change_password","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Boolean","nativeType":null,"default":false,"isGenerated":false,"isUpdatedAt":false},{"name":"password_changed_at","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":["Timestamptz",["6"]],"isGenerated":false,"isUpdatedAt":false},{"name":"phone_number","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["50"]],"isGenerated":false,"isUpdatedAt":false},{"name":"profile_image_url","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["2048"]],"isGenerated":false,"isUpdatedAt":false},{"name":"type","kind":"enum","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"officer_type","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"ward_id","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"department_id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"created_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"updated_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"deleted_at","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":["Timestamptz",["6"]],"isGenerated":false,"isUpdatedAt":false},{"name":"comments","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"comments","nativeType":null,"relationName":"comments_officer","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"notifications","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"notifications","nativeType":null,"relationName":"notifications_officer","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"upvotes","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"upvotes","nativeType":null,"relationName":"upvotes_officer","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"officer_departments","kind":"object","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"officer_departments","nativeType":null,"relationName":"officer_departmentsToofficers","relationFromFields":["department_id"],"relationToFields":["id"],"relationOnDelete":"NoAction","relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false},{"name":"assigned_reports","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"reports","nativeType":null,"relationName":"ReportAssignedFieldOfficer","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"officer_refresh_tokens","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"officer_refresh_tokens","nativeType":null,"relationName":"officer_refresh_tokensToofficers","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"push_tokens","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"push_tokens","nativeType":null,"relationName":"push_tokens_officer","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"task_completions","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"task_completions","nativeType":null,"relationName":"officersTotask_completions","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"wards","kind":"object","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"wards","nativeType":null,"relationName":"officersTowards","relationFromFields":["ward_id"],"relationToFields":["id"],"relationOnDelete":"NoAction","relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"municipalities":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"dbgenerated","args":["gen_random_uuid()"]},"isGenerated":false,"isUpdatedAt":false},{"name":"name","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["255"]],"isGenerated":false,"isUpdatedAt":false},{"name":"name_ne","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["255"]],"isGenerated":false,"isUpdatedAt":false},{"name":"code","kind":"scalar","isList":false,"isRequired":true,"isUnique":true,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["50"]],"isGenerated":false,"isUpdatedAt":false},{"name":"type","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["50"]],"isGenerated":false,"isUpdatedAt":false},{"name":"province_id","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"Int","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"province_name","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["100"]],"isGenerated":false,"isUpdatedAt":false},{"name":"district","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["100"]],"isGenerated":false,"isUpdatedAt":false},{"name":"boundary_metadata","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Json","nativeType":null,"default":"{}","isGenerated":false,"isUpdatedAt":false},{"name":"total_wards","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Int","nativeType":null,"default":0,"isGenerated":false,"isUpdatedAt":false},{"name":"is_active","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Boolean","nativeType":null,"default":true,"isGenerated":false,"isUpdatedAt":false},{"name":"created_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"updated_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"wards","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"wards","nativeType":null,"relationName":"municipalitiesTowards","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"users","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"users","nativeType":null,"relationName":"municipalitiesTousers","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"wards":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"dbgenerated","args":["gen_random_uuid()"]},"isGenerated":false,"isUpdatedAt":false},{"name":"name","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["255"]],"isGenerated":false,"isUpdatedAt":false},{"name":"ward_code","kind":"scalar","isList":false,"isRequired":true,"isUnique":true,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["50"]],"isGenerated":false,"isUpdatedAt":false},{"name":"contact_email","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["255"]],"isGenerated":false,"isUpdatedAt":false},{"name":"contact_phone","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["50"]],"isGenerated":false,"isUpdatedAt":false},{"name":"boundary_metadata","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Json","nativeType":null,"default":"{}","isGenerated":false,"isUpdatedAt":false},{"name":"default_deadline_days","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Int","nativeType":null,"default":7,"isGenerated":false,"isUpdatedAt":false},{"name":"is_active","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Boolean","nativeType":null,"default":true,"isGenerated":false,"isUpdatedAt":false},{"name":"created_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"updated_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"municipality_id","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"municipality","kind":"object","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"municipalities","nativeType":null,"relationName":"municipalitiesTowards","relationFromFields":["municipality_id"],"relationToFields":["id"],"relationOnDelete":"NoAction","relationOnUpdate":"NoAction","isGenerated":false,"isUpdatedAt":false},{"name":"officers","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"officers","nativeType":null,"relationName":"officersTowards","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"happiness_events","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"ward_happiness_events","nativeType":null,"relationName":"ward_happiness_eventsTowards","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"report_posts","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"report_posts","nativeType":null,"relationName":"report_postsTowards","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"reports","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"reports","nativeType":null,"relationName":"reportsTowards","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false},{"name":"ward_officers","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"ward_officers","nativeType":null,"relationName":"ward_officersTowards","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false,"documentation":"This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments"},"chats":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"dbgenerated","args":["gen_random_uuid()"]},"isGenerated":false,"isUpdatedAt":false},{"name":"type","kind":"enum","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"chat_type","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"title","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["255"]],"isGenerated":false,"isUpdatedAt":false},{"name":"municipality_id","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"ward_id","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"department_id","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"complaint_id","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"status","kind":"enum","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"chat_status","nativeType":null,"default":"open","isGenerated":false,"isUpdatedAt":false},{"name":"priority","kind":"enum","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"chat_priority","nativeType":null,"default":"normal","isGenerated":false,"isUpdatedAt":false},{"name":"is_group","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Boolean","nativeType":null,"default":false,"isGenerated":false,"isUpdatedAt":false},{"name":"is_archived","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Boolean","nativeType":null,"default":false,"isGenerated":false,"isUpdatedAt":false},{"name":"restrict_send","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Boolean","nativeType":null,"default":false,"isGenerated":false,"isUpdatedAt":false},{"name":"created_by_kind","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["8"]],"isGenerated":false,"isUpdatedAt":false},{"name":"created_by_id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"last_message_at","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":["Timestamptz",["6"]],"isGenerated":false,"isUpdatedAt":false},{"name":"created_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"updated_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"chat_participants":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"dbgenerated","args":["gen_random_uuid()"]},"isGenerated":false,"isUpdatedAt":false},{"name":"chat_id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"party_kind","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["8"]],"isGenerated":false,"isUpdatedAt":false},{"name":"party_id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"role_in_chat","kind":"enum","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"chat_role","nativeType":null,"default":"member","isGenerated":false,"isUpdatedAt":false},{"name":"last_read_message_id","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"last_read_at","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":["Timestamptz",["6"]],"isGenerated":false,"isUpdatedAt":false},{"name":"muted_until","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":["Timestamptz",["6"]],"isGenerated":false,"isUpdatedAt":false},{"name":"notification_level","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["VarChar",["8"]],"default":"all","isGenerated":false,"isUpdatedAt":false},{"name":"is_active","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Boolean","nativeType":null,"default":true,"isGenerated":false,"isUpdatedAt":false},{"name":"joined_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"removed_at","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":["Timestamptz",["6"]],"isGenerated":false,"isUpdatedAt":false}],"primaryKey":null,"uniqueFields":[["chat_id","party_kind","party_id"]],"uniqueIndexes":[{"name":null,"fields":["chat_id","party_kind","party_id"]}],"isGenerated":false},"messages":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"dbgenerated","args":["gen_random_uuid()"]},"isGenerated":false,"isUpdatedAt":false},{"name":"chat_id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"sender_kind","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["8"]],"isGenerated":false,"isUpdatedAt":false},{"name":"sender_id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"type","kind":"enum","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"chat_message_type","nativeType":null,"default":"text","isGenerated":false,"isUpdatedAt":false},{"name":"body","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"reply_to_message_id","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"priority","kind":"enum","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"chat_priority","nativeType":null,"default":"normal","isGenerated":false,"isUpdatedAt":false},{"name":"client_msg_id","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["64"]],"isGenerated":false,"isUpdatedAt":false},{"name":"edited_at","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":["Timestamptz",["6"]],"isGenerated":false,"isUpdatedAt":false},{"name":"deleted_at","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":["Timestamptz",["6"]],"isGenerated":false,"isUpdatedAt":false},{"name":"created_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"message_receipts":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"dbgenerated","args":["gen_random_uuid()"]},"isGenerated":false,"isUpdatedAt":false},{"name":"message_id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"party_kind","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["8"]],"isGenerated":false,"isUpdatedAt":false},{"name":"party_id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"delivered_at","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":["Timestamptz",["6"]],"isGenerated":false,"isUpdatedAt":false},{"name":"read_at","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":["Timestamptz",["6"]],"isGenerated":false,"isUpdatedAt":false},{"name":"acknowledged_at","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":["Timestamptz",["6"]],"isGenerated":false,"isUpdatedAt":false}],"primaryKey":null,"uniqueFields":[["message_id","party_kind","party_id"]],"uniqueIndexes":[{"name":null,"fields":["message_id","party_kind","party_id"]}],"isGenerated":false},"chat_notification_prefs":{"dbName":null,"schema":null,"fields":[{"name":"party_kind","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["8"]],"isGenerated":false,"isUpdatedAt":false},{"name":"party_id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"push_enabled","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Boolean","nativeType":null,"default":true,"isGenerated":false,"isUpdatedAt":false},{"name":"in_app_enabled","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Boolean","nativeType":null,"default":true,"isGenerated":false,"isUpdatedAt":false},{"name":"dnd","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Boolean","nativeType":null,"default":false,"isGenerated":false,"isUpdatedAt":false},{"name":"quiet_hours_start","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"Int","nativeType":["SmallInt",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"quiet_hours_end","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"Int","nativeType":["SmallInt",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"mention_override","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Boolean","nativeType":null,"default":true,"isGenerated":false,"isUpdatedAt":false},{"name":"updated_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false}],"primaryKey":{"name":null,"fields":["party_kind","party_id"]},"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"chat_mentions":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"dbgenerated","args":["gen_random_uuid()"]},"isGenerated":false,"isUpdatedAt":false},{"name":"message_id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"mentioned_kind","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["8"]],"isGenerated":false,"isUpdatedAt":false},{"name":"mentioned_id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"created_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false}],"primaryKey":null,"uniqueFields":[["message_id","mentioned_kind","mentioned_id"]],"uniqueIndexes":[{"name":null,"fields":["message_id","mentioned_kind","mentioned_id"]}],"isGenerated":false},"message_reactions":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"dbgenerated","args":["gen_random_uuid()"]},"isGenerated":false,"isUpdatedAt":false},{"name":"message_id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"party_kind","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["8"]],"isGenerated":false,"isUpdatedAt":false},{"name":"party_id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"emoji","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["16"]],"isGenerated":false,"isUpdatedAt":false},{"name":"created_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false}],"primaryKey":null,"uniqueFields":[["message_id","party_kind","party_id","emoji"]],"uniqueIndexes":[{"name":null,"fields":["message_id","party_kind","party_id","emoji"]}],"isGenerated":false},"message_attachments":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"dbgenerated","args":["gen_random_uuid()"]},"isGenerated":false,"isUpdatedAt":false},{"name":"message_id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"file_name","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["255"]],"isGenerated":false,"isUpdatedAt":false},{"name":"mime_type","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["127"]],"isGenerated":false,"isUpdatedAt":false},{"name":"size_bytes","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"BigInt","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"storage_key","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["512"]],"isGenerated":false,"isUpdatedAt":false},{"name":"thumbnail_key","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["512"]],"isGenerated":false,"isUpdatedAt":false},{"name":"resource_type","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["VarChar",["16"]],"default":"image","isGenerated":false,"isUpdatedAt":false},{"name":"scan_status","kind":"enum","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"chat_scan_status","nativeType":null,"default":"pending","isGenerated":false,"isUpdatedAt":false},{"name":"uploaded_by_kind","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["8"]],"isGenerated":false,"isUpdatedAt":false},{"name":"uploaded_by_id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"created_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"chat_audit_log":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"dbgenerated","args":["gen_random_uuid()"]},"isGenerated":false,"isUpdatedAt":false},{"name":"chat_id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"actor_kind","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["8"]],"isGenerated":false,"isUpdatedAt":false},{"name":"actor_id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"action","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["50"]],"isGenerated":false,"isUpdatedAt":false},{"name":"metadata","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Json","nativeType":null,"default":"{}","isGenerated":false,"isUpdatedAt":false},{"name":"created_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"chat_sla_configs":{"dbName":null,"schema":null,"fields":[{"name":"chat_id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"resolve_by_hours","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Int","nativeType":null,"default":24,"isGenerated":false,"isUpdatedAt":false},{"name":"escalate_by_hours","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Int","nativeType":null,"default":48,"isGenerated":false,"isUpdatedAt":false},{"name":"created_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"updated_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"chat_sla_timers":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"dbgenerated","args":["gen_random_uuid()"]},"isGenerated":false,"isUpdatedAt":false},{"name":"chat_id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"started_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"resolve_deadline","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":["Timestamptz",["6"]],"isGenerated":false,"isUpdatedAt":false},{"name":"escalate_deadline","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":["Timestamptz",["6"]],"isGenerated":false,"isUpdatedAt":false},{"name":"overdue_fired_at","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":["Timestamptz",["6"]],"isGenerated":false,"isUpdatedAt":false},{"name":"resolved_at","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":["Timestamptz",["6"]],"isGenerated":false,"isUpdatedAt":false},{"name":"created_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"chat_announcements":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":["Uuid",[]],"default":{"name":"dbgenerated","args":["gen_random_uuid()"]},"isGenerated":false,"isUpdatedAt":false},{"name":"sender_kind","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["8"]],"isGenerated":false,"isUpdatedAt":false},{"name":"sender_id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"scope","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["VarChar",["40"]],"isGenerated":false,"isUpdatedAt":false},{"name":"scope_id","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"municipality_id","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":["Uuid",[]],"isGenerated":false,"isUpdatedAt":false},{"name":"body","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"sent_count","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Int","nativeType":null,"default":0,"isGenerated":false,"isUpdatedAt":false},{"name":"created_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"DateTime","nativeType":["Timestamptz",["6"]],"default":{"name":"now","args":[]},"isGenerated":false,"isUpdatedAt":false}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false}},"enums":{"pathway_type":{"values":[{"name":"escalated","dbName":null},{"name":"forwarded","dbName":null}],"dbName":null},"priority_level":{"values":[{"name":"low","dbName":null},{"name":"medium","dbName":null},{"name":"high","dbName":null},{"name":"critical","dbName":null}],"dbName":null},"assignment_level":{"values":[{"name":"ward","dbName":null},{"name":"municipality","dbName":null}],"dbName":null},"report_status":{"values":[{"name":"incoming","dbName":null},{"name":"in_progress","dbName":null},{"name":"completed","dbName":null},{"name":"returned","dbName":null},{"name":"invalid","dbName":null}],"dbName":null},"user_role":{"values":[{"name":"ward","dbName":null},{"name":"municipality","dbName":null},{"name":"admin","dbName":null},{"name":"citizen","dbName":null},{"name":"officer","dbName":null}],"dbName":null},"officer_type":{"values":[{"name":"ward_officer","dbName":null},{"name":"municipality_officer","dbName":null}],"dbName":null},"chat_type":{"values":[{"name":"officer_ward","dbName":null},{"name":"municipality_internal","dbName":null},{"name":"ward_municipality","dbName":null},{"name":"complaint_case","dbName":null}],"dbName":null},"chat_status":{"values":[{"name":"open","dbName":null},{"name":"pending","dbName":null},{"name":"escalated","dbName":null},{"name":"resolved","dbName":null},{"name":"closed","dbName":null},{"name":"reopened","dbName":null}],"dbName":null},"chat_priority":{"values":[{"name":"normal","dbName":null},{"name":"important","dbName":null},{"name":"urgent","dbName":null},{"name":"emergency","dbName":null}],"dbName":null},"chat_role":{"values":[{"name":"admin","dbName":null},{"name":"member","dbName":null},{"name":"viewer","dbName":null}],"dbName":null},"chat_message_type":{"values":[{"name":"text","dbName":null},{"name":"image","dbName":null},{"name":"file","dbName":null},{"name":"audio","dbName":null},{"name":"location","dbName":null},{"name":"system","dbName":null}],"dbName":null},"chat_scan_status":{"values":[{"name":"pending","dbName":null},{"name":"clean","dbName":null},{"name":"infected","dbName":null}],"dbName":null}},"types":{}}');
-    defineDmmfProperty2(exports.Prisma, config.runtimeDataModel);
+    defineDmmfProperty2(exports2.Prisma, config.runtimeDataModel);
     config.engineWasm = void 0;
     config.compilerWasm = void 0;
     var { warnEnvConflicts: warnEnvConflicts2 } = require_library();
@@ -6566,8 +6574,8 @@ var require_prisma_client = __commonJS({
       schemaEnvPath: config.relativeEnvPaths.schemaEnvPath && path.resolve(config.dirname, config.relativeEnvPaths.schemaEnvPath)
     });
     var PrismaClient2 = getPrismaClient2(config);
-    exports.PrismaClient = PrismaClient2;
-    Object.assign(exports, Prisma);
+    exports2.PrismaClient = PrismaClient2;
+    Object.assign(exports2, Prisma);
     path.join(__dirname, "libquery_engine-debian-openssl-3.0.x.so.node");
     path.join(process.cwd(), "src/generated/prisma-client/libquery_engine-debian-openssl-3.0.x.so.node");
     path.join(__dirname, "schema.prisma");
@@ -6580,8 +6588,9 @@ var import_prisma_client, prisma;
 var init_prisma = __esm({
   "src/lib/prisma.ts"() {
     "use strict";
+    init_cjs_shims();
     init_env();
-    import_prisma_client = __toESM(require_prisma_client(), 1);
+    import_prisma_client = __toESM(require_prisma_client());
     prisma = globalThis.__backendPrisma ?? new import_prisma_client.PrismaClient({
       log: process.env.NODE_ENV === "development" ? ["warn", "error"] : ["error"]
     });
@@ -6596,13 +6605,14 @@ var pool_exports = {};
 __export(pool_exports, {
   pool: () => pool
 });
-import pg from "pg";
-var Pool, pool;
+var import_pg, Pool, pool;
 var init_pool = __esm({
   "src/db/pool.ts"() {
     "use strict";
+    init_cjs_shims();
+    import_pg = __toESM(require("pg"));
     init_env();
-    ({ Pool } = pg);
+    ({ Pool } = import_pg.default);
     pool = new Pool({
       connectionString: process.env.DATABASE_URL
     });
@@ -6803,6 +6813,7 @@ var NOTIFICATION_CHANNEL;
 var init_notifications_service = __esm({
   "src/services/notifications/notifications.service.ts"() {
     "use strict";
+    init_cjs_shims();
     init_prisma();
     init_pool();
     NOTIFICATION_CHANNEL = "notification_events";
@@ -6844,6 +6855,7 @@ async function getFollowerIds(reportId) {
 var init_followers_service = __esm({
   "src/services/reports/followers.service.ts"() {
     "use strict";
+    init_cjs_shims();
     init_prisma();
   }
 });
@@ -7238,6 +7250,7 @@ var UPVOTE_MILESTONES, LEADERBOARD_RANK_MILESTONES;
 var init_triggers_service = __esm({
   "src/services/notifications/triggers.service.ts"() {
     "use strict";
+    init_cjs_shims();
     init_pool();
     init_notifications_service();
     init_followers_service();
@@ -7532,6 +7545,7 @@ async function addPostComment(postId, userId, content) {
 var init_feed_service = __esm({
   "src/services/report-posts/feed.service.ts"() {
     "use strict";
+    init_cjs_shims();
     init_pool();
     init_triggers_service();
   }
@@ -7539,10 +7553,11 @@ var init_feed_service = __esm({
 
 // ../../node_modules/negotiator/lib/charset.js
 var require_charset = __commonJS({
-  "../../node_modules/negotiator/lib/charset.js"(exports, module) {
+  "../../node_modules/negotiator/lib/charset.js"(exports2, module2) {
     "use strict";
-    module.exports = preferredCharsets;
-    module.exports.preferredCharsets = preferredCharsets;
+    init_cjs_shims();
+    module2.exports = preferredCharsets;
+    module2.exports.preferredCharsets = preferredCharsets;
     var simpleCharsetRegExp = /^\s*([^\s;]+)\s*(?:;(.*))?$/;
     function parseAcceptCharset(accept) {
       var accepts = accept.split(",");
@@ -7626,10 +7641,11 @@ var require_charset = __commonJS({
 
 // ../../node_modules/negotiator/lib/encoding.js
 var require_encoding = __commonJS({
-  "../../node_modules/negotiator/lib/encoding.js"(exports, module) {
+  "../../node_modules/negotiator/lib/encoding.js"(exports2, module2) {
     "use strict";
-    module.exports = preferredEncodings;
-    module.exports.preferredEncodings = preferredEncodings;
+    init_cjs_shims();
+    module2.exports = preferredEncodings;
+    module2.exports.preferredEncodings = preferredEncodings;
     var simpleEncodingRegExp = /^\s*([^\s;]+)\s*(?:;(.*))?$/;
     function parseAcceptEncoding(accept) {
       var accepts = accept.split(",");
@@ -7724,10 +7740,11 @@ var require_encoding = __commonJS({
 
 // ../../node_modules/negotiator/lib/language.js
 var require_language = __commonJS({
-  "../../node_modules/negotiator/lib/language.js"(exports, module) {
+  "../../node_modules/negotiator/lib/language.js"(exports2, module2) {
     "use strict";
-    module.exports = preferredLanguages;
-    module.exports.preferredLanguages = preferredLanguages;
+    init_cjs_shims();
+    module2.exports = preferredLanguages;
+    module2.exports.preferredLanguages = preferredLanguages;
     var simpleLanguageRegExp = /^\s*([^\s\-;]+)(?:-([^\s;]+))?\s*(?:;(.*))?$/;
     function parseAcceptLanguage(accept) {
       var accepts = accept.split(",");
@@ -7819,10 +7836,11 @@ var require_language = __commonJS({
 
 // ../../node_modules/negotiator/lib/mediaType.js
 var require_mediaType = __commonJS({
-  "../../node_modules/negotiator/lib/mediaType.js"(exports, module) {
+  "../../node_modules/negotiator/lib/mediaType.js"(exports2, module2) {
     "use strict";
-    module.exports = preferredMediaTypes;
-    module.exports.preferredMediaTypes = preferredMediaTypes;
+    init_cjs_shims();
+    module2.exports = preferredMediaTypes;
+    module2.exports.preferredMediaTypes = preferredMediaTypes;
     var simpleMediaTypeRegExp = /^\s*([^\s\/;]+)\/([^;\s]+)\s*(?:;(.*))?$/;
     function parseAccept(accept) {
       var accepts = splitMediaTypes(accept);
@@ -7981,14 +7999,15 @@ var require_mediaType = __commonJS({
 
 // ../../node_modules/negotiator/index.js
 var require_negotiator = __commonJS({
-  "../../node_modules/negotiator/index.js"(exports, module) {
+  "../../node_modules/negotiator/index.js"(exports2, module2) {
     "use strict";
+    init_cjs_shims();
     var preferredCharsets = require_charset();
     var preferredEncodings = require_encoding();
     var preferredLanguages = require_language();
     var preferredMediaTypes = require_mediaType();
-    module.exports = Negotiator;
-    module.exports.Negotiator = Negotiator;
+    module2.exports = Negotiator;
+    module2.exports.Negotiator = Negotiator;
     function Negotiator(request) {
       if (!(this instanceof Negotiator)) {
         return new Negotiator(request);
@@ -8036,8 +8055,8 @@ var require_negotiator = __commonJS({
 
 // ../../node_modules/mime-db/db.json
 var require_db = __commonJS({
-  "../../node_modules/mime-db/db.json"(exports, module) {
-    module.exports = {
+  "../../node_modules/mime-db/db.json"(exports2, module2) {
+    module2.exports = {
       "application/1d-interleaved-parityfec": {
         source: "iana"
       },
@@ -16561,28 +16580,30 @@ var require_db = __commonJS({
 
 // ../../node_modules/mime-db/index.js
 var require_mime_db = __commonJS({
-  "../../node_modules/mime-db/index.js"(exports, module) {
+  "../../node_modules/mime-db/index.js"(exports2, module2) {
     "use strict";
-    module.exports = require_db();
+    init_cjs_shims();
+    module2.exports = require_db();
   }
 });
 
 // ../../node_modules/mime-types/index.js
 var require_mime_types = __commonJS({
-  "../../node_modules/mime-types/index.js"(exports) {
+  "../../node_modules/mime-types/index.js"(exports2) {
     "use strict";
+    init_cjs_shims();
     var db = require_mime_db();
-    var extname = __require("path").extname;
+    var extname = require("path").extname;
     var EXTRACT_TYPE_REGEXP = /^\s*([^;\s]*)(?:;|\s|$)/;
     var TEXT_TYPE_REGEXP = /^text\//i;
-    exports.charset = charset;
-    exports.charsets = { lookup: charset };
-    exports.contentType = contentType;
-    exports.extension = extension;
-    exports.extensions = /* @__PURE__ */ Object.create(null);
-    exports.lookup = lookup;
-    exports.types = /* @__PURE__ */ Object.create(null);
-    populateMaps(exports.extensions, exports.types);
+    exports2.charset = charset;
+    exports2.charsets = { lookup: charset };
+    exports2.contentType = contentType;
+    exports2.extension = extension;
+    exports2.extensions = /* @__PURE__ */ Object.create(null);
+    exports2.lookup = lookup;
+    exports2.types = /* @__PURE__ */ Object.create(null);
+    populateMaps(exports2.extensions, exports2.types);
     function charset(type) {
       if (!type || typeof type !== "string") {
         return false;
@@ -16601,12 +16622,12 @@ var require_mime_types = __commonJS({
       if (!str || typeof str !== "string") {
         return false;
       }
-      var mime = str.indexOf("/") === -1 ? exports.lookup(str) : str;
+      var mime = str.indexOf("/") === -1 ? exports2.lookup(str) : str;
       if (!mime) {
         return false;
       }
       if (mime.indexOf("charset") === -1) {
-        var charset2 = exports.charset(mime);
+        var charset2 = exports2.charset(mime);
         if (charset2) mime += "; charset=" + charset2.toLowerCase();
       }
       return mime;
@@ -16616,7 +16637,7 @@ var require_mime_types = __commonJS({
         return false;
       }
       var match = EXTRACT_TYPE_REGEXP.exec(type);
-      var exts = match && exports.extensions[match[1].toLowerCase()];
+      var exts = match && exports2.extensions[match[1].toLowerCase()];
       if (!exts || !exts.length) {
         return false;
       }
@@ -16630,7 +16651,7 @@ var require_mime_types = __commonJS({
       if (!extension2) {
         return false;
       }
-      return exports.types[extension2] || false;
+      return exports2.types[extension2] || false;
     }
     function populateMaps(extensions, types) {
       var preference = ["nginx", "apache", void 0, "iana"];
@@ -16659,11 +16680,12 @@ var require_mime_types = __commonJS({
 
 // ../../node_modules/accepts/index.js
 var require_accepts = __commonJS({
-  "../../node_modules/accepts/index.js"(exports, module) {
+  "../../node_modules/accepts/index.js"(exports2, module2) {
     "use strict";
+    init_cjs_shims();
     var Negotiator = require_negotiator();
     var mime = require_mime_types();
-    module.exports = Accepts;
+    module2.exports = Accepts;
     function Accepts(req) {
       if (!(this instanceof Accepts)) {
         return new Accepts(req);
@@ -16740,9 +16762,10 @@ var require_accepts = __commonJS({
 
 // ../../node_modules/base64id/lib/base64id.js
 var require_base64id = __commonJS({
-  "../../node_modules/base64id/lib/base64id.js"(exports, module) {
+  "../../node_modules/base64id/lib/base64id.js"(exports2, module2) {
     "use strict";
-    var crypto3 = __require("crypto");
+    init_cjs_shims();
+    var crypto3 = require("crypto");
     var Base64Id = function() {
     };
     Base64Id.prototype.getRandomBytes = function(bytes) {
@@ -16797,18 +16820,19 @@ var require_base64id = __commonJS({
       }
       return rand.toString("base64").replace(/\//g, "_").replace(/\+/g, "-");
     };
-    exports = module.exports = new Base64Id();
+    exports2 = module2.exports = new Base64Id();
   }
 });
 
 // ../../node_modules/engine.io-parser/build/cjs/commons.js
 var require_commons = __commonJS({
-  "../../node_modules/engine.io-parser/build/cjs/commons.js"(exports) {
+  "../../node_modules/engine.io-parser/build/cjs/commons.js"(exports2) {
     "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    exports.ERROR_PACKET = exports.PACKET_TYPES_REVERSE = exports.PACKET_TYPES = void 0;
+    init_cjs_shims();
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.ERROR_PACKET = exports2.PACKET_TYPES_REVERSE = exports2.PACKET_TYPES = void 0;
     var PACKET_TYPES = /* @__PURE__ */ Object.create(null);
-    exports.PACKET_TYPES = PACKET_TYPES;
+    exports2.PACKET_TYPES = PACKET_TYPES;
     PACKET_TYPES["open"] = "0";
     PACKET_TYPES["close"] = "1";
     PACKET_TYPES["ping"] = "2";
@@ -16817,22 +16841,23 @@ var require_commons = __commonJS({
     PACKET_TYPES["upgrade"] = "5";
     PACKET_TYPES["noop"] = "6";
     var PACKET_TYPES_REVERSE = /* @__PURE__ */ Object.create(null);
-    exports.PACKET_TYPES_REVERSE = PACKET_TYPES_REVERSE;
+    exports2.PACKET_TYPES_REVERSE = PACKET_TYPES_REVERSE;
     Object.keys(PACKET_TYPES).forEach((key2) => {
       PACKET_TYPES_REVERSE[PACKET_TYPES[key2]] = key2;
     });
     var ERROR_PACKET = { type: "error", data: "parser error" };
-    exports.ERROR_PACKET = ERROR_PACKET;
+    exports2.ERROR_PACKET = ERROR_PACKET;
   }
 });
 
 // ../../node_modules/engine.io-parser/build/cjs/encodePacket.js
 var require_encodePacket = __commonJS({
-  "../../node_modules/engine.io-parser/build/cjs/encodePacket.js"(exports) {
+  "../../node_modules/engine.io-parser/build/cjs/encodePacket.js"(exports2) {
     "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    exports.encodePacket = void 0;
-    exports.encodePacketToBinary = encodePacketToBinary;
+    init_cjs_shims();
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.encodePacket = void 0;
+    exports2.encodePacketToBinary = encodePacketToBinary;
     var commons_js_1 = require_commons();
     var encodePacket = ({ type, data }, supportsBinary, callback) => {
       if (data instanceof ArrayBuffer || ArrayBuffer.isView(data)) {
@@ -16840,7 +16865,7 @@ var require_encodePacket = __commonJS({
       }
       return callback(commons_js_1.PACKET_TYPES[type] + (data || ""));
     };
-    exports.encodePacket = encodePacket;
+    exports2.encodePacket = encodePacket;
     var toBuffer = (data, forceBufferConversion) => {
       if (Buffer.isBuffer(data) || data instanceof Uint8Array && !forceBufferConversion) {
         return data;
@@ -16855,7 +16880,7 @@ var require_encodePacket = __commonJS({
       if (packet.data instanceof ArrayBuffer || ArrayBuffer.isView(packet.data)) {
         return callback(toBuffer(packet.data, false));
       }
-      (0, exports.encodePacket)(packet, true, (encoded) => {
+      (0, exports2.encodePacket)(packet, true, (encoded) => {
         if (!TEXT_ENCODER) {
           TEXT_ENCODER = new TextEncoder();
         }
@@ -16867,10 +16892,11 @@ var require_encodePacket = __commonJS({
 
 // ../../node_modules/engine.io-parser/build/cjs/decodePacket.js
 var require_decodePacket = __commonJS({
-  "../../node_modules/engine.io-parser/build/cjs/decodePacket.js"(exports) {
+  "../../node_modules/engine.io-parser/build/cjs/decodePacket.js"(exports2) {
     "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    exports.decodePacket = void 0;
+    init_cjs_shims();
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.decodePacket = void 0;
     var commons_js_1 = require_commons();
     var decodePacket = (encodedPacket, binaryType) => {
       if (typeof encodedPacket !== "string") {
@@ -16897,7 +16923,7 @@ var require_decodePacket = __commonJS({
         type: commons_js_1.PACKET_TYPES_REVERSE[type]
       };
     };
-    exports.decodePacket = decodePacket;
+    exports2.decodePacket = decodePacket;
     var mapBinary = (data, binaryType) => {
       switch (binaryType) {
         case "arraybuffer":
@@ -16922,18 +16948,19 @@ var require_decodePacket = __commonJS({
 
 // ../../node_modules/engine.io-parser/build/cjs/index.js
 var require_cjs = __commonJS({
-  "../../node_modules/engine.io-parser/build/cjs/index.js"(exports) {
+  "../../node_modules/engine.io-parser/build/cjs/index.js"(exports2) {
     "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    exports.decodePayload = exports.decodePacket = exports.encodePayload = exports.encodePacket = exports.protocol = void 0;
-    exports.createPacketEncoderStream = createPacketEncoderStream;
-    exports.createPacketDecoderStream = createPacketDecoderStream;
+    init_cjs_shims();
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.decodePayload = exports2.decodePacket = exports2.encodePayload = exports2.encodePacket = exports2.protocol = void 0;
+    exports2.createPacketEncoderStream = createPacketEncoderStream;
+    exports2.createPacketDecoderStream = createPacketDecoderStream;
     var encodePacket_js_1 = require_encodePacket();
-    Object.defineProperty(exports, "encodePacket", { enumerable: true, get: function() {
+    Object.defineProperty(exports2, "encodePacket", { enumerable: true, get: function() {
       return encodePacket_js_1.encodePacket;
     } });
     var decodePacket_js_1 = require_decodePacket();
-    Object.defineProperty(exports, "decodePacket", { enumerable: true, get: function() {
+    Object.defineProperty(exports2, "decodePacket", { enumerable: true, get: function() {
       return decodePacket_js_1.decodePacket;
     } });
     var commons_js_1 = require_commons();
@@ -16951,7 +16978,7 @@ var require_cjs = __commonJS({
         });
       });
     };
-    exports.encodePayload = encodePayload;
+    exports2.encodePayload = encodePayload;
     var decodePayload = (encodedPayload, binaryType) => {
       const encodedPackets = encodedPayload.split(SEPARATOR);
       const packets = [];
@@ -16964,7 +16991,7 @@ var require_cjs = __commonJS({
       }
       return packets;
     };
-    exports.decodePayload = decodePayload;
+    exports2.decodePayload = decodePayload;
     function createPacketEncoderStream() {
       return new TransformStream({
         transform(packet, controller) {
@@ -17078,14 +17105,15 @@ var require_cjs = __commonJS({
         }
       });
     }
-    exports.protocol = 4;
+    exports2.protocol = 4;
   }
 });
 
 // ../../node_modules/engine.io/build/parser-v3/utf8.js
 var require_utf8 = __commonJS({
-  "../../node_modules/engine.io/build/parser-v3/utf8.js"(exports, module) {
+  "../../node_modules/engine.io/build/parser-v3/utf8.js"(exports2, module2) {
     "use strict";
+    init_cjs_shims();
     var stringFromCharCode = String.fromCharCode;
     function ucs2decode(string) {
       var output = [];
@@ -17246,7 +17274,7 @@ var require_utf8 = __commonJS({
       }
       return ucs2encode(codePoints);
     }
-    module.exports = {
+    module2.exports = {
       version: "2.1.2",
       encode: utf8encode,
       decode: utf8decode
@@ -17256,20 +17284,21 @@ var require_utf8 = __commonJS({
 
 // ../../node_modules/engine.io/build/parser-v3/index.js
 var require_parser_v3 = __commonJS({
-  "../../node_modules/engine.io/build/parser-v3/index.js"(exports) {
+  "../../node_modules/engine.io/build/parser-v3/index.js"(exports2) {
     "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    exports.packets = exports.protocol = void 0;
-    exports.encodePacket = encodePacket;
-    exports.encodeBase64Packet = encodeBase64Packet;
-    exports.decodePacket = decodePacket;
-    exports.decodeBase64Packet = decodeBase64Packet;
-    exports.encodePayload = encodePayload;
-    exports.decodePayload = decodePayload;
-    exports.encodePayloadAsBinary = encodePayloadAsBinary;
-    exports.decodePayloadAsBinary = decodePayloadAsBinary;
+    init_cjs_shims();
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.packets = exports2.protocol = void 0;
+    exports2.encodePacket = encodePacket;
+    exports2.encodeBase64Packet = encodeBase64Packet;
+    exports2.decodePacket = decodePacket;
+    exports2.decodeBase64Packet = decodeBase64Packet;
+    exports2.encodePayload = encodePayload;
+    exports2.decodePayload = decodePayload;
+    exports2.encodePayloadAsBinary = encodePayloadAsBinary;
+    exports2.decodePayloadAsBinary = decodePayloadAsBinary;
     var utf8 = require_utf8();
-    exports.protocol = 3;
+    exports2.protocol = 3;
     var hasBinary = (packets) => {
       for (const packet of packets) {
         if (packet.data instanceof ArrayBuffer || ArrayBuffer.isView(packet.data)) {
@@ -17278,7 +17307,7 @@ var require_parser_v3 = __commonJS({
       }
       return false;
     };
-    exports.packets = {
+    exports2.packets = {
       open: 0,
       close: 1,
       ping: 2,
@@ -17287,7 +17316,7 @@ var require_parser_v3 = __commonJS({
       upgrade: 5,
       noop: 6
     };
-    var packetslist = Object.keys(exports.packets);
+    var packetslist = Object.keys(exports2.packets);
     var err = { type: "error", data: "parser error" };
     var EMPTY_BUFFER = Buffer.concat([]);
     function encodePacket(packet, supportsBinary, utf8encode, callback) {
@@ -17304,7 +17333,7 @@ var require_parser_v3 = __commonJS({
       } else if (packet.data && (packet.data.buffer || packet.data) instanceof ArrayBuffer) {
         return encodeBuffer({ type: packet.type, data: arrayBufferToBuffer(packet.data) }, supportsBinary, callback);
       }
-      var encoded = exports.packets[packet.type];
+      var encoded = exports2.packets[packet.type];
       if (void 0 !== packet.data) {
         encoded += utf8encode ? utf8.encode(String(packet.data), { strict: false }) : String(packet.data);
       }
@@ -17316,12 +17345,12 @@ var require_parser_v3 = __commonJS({
       }
       var data = packet.data;
       var typeBuffer = Buffer.allocUnsafe(1);
-      typeBuffer[0] = exports.packets[packet.type];
+      typeBuffer[0] = exports2.packets[packet.type];
       return callback(Buffer.concat([typeBuffer, data]));
     }
     function encodeBase64Packet(packet, callback) {
       var data = Buffer.isBuffer(packet.data) ? packet.data : arrayBufferToBuffer(packet.data);
-      var message = "b" + exports.packets[packet.type];
+      var message = "b" + exports2.packets[packet.type];
       message += data.toString("base64");
       return callback(message);
     }
@@ -17545,15 +17574,16 @@ var require_parser_v3 = __commonJS({
 
 // ../../node_modules/ms/index.js
 var require_ms = __commonJS({
-  "../../node_modules/ms/index.js"(exports, module) {
+  "../../node_modules/ms/index.js"(exports2, module2) {
     "use strict";
+    init_cjs_shims();
     var s = 1e3;
     var m = s * 60;
     var h = m * 60;
     var d = h * 24;
     var w = d * 7;
     var y = d * 365.25;
-    module.exports = function(val, options) {
+    module2.exports = function(val, options) {
       options = options || {};
       var type = typeof val;
       if (type === "string" && val.length > 0) {
@@ -17662,8 +17692,9 @@ var require_ms = __commonJS({
 
 // ../../node_modules/debug/src/common.js
 var require_common = __commonJS({
-  "../../node_modules/debug/src/common.js"(exports, module) {
+  "../../node_modules/debug/src/common.js"(exports2, module2) {
     "use strict";
+    init_cjs_shims();
     function setup(env) {
       createDebug.debug = createDebug;
       createDebug.default = createDebug;
@@ -17834,20 +17865,21 @@ var require_common = __commonJS({
       createDebug.enable(createDebug.load());
       return createDebug;
     }
-    module.exports = setup;
+    module2.exports = setup;
   }
 });
 
 // ../../node_modules/debug/src/browser.js
 var require_browser = __commonJS({
-  "../../node_modules/debug/src/browser.js"(exports, module) {
+  "../../node_modules/debug/src/browser.js"(exports2, module2) {
     "use strict";
-    exports.formatArgs = formatArgs;
-    exports.save = save;
-    exports.load = load;
-    exports.useColors = useColors;
-    exports.storage = localstorage();
-    exports.destroy = /* @__PURE__ */ (() => {
+    init_cjs_shims();
+    exports2.formatArgs = formatArgs;
+    exports2.save = save;
+    exports2.load = load;
+    exports2.useColors = useColors;
+    exports2.storage = localstorage();
+    exports2.destroy = /* @__PURE__ */ (() => {
       let warned = false;
       return () => {
         if (!warned) {
@@ -17856,7 +17888,7 @@ var require_browser = __commonJS({
         }
       };
     })();
-    exports.colors = [
+    exports2.colors = [
       "#0000CC",
       "#0000FF",
       "#0033CC",
@@ -17949,7 +17981,7 @@ var require_browser = __commonJS({
       typeof navigator !== "undefined" && navigator.userAgent && navigator.userAgent.toLowerCase().match(/applewebkit\/(\d+)/);
     }
     function formatArgs(args) {
-      args[0] = (this.useColors ? "%c" : "") + this.namespace + (this.useColors ? " %c" : " ") + args[0] + (this.useColors ? "%c " : " ") + "+" + module.exports.humanize(this.diff);
+      args[0] = (this.useColors ? "%c" : "") + this.namespace + (this.useColors ? " %c" : " ") + args[0] + (this.useColors ? "%c " : " ") + "+" + module2.exports.humanize(this.diff);
       if (!this.useColors) {
         return;
       }
@@ -17968,14 +18000,14 @@ var require_browser = __commonJS({
       });
       args.splice(lastC, 0, c);
     }
-    exports.log = console.debug || console.log || (() => {
+    exports2.log = console.debug || console.log || (() => {
     });
     function save(namespaces) {
       try {
         if (namespaces) {
-          exports.storage.setItem("debug", namespaces);
+          exports2.storage.setItem("debug", namespaces);
         } else {
-          exports.storage.removeItem("debug");
+          exports2.storage.removeItem("debug");
         }
       } catch (error) {
       }
@@ -17983,7 +18015,7 @@ var require_browser = __commonJS({
     function load() {
       let r;
       try {
-        r = exports.storage.getItem("debug") || exports.storage.getItem("DEBUG");
+        r = exports2.storage.getItem("debug") || exports2.storage.getItem("DEBUG");
       } catch (error) {
       }
       if (!r && typeof process !== "undefined" && "env" in process) {
@@ -17997,8 +18029,8 @@ var require_browser = __commonJS({
       } catch (error) {
       }
     }
-    module.exports = require_common()(exports);
-    var { formatters } = module.exports;
+    module2.exports = require_common()(exports2);
+    var { formatters } = module2.exports;
     formatters.j = function(v) {
       try {
         return JSON.stringify(v);
@@ -18011,26 +18043,27 @@ var require_browser = __commonJS({
 
 // ../../node_modules/debug/src/node.js
 var require_node = __commonJS({
-  "../../node_modules/debug/src/node.js"(exports, module) {
+  "../../node_modules/debug/src/node.js"(exports2, module2) {
     "use strict";
-    var tty = __require("tty");
-    var util = __require("util");
-    exports.init = init;
-    exports.log = log;
-    exports.formatArgs = formatArgs;
-    exports.save = save;
-    exports.load = load;
-    exports.useColors = useColors;
-    exports.destroy = util.deprecate(
+    init_cjs_shims();
+    var tty = require("tty");
+    var util = require("util");
+    exports2.init = init;
+    exports2.log = log;
+    exports2.formatArgs = formatArgs;
+    exports2.save = save;
+    exports2.load = load;
+    exports2.useColors = useColors;
+    exports2.destroy = util.deprecate(
       () => {
       },
       "Instance method `debug.destroy()` is deprecated and no longer does anything. It will be removed in the next major version of `debug`."
     );
-    exports.colors = [6, 2, 3, 4, 5, 1];
+    exports2.colors = [6, 2, 3, 4, 5, 1];
     try {
-      const supportsColor = __require("supports-color");
+      const supportsColor = require("supports-color");
       if (supportsColor && (supportsColor.stderr || supportsColor).level >= 2) {
-        exports.colors = [
+        exports2.colors = [
           20,
           21,
           26,
@@ -18111,7 +18144,7 @@ var require_node = __commonJS({
       }
     } catch (error) {
     }
-    exports.inspectOpts = Object.keys(process.env).filter((key2) => {
+    exports2.inspectOpts = Object.keys(process.env).filter((key2) => {
       return /^debug_/i.test(key2);
     }).reduce((obj, key2) => {
       const prop = key2.substring(6).toLowerCase().replace(/_([a-z])/g, (_, k) => {
@@ -18131,7 +18164,7 @@ var require_node = __commonJS({
       return obj;
     }, {});
     function useColors() {
-      return "colors" in exports.inspectOpts ? Boolean(exports.inspectOpts.colors) : tty.isatty(process.stderr.fd);
+      return "colors" in exports2.inspectOpts ? Boolean(exports2.inspectOpts.colors) : tty.isatty(process.stderr.fd);
     }
     function formatArgs(args) {
       const { namespace: name, useColors: useColors2 } = this;
@@ -18140,19 +18173,19 @@ var require_node = __commonJS({
         const colorCode = "\x1B[3" + (c < 8 ? c : "8;5;" + c);
         const prefix = `  ${colorCode};1m${name} \x1B[0m`;
         args[0] = prefix + args[0].split("\n").join("\n" + prefix);
-        args.push(colorCode + "m+" + module.exports.humanize(this.diff) + "\x1B[0m");
+        args.push(colorCode + "m+" + module2.exports.humanize(this.diff) + "\x1B[0m");
       } else {
         args[0] = getDate() + name + " " + args[0];
       }
     }
     function getDate() {
-      if (exports.inspectOpts.hideDate) {
+      if (exports2.inspectOpts.hideDate) {
         return "";
       }
       return (/* @__PURE__ */ new Date()).toISOString() + " ";
     }
     function log(...args) {
-      return process.stderr.write(util.formatWithOptions(exports.inspectOpts, ...args) + "\n");
+      return process.stderr.write(util.formatWithOptions(exports2.inspectOpts, ...args) + "\n");
     }
     function save(namespaces) {
       if (namespaces) {
@@ -18166,13 +18199,13 @@ var require_node = __commonJS({
     }
     function init(debug) {
       debug.inspectOpts = {};
-      const keys = Object.keys(exports.inspectOpts);
+      const keys = Object.keys(exports2.inspectOpts);
       for (let i = 0; i < keys.length; i++) {
-        debug.inspectOpts[keys[i]] = exports.inspectOpts[keys[i]];
+        debug.inspectOpts[keys[i]] = exports2.inspectOpts[keys[i]];
       }
     }
-    module.exports = require_common()(exports);
-    var { formatters } = module.exports;
+    module2.exports = require_common()(exports2);
+    var { formatters } = module2.exports;
     formatters.o = function(v) {
       this.inspectOpts.colors = this.useColors;
       return util.inspect(v, this.inspectOpts).split("\n").map((str) => str.trim()).join(" ");
@@ -18186,23 +18219,25 @@ var require_node = __commonJS({
 
 // ../../node_modules/debug/src/index.js
 var require_src = __commonJS({
-  "../../node_modules/debug/src/index.js"(exports, module) {
+  "../../node_modules/debug/src/index.js"(exports2, module2) {
     "use strict";
+    init_cjs_shims();
     if (typeof process === "undefined" || process.type === "renderer" || process.browser === true || process.__nwjs) {
-      module.exports = require_browser();
+      module2.exports = require_browser();
     } else {
-      module.exports = require_node();
+      module2.exports = require_node();
     }
   }
 });
 
 // ../../node_modules/engine.io/build/transport.js
 var require_transport = __commonJS({
-  "../../node_modules/engine.io/build/transport.js"(exports) {
+  "../../node_modules/engine.io/build/transport.js"(exports2) {
     "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    exports.Transport = void 0;
-    var events_1 = __require("events");
+    init_cjs_shims();
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.Transport = void 0;
+    var events_1 = require("events");
     var parser_v4 = require_cjs();
     var parser_v3 = require_parser_v3();
     var debug_1 = require_src();
@@ -18303,19 +18338,20 @@ var require_transport = __commonJS({
         this.emit("close");
       }
     };
-    exports.Transport = Transport;
+    exports2.Transport = Transport;
     Transport.upgradesTo = [];
   }
 });
 
 // ../../node_modules/engine.io/build/transports/polling.js
 var require_polling = __commonJS({
-  "../../node_modules/engine.io/build/transports/polling.js"(exports) {
+  "../../node_modules/engine.io/build/transports/polling.js"(exports2) {
     "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    exports.Polling = void 0;
+    init_cjs_shims();
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.Polling = void 0;
     var transport_1 = require_transport();
-    var zlib_1 = __require("zlib");
+    var zlib_1 = require("zlib");
     var accepts = require_accepts();
     var debug_1 = require_src();
     var debug = (0, debug_1.default)("engine:polling");
@@ -18621,18 +18657,19 @@ var require_polling = __commonJS({
         return headers;
       }
     };
-    exports.Polling = Polling;
+    exports2.Polling = Polling;
   }
 });
 
 // ../../node_modules/engine.io/build/transports/polling-jsonp.js
 var require_polling_jsonp = __commonJS({
-  "../../node_modules/engine.io/build/transports/polling-jsonp.js"(exports) {
+  "../../node_modules/engine.io/build/transports/polling-jsonp.js"(exports2) {
     "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    exports.JSONP = void 0;
+    init_cjs_shims();
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.JSONP = void 0;
     var polling_1 = require_polling();
-    var qs = __require("querystring");
+    var qs = require("querystring");
     var rDoubleSlashes = /\\\\n/g;
     var rSlashes = /(\\)?\\n/g;
     var JSONP = class extends polling_1.Polling {
@@ -18659,16 +18696,17 @@ var require_polling_jsonp = __commonJS({
         super.doWrite(data, options, callback);
       }
     };
-    exports.JSONP = JSONP;
+    exports2.JSONP = JSONP;
   }
 });
 
 // ../../node_modules/engine.io/build/transports/websocket.js
 var require_websocket = __commonJS({
-  "../../node_modules/engine.io/build/transports/websocket.js"(exports) {
+  "../../node_modules/engine.io/build/transports/websocket.js"(exports2) {
     "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    exports.WebSocket = void 0;
+    init_cjs_shims();
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.WebSocket = void 0;
     var transport_1 = require_transport();
     var debug_1 = require_src();
     var debug = (0, debug_1.default)("engine:ws");
@@ -18751,16 +18789,17 @@ var require_websocket = __commonJS({
         fn && fn();
       }
     };
-    exports.WebSocket = WebSocket;
+    exports2.WebSocket = WebSocket;
   }
 });
 
 // ../../node_modules/engine.io/build/transports/webtransport.js
 var require_webtransport = __commonJS({
-  "../../node_modules/engine.io/build/transports/webtransport.js"(exports) {
+  "../../node_modules/engine.io/build/transports/webtransport.js"(exports2) {
     "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    exports.WebTransport = void 0;
+    init_cjs_shims();
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.WebTransport = void 0;
     var transport_1 = require_transport();
     var debug_1 = require_src();
     var engine_io_parser_1 = require_cjs();
@@ -18815,20 +18854,21 @@ var require_webtransport = __commonJS({
         fn && fn();
       }
     };
-    exports.WebTransport = WebTransport;
+    exports2.WebTransport = WebTransport;
   }
 });
 
 // ../../node_modules/engine.io/build/transports/index.js
 var require_transports = __commonJS({
-  "../../node_modules/engine.io/build/transports/index.js"(exports) {
+  "../../node_modules/engine.io/build/transports/index.js"(exports2) {
     "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
+    init_cjs_shims();
+    Object.defineProperty(exports2, "__esModule", { value: true });
     var polling_1 = require_polling();
     var polling_jsonp_1 = require_polling_jsonp();
     var websocket_1 = require_websocket();
     var webtransport_1 = require_webtransport();
-    exports.default = {
+    exports2.default = {
       polling,
       websocket: websocket_1.WebSocket,
       webtransport: webtransport_1.WebTransport
@@ -18846,13 +18886,14 @@ var require_transports = __commonJS({
 
 // ../../node_modules/engine.io/build/socket.js
 var require_socket = __commonJS({
-  "../../node_modules/engine.io/build/socket.js"(exports) {
+  "../../node_modules/engine.io/build/socket.js"(exports2) {
     "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    exports.Socket = void 0;
-    var events_1 = __require("events");
+    init_cjs_shims();
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.Socket = void 0;
+    var events_1 = require("events");
     var debug_1 = require_src();
-    var timers_1 = __require("timers");
+    var timers_1 = require("timers");
     var debug = (0, debug_1.default)("engine:socket");
     var Socket2 = class extends events_1.EventEmitter {
       get readyState() {
@@ -19276,16 +19317,17 @@ var require_socket = __commonJS({
         this.transport.close(this.onClose.bind(this, "forced close"));
       }
     };
-    exports.Socket = Socket2;
+    exports2.Socket = Socket2;
   }
 });
 
 // ../../node_modules/cookie/index.js
 var require_cookie = __commonJS({
-  "../../node_modules/cookie/index.js"(exports) {
+  "../../node_modules/cookie/index.js"(exports2) {
     "use strict";
-    exports.parse = parse;
-    exports.serialize = serialize;
+    init_cjs_shims();
+    exports2.parse = parse;
+    exports2.serialize = serialize;
     var __toString = Object.prototype.toString;
     var __hasOwnProperty = Object.prototype.hasOwnProperty;
     var cookieNameRegExp = /^[!#$%&'*+\-.^_`|~0-9A-Za-z]+$/;
@@ -19448,12 +19490,13 @@ var require_cookie = __commonJS({
 
 // ../../node_modules/ws/lib/constants.js
 var require_constants = __commonJS({
-  "../../node_modules/ws/lib/constants.js"(exports, module) {
+  "../../node_modules/ws/lib/constants.js"(exports2, module2) {
     "use strict";
+    init_cjs_shims();
     var BINARY_TYPES = ["nodebuffer", "arraybuffer", "fragments"];
     var hasBlob = typeof Blob !== "undefined";
     if (hasBlob) BINARY_TYPES.push("blob");
-    module.exports = {
+    module2.exports = {
       BINARY_TYPES,
       EMPTY_BUFFER: Buffer.alloc(0),
       GUID: "258EAFA5-E914-47DA-95CA-C5AB0DC85B11",
@@ -19470,8 +19513,9 @@ var require_constants = __commonJS({
 
 // ../../node_modules/ws/lib/buffer-util.js
 var require_buffer_util = __commonJS({
-  "../../node_modules/ws/lib/buffer-util.js"(exports, module) {
+  "../../node_modules/ws/lib/buffer-util.js"(exports2, module2) {
     "use strict";
+    init_cjs_shims();
     var { EMPTY_BUFFER } = require_constants();
     var FastBuffer = Buffer[Symbol.species];
     function concat(list, totalLength) {
@@ -19519,7 +19563,7 @@ var require_buffer_util = __commonJS({
       }
       return buf;
     }
-    module.exports = {
+    module2.exports = {
       concat,
       mask: _mask,
       toArrayBuffer,
@@ -19528,12 +19572,12 @@ var require_buffer_util = __commonJS({
     };
     if (!process.env.WS_NO_BUFFER_UTIL) {
       try {
-        const bufferUtil = __require("bufferutil");
-        module.exports.mask = function(source, mask, output, offset, length) {
+        const bufferUtil = require("bufferutil");
+        module2.exports.mask = function(source, mask, output, offset, length) {
           if (length < 48) _mask(source, mask, output, offset, length);
           else bufferUtil.mask(source, mask, output, offset, length);
         };
-        module.exports.unmask = function(buffer, mask) {
+        module2.exports.unmask = function(buffer, mask) {
           if (buffer.length < 32) _unmask(buffer, mask);
           else bufferUtil.unmask(buffer, mask);
         };
@@ -19545,8 +19589,9 @@ var require_buffer_util = __commonJS({
 
 // ../../node_modules/ws/lib/limiter.js
 var require_limiter = __commonJS({
-  "../../node_modules/ws/lib/limiter.js"(exports, module) {
+  "../../node_modules/ws/lib/limiter.js"(exports2, module2) {
     "use strict";
+    init_cjs_shims();
     var kDone = /* @__PURE__ */ Symbol("kDone");
     var kRun = /* @__PURE__ */ Symbol("kRun");
     var Limiter = class {
@@ -19589,15 +19634,16 @@ var require_limiter = __commonJS({
         }
       }
     };
-    module.exports = Limiter;
+    module2.exports = Limiter;
   }
 });
 
 // ../../node_modules/ws/lib/permessage-deflate.js
 var require_permessage_deflate = __commonJS({
-  "../../node_modules/ws/lib/permessage-deflate.js"(exports, module) {
+  "../../node_modules/ws/lib/permessage-deflate.js"(exports2, module2) {
     "use strict";
-    var zlib = __require("zlib");
+    init_cjs_shims();
+    var zlib = require("zlib");
     var bufferUtil = require_buffer_util();
     var Limiter = require_limiter();
     var { kStatusCode } = require_constants();
@@ -19947,7 +19993,7 @@ var require_permessage_deflate = __commonJS({
         });
       }
     };
-    module.exports = PerMessageDeflate;
+    module2.exports = PerMessageDeflate;
     function deflateOnData(chunk) {
       this[kBuffers].push(chunk);
       this[kTotalLength] += chunk.length;
@@ -19978,9 +20024,10 @@ var require_permessage_deflate = __commonJS({
 
 // ../../node_modules/ws/lib/validation.js
 var require_validation = __commonJS({
-  "../../node_modules/ws/lib/validation.js"(exports, module) {
+  "../../node_modules/ws/lib/validation.js"(exports2, module2) {
     "use strict";
-    var { isUtf8 } = __require("buffer");
+    init_cjs_shims();
+    var { isUtf8 } = require("buffer");
     var { hasBlob } = require_constants();
     var tokenChars = [
       0,
@@ -20155,20 +20202,20 @@ var require_validation = __commonJS({
     function isBlob(value) {
       return hasBlob && typeof value === "object" && typeof value.arrayBuffer === "function" && typeof value.type === "string" && typeof value.stream === "function" && (value[Symbol.toStringTag] === "Blob" || value[Symbol.toStringTag] === "File");
     }
-    module.exports = {
+    module2.exports = {
       isBlob,
       isValidStatusCode,
       isValidUTF8: _isValidUTF8,
       tokenChars
     };
     if (isUtf8) {
-      module.exports.isValidUTF8 = function(buf) {
+      module2.exports.isValidUTF8 = function(buf) {
         return buf.length < 24 ? _isValidUTF8(buf) : isUtf8(buf);
       };
     } else if (!process.env.WS_NO_UTF_8_VALIDATE) {
       try {
-        const isValidUTF8 = __require("utf-8-validate");
-        module.exports.isValidUTF8 = function(buf) {
+        const isValidUTF8 = require("utf-8-validate");
+        module2.exports.isValidUTF8 = function(buf) {
           return buf.length < 32 ? _isValidUTF8(buf) : isValidUTF8(buf);
         };
       } catch (e) {
@@ -20179,9 +20226,10 @@ var require_validation = __commonJS({
 
 // ../../node_modules/ws/lib/receiver.js
 var require_receiver = __commonJS({
-  "../../node_modules/ws/lib/receiver.js"(exports, module) {
+  "../../node_modules/ws/lib/receiver.js"(exports2, module2) {
     "use strict";
-    var { Writable } = __require("stream");
+    init_cjs_shims();
+    var { Writable } = require("stream");
     var PerMessageDeflate = require_permessage_deflate();
     var {
       BINARY_TYPES,
@@ -20765,16 +20813,17 @@ var require_receiver = __commonJS({
         return err;
       }
     };
-    module.exports = Receiver;
+    module2.exports = Receiver;
   }
 });
 
 // ../../node_modules/ws/lib/sender.js
 var require_sender = __commonJS({
-  "../../node_modules/ws/lib/sender.js"(exports, module) {
+  "../../node_modules/ws/lib/sender.js"(exports2, module2) {
     "use strict";
-    var { Duplex } = __require("stream");
-    var { randomFillSync } = __require("crypto");
+    init_cjs_shims();
+    var { Duplex } = require("stream");
+    var { randomFillSync } = require("crypto");
     var PerMessageDeflate = require_permessage_deflate();
     var { EMPTY_BUFFER, kWebSocket, NOOP } = require_constants();
     var { isBlob, isValidStatusCode } = require_validation();
@@ -21241,7 +21290,7 @@ var require_sender = __commonJS({
         }
       }
     };
-    module.exports = Sender;
+    module2.exports = Sender;
     function callCallbacks(sender, err, cb) {
       if (typeof cb === "function") cb(err);
       for (let i = 0; i < sender._queue.length; i++) {
@@ -21259,8 +21308,9 @@ var require_sender = __commonJS({
 
 // ../../node_modules/ws/lib/event-target.js
 var require_event_target = __commonJS({
-  "../../node_modules/ws/lib/event-target.js"(exports, module) {
+  "../../node_modules/ws/lib/event-target.js"(exports2, module2) {
     "use strict";
+    init_cjs_shims();
     var { kForOnEventAttribute, kListener } = require_constants();
     var kCode = /* @__PURE__ */ Symbol("kCode");
     var kData = /* @__PURE__ */ Symbol("kData");
@@ -21469,7 +21519,7 @@ var require_event_target = __commonJS({
         }
       }
     };
-    module.exports = {
+    module2.exports = {
       CloseEvent,
       ErrorEvent,
       Event,
@@ -21488,8 +21538,9 @@ var require_event_target = __commonJS({
 
 // ../../node_modules/ws/lib/extension.js
 var require_extension = __commonJS({
-  "../../node_modules/ws/lib/extension.js"(exports, module) {
+  "../../node_modules/ws/lib/extension.js"(exports2, module2) {
     "use strict";
+    init_cjs_shims();
     var { tokenChars } = require_validation();
     function push(dest, name, elem) {
       if (dest[name] === void 0) dest[name] = [elem];
@@ -21635,22 +21686,23 @@ var require_extension = __commonJS({
         }).join(", ");
       }).join(", ");
     }
-    module.exports = { format, parse };
+    module2.exports = { format, parse };
   }
 });
 
 // ../../node_modules/ws/lib/websocket.js
 var require_websocket2 = __commonJS({
-  "../../node_modules/ws/lib/websocket.js"(exports, module) {
+  "../../node_modules/ws/lib/websocket.js"(exports2, module2) {
     "use strict";
-    var EventEmitter = __require("events");
-    var https = __require("https");
-    var http = __require("http");
-    var net = __require("net");
-    var tls = __require("tls");
-    var { randomBytes, createHash: createHash2 } = __require("crypto");
-    var { Duplex, Readable: Readable2 } = __require("stream");
-    var { URL: URL2 } = __require("url");
+    init_cjs_shims();
+    var EventEmitter = require("events");
+    var https = require("https");
+    var http = require("http");
+    var net = require("net");
+    var tls = require("tls");
+    var { randomBytes, createHash: createHash2 } = require("crypto");
+    var { Duplex, Readable: Readable2 } = require("stream");
+    var { URL: URL2 } = require("url");
     var PerMessageDeflate = require_permessage_deflate();
     var Receiver = require_receiver();
     var Sender = require_sender();
@@ -22112,7 +22164,7 @@ var require_websocket2 = __commonJS({
     });
     WebSocket.prototype.addEventListener = addEventListener;
     WebSocket.prototype.removeEventListener = removeEventListener;
-    module.exports = WebSocket;
+    module2.exports = WebSocket;
     function initAsClient(websocket, address, protocols, options) {
       const opts = {
         allowSynchronousEvents: true,
@@ -22524,10 +22576,11 @@ var require_websocket2 = __commonJS({
 
 // ../../node_modules/ws/lib/stream.js
 var require_stream = __commonJS({
-  "../../node_modules/ws/lib/stream.js"(exports, module) {
+  "../../node_modules/ws/lib/stream.js"(exports2, module2) {
     "use strict";
+    init_cjs_shims();
     var WebSocket = require_websocket2();
-    var { Duplex } = __require("stream");
+    var { Duplex } = require("stream");
     function emitClose(stream) {
       stream.emit("close");
     }
@@ -22616,14 +22669,15 @@ var require_stream = __commonJS({
       duplex.on("error", duplexOnError);
       return duplex;
     }
-    module.exports = createWebSocketStream;
+    module2.exports = createWebSocketStream;
   }
 });
 
 // ../../node_modules/ws/lib/subprotocol.js
 var require_subprotocol = __commonJS({
-  "../../node_modules/ws/lib/subprotocol.js"(exports, module) {
+  "../../node_modules/ws/lib/subprotocol.js"(exports2, module2) {
     "use strict";
+    init_cjs_shims();
     var { tokenChars } = require_validation();
     function parse(header) {
       const protocols = /* @__PURE__ */ new Set();
@@ -22661,18 +22715,19 @@ var require_subprotocol = __commonJS({
       protocols.add(protocol);
       return protocols;
     }
-    module.exports = { parse };
+    module2.exports = { parse };
   }
 });
 
 // ../../node_modules/ws/lib/websocket-server.js
 var require_websocket_server = __commonJS({
-  "../../node_modules/ws/lib/websocket-server.js"(exports, module) {
+  "../../node_modules/ws/lib/websocket-server.js"(exports2, module2) {
     "use strict";
-    var EventEmitter = __require("events");
-    var http = __require("http");
-    var { Duplex } = __require("stream");
-    var { createHash: createHash2 } = __require("crypto");
+    init_cjs_shims();
+    var EventEmitter = require("events");
+    var http = require("http");
+    var { Duplex } = require("stream");
+    var { createHash: createHash2 } = require("crypto");
     var extension = require_extension();
     var PerMessageDeflate = require_permessage_deflate();
     var subprotocol = require_subprotocol();
@@ -23012,7 +23067,7 @@ var require_websocket_server = __commonJS({
         cb(ws, req);
       }
     };
-    module.exports = WebSocketServer;
+    module2.exports = WebSocketServer;
     function addListeners(server, map) {
       for (const event of Object.keys(map)) server.on(event, map[event]);
       return function removeListeners() {
@@ -23056,8 +23111,9 @@ var require_websocket_server = __commonJS({
 
 // ../../node_modules/ws/index.js
 var require_ws = __commonJS({
-  "../../node_modules/ws/index.js"(exports, module) {
+  "../../node_modules/ws/index.js"(exports2, module2) {
     "use strict";
+    init_cjs_shims();
     var WebSocket = require_websocket2();
     WebSocket.createWebSocketStream = require_stream();
     WebSocket.Server = require_websocket_server();
@@ -23065,19 +23121,20 @@ var require_ws = __commonJS({
     WebSocket.Sender = require_sender();
     WebSocket.WebSocket = WebSocket;
     WebSocket.WebSocketServer = WebSocket.Server;
-    module.exports = WebSocket;
+    module2.exports = WebSocket;
   }
 });
 
 // ../../node_modules/engine.io/build/server.js
 var require_server = __commonJS({
-  "../../node_modules/engine.io/build/server.js"(exports) {
+  "../../node_modules/engine.io/build/server.js"(exports2) {
     "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    exports.Server = exports.BaseServer = void 0;
+    init_cjs_shims();
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.Server = exports2.BaseServer = void 0;
     var base64id = require_base64id();
     var transports_1 = require_transports();
-    var events_1 = __require("events");
+    var events_1 = require("events");
     var socket_1 = require_socket();
     var debug_1 = require_src();
     var cookie_1 = require_cookie();
@@ -23134,7 +23191,7 @@ var require_server = __commonJS({
           }, opts.cookie);
         }
         if (this.opts.cors) {
-          this.use(__require("cors")(this.opts.cors));
+          this.use(require("cors")(this.opts.cors));
         }
         if (opts.perMessageDeflate) {
           this.opts.perMessageDeflate = Object.assign({
@@ -23445,7 +23502,7 @@ var require_server = __commonJS({
         }
       }
     };
-    exports.BaseServer = BaseServer;
+    exports2.BaseServer = BaseServer;
     BaseServer.errors = {
       UNKNOWN_TRANSPORT: 0,
       UNKNOWN_SID: 1,
@@ -23697,7 +23754,7 @@ var require_server = __commonJS({
         }
       }
     };
-    exports.Server = Server2;
+    exports2.Server = Server2;
     function abortRequest(res, errorCode, errorContext) {
       const statusCode = errorCode === Server2.errors.FORBIDDEN ? 403 : 400;
       const message = errorContext && errorContext.message ? errorContext.message : Server2.errorMessages[errorCode];
@@ -24025,12 +24082,13 @@ var require_server = __commonJS({
 
 // ../../node_modules/engine.io/build/transports-uws/polling.js
 var require_polling2 = __commonJS({
-  "../../node_modules/engine.io/build/transports-uws/polling.js"(exports) {
+  "../../node_modules/engine.io/build/transports-uws/polling.js"(exports2) {
     "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    exports.Polling = void 0;
+    init_cjs_shims();
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.Polling = void 0;
     var transport_1 = require_transport();
-    var zlib_1 = __require("zlib");
+    var zlib_1 = require("zlib");
     var accepts = require_accepts();
     var debug_1 = require_src();
     var debug = (0, debug_1.default)("engine:polling");
@@ -24370,16 +24428,17 @@ var require_polling2 = __commonJS({
         return headers;
       }
     };
-    exports.Polling = Polling;
+    exports2.Polling = Polling;
   }
 });
 
 // ../../node_modules/engine.io/build/transports-uws/websocket.js
 var require_websocket3 = __commonJS({
-  "../../node_modules/engine.io/build/transports-uws/websocket.js"(exports) {
+  "../../node_modules/engine.io/build/transports-uws/websocket.js"(exports2) {
     "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    exports.WebSocket = void 0;
+    init_cjs_shims();
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.WebSocket = void 0;
     var transport_1 = require_transport();
     var debug_1 = require_src();
     var debug = (0, debug_1.default)("engine:ws");
@@ -24446,18 +24505,19 @@ var require_websocket3 = __commonJS({
         this.socket.end();
       }
     };
-    exports.WebSocket = WebSocket;
+    exports2.WebSocket = WebSocket;
   }
 });
 
 // ../../node_modules/engine.io/build/transports-uws/index.js
 var require_transports_uws = __commonJS({
-  "../../node_modules/engine.io/build/transports-uws/index.js"(exports) {
+  "../../node_modules/engine.io/build/transports-uws/index.js"(exports2) {
     "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
+    init_cjs_shims();
+    Object.defineProperty(exports2, "__esModule", { value: true });
     var polling_1 = require_polling2();
     var websocket_1 = require_websocket3();
-    exports.default = {
+    exports2.default = {
       polling: polling_1.Polling,
       websocket: websocket_1.WebSocket
     };
@@ -24466,10 +24526,11 @@ var require_transports_uws = __commonJS({
 
 // ../../node_modules/engine.io/build/userver.js
 var require_userver = __commonJS({
-  "../../node_modules/engine.io/build/userver.js"(exports) {
+  "../../node_modules/engine.io/build/userver.js"(exports2) {
     "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    exports.uServer = void 0;
+    init_cjs_shims();
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.uServer = void 0;
     var debug_1 = require_src();
     var server_1 = require_server();
     var transports_uws_1 = require_transports_uws();
@@ -24643,7 +24704,7 @@ var require_userver = __commonJS({
         }));
       }
     };
-    exports.uServer = uServer;
+    exports2.uServer = uServer;
     var ResponseWrapper = class {
       constructor(res) {
         this.res = res;
@@ -24733,34 +24794,35 @@ var require_userver = __commonJS({
 
 // ../../node_modules/engine.io/build/engine.io.js
 var require_engine_io = __commonJS({
-  "../../node_modules/engine.io/build/engine.io.js"(exports) {
+  "../../node_modules/engine.io/build/engine.io.js"(exports2) {
     "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    exports.protocol = exports.Transport = exports.Socket = exports.uServer = exports.parser = exports.transports = exports.Server = void 0;
-    exports.listen = listen;
-    exports.attach = attach;
-    var http_1 = __require("http");
+    init_cjs_shims();
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.protocol = exports2.Transport = exports2.Socket = exports2.uServer = exports2.parser = exports2.transports = exports2.Server = void 0;
+    exports2.listen = listen;
+    exports2.attach = attach;
+    var http_1 = require("http");
     var server_1 = require_server();
-    Object.defineProperty(exports, "Server", { enumerable: true, get: function() {
+    Object.defineProperty(exports2, "Server", { enumerable: true, get: function() {
       return server_1.Server;
     } });
     var index_1 = require_transports();
-    exports.transports = index_1.default;
+    exports2.transports = index_1.default;
     var parser = require_cjs();
-    exports.parser = parser;
+    exports2.parser = parser;
     var userver_1 = require_userver();
-    Object.defineProperty(exports, "uServer", { enumerable: true, get: function() {
+    Object.defineProperty(exports2, "uServer", { enumerable: true, get: function() {
       return userver_1.uServer;
     } });
     var socket_1 = require_socket();
-    Object.defineProperty(exports, "Socket", { enumerable: true, get: function() {
+    Object.defineProperty(exports2, "Socket", { enumerable: true, get: function() {
       return socket_1.Socket;
     } });
     var transport_1 = require_transport();
-    Object.defineProperty(exports, "Transport", { enumerable: true, get: function() {
+    Object.defineProperty(exports2, "Transport", { enumerable: true, get: function() {
       return transport_1.Transport;
     } });
-    exports.protocol = parser.protocol;
+    exports2.protocol = parser.protocol;
     function listen(port, options, listenCallback) {
       if ("function" === typeof options) {
         listenCallback = options;
@@ -24800,6 +24862,7 @@ function mixin(obj) {
 var init_esm = __esm({
   "../../node_modules/@socket.io/component-emitter/lib/esm/index.js"() {
     "use strict";
+    init_cjs_shims();
     Emitter.prototype.on = Emitter.prototype.addEventListener = function(event, fn) {
       this._callbacks = this._callbacks || {};
       (this._callbacks["$" + event] = this._callbacks["$" + event] || []).push(fn);
@@ -24866,11 +24929,12 @@ var init_esm = __esm({
 
 // ../../node_modules/socket.io-parser/build/cjs/is-binary.js
 var require_is_binary = __commonJS({
-  "../../node_modules/socket.io-parser/build/cjs/is-binary.js"(exports) {
+  "../../node_modules/socket.io-parser/build/cjs/is-binary.js"(exports2) {
     "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    exports.isBinary = isBinary;
-    exports.hasBinary = hasBinary;
+    init_cjs_shims();
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.isBinary = isBinary;
+    exports2.hasBinary = hasBinary;
     var withNativeArrayBuffer = typeof ArrayBuffer === "function";
     var isView = (obj) => {
       return typeof ArrayBuffer.isView === "function" ? ArrayBuffer.isView(obj) : obj.buffer instanceof ArrayBuffer;
@@ -24911,11 +24975,12 @@ var require_is_binary = __commonJS({
 
 // ../../node_modules/socket.io-parser/build/cjs/binary.js
 var require_binary = __commonJS({
-  "../../node_modules/socket.io-parser/build/cjs/binary.js"(exports) {
+  "../../node_modules/socket.io-parser/build/cjs/binary.js"(exports2) {
     "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    exports.deconstructPacket = deconstructPacket;
-    exports.reconstructPacket = reconstructPacket;
+    init_cjs_shims();
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.deconstructPacket = deconstructPacket;
+    exports2.reconstructPacket = reconstructPacket;
     var is_binary_js_1 = require_is_binary();
     function deconstructPacket(packet) {
       const buffers = [];
@@ -24982,11 +25047,12 @@ var require_binary = __commonJS({
 
 // ../../node_modules/socket.io-parser/build/cjs/index.js
 var require_cjs2 = __commonJS({
-  "../../node_modules/socket.io-parser/build/cjs/index.js"(exports) {
+  "../../node_modules/socket.io-parser/build/cjs/index.js"(exports2) {
     "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    exports.Decoder = exports.Encoder = exports.PacketType = exports.protocol = void 0;
-    exports.isPacketValid = isPacketValid;
+    init_cjs_shims();
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.Decoder = exports2.Encoder = exports2.PacketType = exports2.protocol = void 0;
+    exports2.isPacketValid = isPacketValid;
     var component_emitter_1 = (init_esm(), __toCommonJS(esm_exports));
     var binary_js_1 = require_binary();
     var is_binary_js_1 = require_is_binary();
@@ -25006,7 +25072,7 @@ var require_cjs2 = __commonJS({
       "removeListener"
       // used by the Node.js EventEmitter
     ];
-    exports.protocol = 5;
+    exports2.protocol = 5;
     var PacketType;
     (function(PacketType2) {
       PacketType2[PacketType2["CONNECT"] = 0] = "CONNECT";
@@ -25016,7 +25082,7 @@ var require_cjs2 = __commonJS({
       PacketType2[PacketType2["CONNECT_ERROR"] = 4] = "CONNECT_ERROR";
       PacketType2[PacketType2["BINARY_EVENT"] = 5] = "BINARY_EVENT";
       PacketType2[PacketType2["BINARY_ACK"] = 6] = "BINARY_ACK";
-    })(PacketType || (exports.PacketType = PacketType = {}));
+    })(PacketType || (exports2.PacketType = PacketType = {}));
     var Encoder = class {
       /**
        * Encoder constructor
@@ -25079,7 +25145,7 @@ var require_cjs2 = __commonJS({
         return buffers;
       }
     };
-    exports.Encoder = Encoder;
+    exports2.Encoder = Encoder;
     var Decoder = class _Decoder extends component_emitter_1.Emitter {
       /**
        * Decoder constructor
@@ -25228,7 +25294,7 @@ var require_cjs2 = __commonJS({
         }
       }
     };
-    exports.Decoder = Decoder;
+    exports2.Decoder = Decoder;
     var BinaryReconstructor = class {
       constructor(packet) {
         this.packet = packet;
@@ -25296,13 +25362,14 @@ var require_cjs2 = __commonJS({
 
 // ../../node_modules/socket.io/dist/client.js
 var require_client = __commonJS({
-  "../../node_modules/socket.io/dist/client.js"(exports) {
+  "../../node_modules/socket.io/dist/client.js"(exports2) {
     "use strict";
-    var __importDefault = exports && exports.__importDefault || function(mod) {
+    init_cjs_shims();
+    var __importDefault = exports2 && exports2.__importDefault || function(mod) {
       return mod && mod.__esModule ? mod : { "default": mod };
     };
-    Object.defineProperty(exports, "__esModule", { value: true });
-    exports.Client = void 0;
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.Client = void 0;
     var socket_io_parser_1 = require_cjs2();
     var debug_1 = __importDefault(require_src());
     var debug = (0, debug_1.default)("socket.io:client");
@@ -25552,17 +25619,18 @@ var require_client = __commonJS({
         }
       }
     };
-    exports.Client = Client;
+    exports2.Client = Client;
   }
 });
 
 // ../../node_modules/socket.io/dist/typed-events.js
 var require_typed_events = __commonJS({
-  "../../node_modules/socket.io/dist/typed-events.js"(exports) {
+  "../../node_modules/socket.io/dist/typed-events.js"(exports2) {
     "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    exports.StrictEventEmitter = void 0;
-    var events_1 = __require("events");
+    init_cjs_shims();
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.StrictEventEmitter = void 0;
+    var events_1 = require("events");
     var StrictEventEmitter = class extends events_1.EventEmitter {
       /**
        * Adds the `listener` function as an event listener for `ev`.
@@ -25626,17 +25694,18 @@ var require_typed_events = __commonJS({
         return super.listeners(event);
       }
     };
-    exports.StrictEventEmitter = StrictEventEmitter;
+    exports2.StrictEventEmitter = StrictEventEmitter;
   }
 });
 
 // ../../node_modules/socket.io/dist/socket-types.js
 var require_socket_types = __commonJS({
-  "../../node_modules/socket.io/dist/socket-types.js"(exports) {
+  "../../node_modules/socket.io/dist/socket-types.js"(exports2) {
     "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    exports.RESERVED_EVENTS = void 0;
-    exports.RESERVED_EVENTS = /* @__PURE__ */ new Set([
+    init_cjs_shims();
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.RESERVED_EVENTS = void 0;
+    exports2.RESERVED_EVENTS = /* @__PURE__ */ new Set([
       "connect",
       "connect_error",
       "disconnect",
@@ -25649,10 +25718,11 @@ var require_socket_types = __commonJS({
 
 // ../../node_modules/socket.io/dist/broadcast-operator.js
 var require_broadcast_operator = __commonJS({
-  "../../node_modules/socket.io/dist/broadcast-operator.js"(exports) {
+  "../../node_modules/socket.io/dist/broadcast-operator.js"(exports2) {
     "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    exports.RemoteSocket = exports.BroadcastOperator = void 0;
+    init_cjs_shims();
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.RemoteSocket = exports2.BroadcastOperator = void 0;
     var socket_types_1 = require_socket_types();
     var socket_io_parser_1 = require_cjs2();
     var BroadcastOperator = class _BroadcastOperator {
@@ -26004,7 +26074,7 @@ var require_broadcast_operator = __commonJS({
         }, close);
       }
     };
-    exports.BroadcastOperator = BroadcastOperator;
+    exports2.BroadcastOperator = BroadcastOperator;
     var RemoteSocket = class {
       constructor(adapter, details) {
         this.id = details.id;
@@ -26072,19 +26142,20 @@ var require_broadcast_operator = __commonJS({
         return this;
       }
     };
-    exports.RemoteSocket = RemoteSocket;
+    exports2.RemoteSocket = RemoteSocket;
   }
 });
 
 // ../../node_modules/socket.io/dist/socket.js
 var require_socket2 = __commonJS({
-  "../../node_modules/socket.io/dist/socket.js"(exports) {
+  "../../node_modules/socket.io/dist/socket.js"(exports2) {
     "use strict";
-    var __importDefault = exports && exports.__importDefault || function(mod) {
+    init_cjs_shims();
+    var __importDefault = exports2 && exports2.__importDefault || function(mod) {
       return mod && mod.__esModule ? mod : { "default": mod };
     };
-    Object.defineProperty(exports, "__esModule", { value: true });
-    exports.Socket = void 0;
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.Socket = void 0;
     var socket_io_parser_1 = require_cjs2();
     var debug_1 = __importDefault(require_src());
     var typed_events_1 = require_typed_events();
@@ -26979,25 +27050,26 @@ var require_socket2 = __commonJS({
         return new broadcast_operator_1.BroadcastOperator(this.adapter, /* @__PURE__ */ new Set(), /* @__PURE__ */ new Set([this.id]), flags);
       }
     };
-    exports.Socket = Socket2;
+    exports2.Socket = Socket2;
   }
 });
 
 // ../../node_modules/socket.io/dist/namespace.js
 var require_namespace = __commonJS({
-  "../../node_modules/socket.io/dist/namespace.js"(exports) {
+  "../../node_modules/socket.io/dist/namespace.js"(exports2) {
     "use strict";
-    var __importDefault = exports && exports.__importDefault || function(mod) {
+    init_cjs_shims();
+    var __importDefault = exports2 && exports2.__importDefault || function(mod) {
       return mod && mod.__esModule ? mod : { "default": mod };
     };
-    Object.defineProperty(exports, "__esModule", { value: true });
-    exports.Namespace = exports.RESERVED_EVENTS = void 0;
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.Namespace = exports2.RESERVED_EVENTS = void 0;
     var socket_1 = require_socket2();
     var typed_events_1 = require_typed_events();
     var debug_1 = __importDefault(require_src());
     var broadcast_operator_1 = require_broadcast_operator();
     var debug = (0, debug_1.default)("socket.io:namespace");
-    exports.RESERVED_EVENTS = /* @__PURE__ */ new Set(["connect", "connection", "new_namespace"]);
+    exports2.RESERVED_EVENTS = /* @__PURE__ */ new Set(["connect", "connection", "new_namespace"]);
     var Namespace2 = class extends typed_events_1.StrictEventEmitter {
       /**
        * Namespace constructor.
@@ -27285,7 +27357,7 @@ var require_namespace = __commonJS({
        * @param args - an array of arguments, which may include an acknowledgement callback at the end
        */
       serverSideEmit(ev, ...args) {
-        if (exports.RESERVED_EVENTS.has(ev)) {
+        if (exports2.RESERVED_EVENTS.has(ev)) {
           throw new Error(`"${String(ev)}" is a reserved event name`);
         }
         args.unshift(ev);
@@ -27491,18 +27563,19 @@ var require_namespace = __commonJS({
         return new broadcast_operator_1.BroadcastOperator(this.adapter).disconnectSockets(close);
       }
     };
-    exports.Namespace = Namespace2;
+    exports2.Namespace = Namespace2;
   }
 });
 
 // ../../node_modules/socket.io-adapter/dist/contrib/yeast.js
 var require_yeast = __commonJS({
-  "../../node_modules/socket.io-adapter/dist/contrib/yeast.js"(exports) {
+  "../../node_modules/socket.io-adapter/dist/contrib/yeast.js"(exports2) {
     "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    exports.encode = encode;
-    exports.decode = decode;
-    exports.yeast = yeast;
+    init_cjs_shims();
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.encode = encode;
+    exports2.decode = decode;
+    exports2.yeast = yeast;
     var alphabet = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-_".split("");
     var length = 64;
     var map = {};
@@ -27537,12 +27610,13 @@ var require_yeast = __commonJS({
 
 // ../../node_modules/socket.io-adapter/dist/in-memory-adapter.js
 var require_in_memory_adapter = __commonJS({
-  "../../node_modules/socket.io-adapter/dist/in-memory-adapter.js"(exports) {
+  "../../node_modules/socket.io-adapter/dist/in-memory-adapter.js"(exports2) {
     "use strict";
+    init_cjs_shims();
     var _a;
-    Object.defineProperty(exports, "__esModule", { value: true });
-    exports.SessionAwareAdapter = exports.Adapter = void 0;
-    var events_1 = __require("events");
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.SessionAwareAdapter = exports2.Adapter = void 0;
+    var events_1 = require("events");
     var yeast_1 = require_yeast();
     var WebSocket = require_ws();
     var canPreComputeFrame = typeof ((_a = WebSocket === null || WebSocket === void 0 ? void 0 : WebSocket.Sender) === null || _a === void 0 ? void 0 : _a.frame) === "function";
@@ -27841,7 +27915,7 @@ var require_in_memory_adapter = __commonJS({
         return null;
       }
     };
-    exports.Adapter = Adapter;
+    exports2.Adapter = Adapter;
     var SessionAwareAdapter = class extends Adapter {
       constructor(nsp) {
         super(nsp);
@@ -27912,7 +27986,7 @@ var require_in_memory_adapter = __commonJS({
         super.broadcast(packet, opts);
       }
     };
-    exports.SessionAwareAdapter = SessionAwareAdapter;
+    exports2.SessionAwareAdapter = SessionAwareAdapter;
     function shouldIncludePacket(sessionRooms, opts) {
       const included = opts.rooms.size === 0 || sessionRooms.some((room) => opts.rooms.has(room));
       const notExcluded = sessionRooms.every((room) => !opts.except.has(room));
@@ -27923,9 +27997,10 @@ var require_in_memory_adapter = __commonJS({
 
 // ../../node_modules/socket.io-adapter/dist/cluster-adapter.js
 var require_cluster_adapter = __commonJS({
-  "../../node_modules/socket.io-adapter/dist/cluster-adapter.js"(exports) {
+  "../../node_modules/socket.io-adapter/dist/cluster-adapter.js"(exports2) {
     "use strict";
-    var __rest = exports && exports.__rest || function(s, e) {
+    init_cjs_shims();
+    var __rest = exports2 && exports2.__rest || function(s, e) {
       var t = {};
       for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
         t[p] = s[p];
@@ -27936,11 +28011,11 @@ var require_cluster_adapter = __commonJS({
         }
       return t;
     };
-    Object.defineProperty(exports, "__esModule", { value: true });
-    exports.ClusterAdapterWithHeartbeat = exports.ClusterAdapter = exports.MessageType = void 0;
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.ClusterAdapterWithHeartbeat = exports2.ClusterAdapter = exports2.MessageType = void 0;
     var in_memory_adapter_1 = require_in_memory_adapter();
     var debug_1 = require_src();
-    var crypto_1 = __require("crypto");
+    var crypto_1 = require("crypto");
     var debug = (0, debug_1.debug)("socket.io-adapter");
     var EMITTER_UID = "emitter";
     var DEFAULT_TIMEOUT = 5e3;
@@ -27962,7 +28037,7 @@ var require_cluster_adapter = __commonJS({
       MessageType2[MessageType2["BROADCAST_CLIENT_COUNT"] = 11] = "BROADCAST_CLIENT_COUNT";
       MessageType2[MessageType2["BROADCAST_ACK"] = 12] = "BROADCAST_ACK";
       MessageType2[MessageType2["ADAPTER_CLOSE"] = 13] = "ADAPTER_CLOSE";
-    })(MessageType || (exports.MessageType = MessageType = {}));
+    })(MessageType || (exports2.MessageType = MessageType = {}));
     function encodeOptions(opts) {
       return {
         rooms: [...opts.rooms],
@@ -28366,7 +28441,7 @@ var require_cluster_adapter = __commonJS({
         });
       }
     };
-    exports.ClusterAdapter = ClusterAdapter;
+    exports2.ClusterAdapter = ClusterAdapter;
     var ClusterAdapterWithHeartbeat = class extends ClusterAdapter {
       constructor(nsp, opts) {
         super(nsp);
@@ -28576,31 +28651,32 @@ var require_cluster_adapter = __commonJS({
         this.nodesMap.delete(uid);
       }
     };
-    exports.ClusterAdapterWithHeartbeat = ClusterAdapterWithHeartbeat;
+    exports2.ClusterAdapterWithHeartbeat = ClusterAdapterWithHeartbeat;
   }
 });
 
 // ../../node_modules/socket.io-adapter/dist/index.js
 var require_dist = __commonJS({
-  "../../node_modules/socket.io-adapter/dist/index.js"(exports) {
+  "../../node_modules/socket.io-adapter/dist/index.js"(exports2) {
     "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    exports.MessageType = exports.ClusterAdapterWithHeartbeat = exports.ClusterAdapter = exports.SessionAwareAdapter = exports.Adapter = void 0;
+    init_cjs_shims();
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.MessageType = exports2.ClusterAdapterWithHeartbeat = exports2.ClusterAdapter = exports2.SessionAwareAdapter = exports2.Adapter = void 0;
     var in_memory_adapter_1 = require_in_memory_adapter();
-    Object.defineProperty(exports, "Adapter", { enumerable: true, get: function() {
+    Object.defineProperty(exports2, "Adapter", { enumerable: true, get: function() {
       return in_memory_adapter_1.Adapter;
     } });
-    Object.defineProperty(exports, "SessionAwareAdapter", { enumerable: true, get: function() {
+    Object.defineProperty(exports2, "SessionAwareAdapter", { enumerable: true, get: function() {
       return in_memory_adapter_1.SessionAwareAdapter;
     } });
     var cluster_adapter_1 = require_cluster_adapter();
-    Object.defineProperty(exports, "ClusterAdapter", { enumerable: true, get: function() {
+    Object.defineProperty(exports2, "ClusterAdapter", { enumerable: true, get: function() {
       return cluster_adapter_1.ClusterAdapter;
     } });
-    Object.defineProperty(exports, "ClusterAdapterWithHeartbeat", { enumerable: true, get: function() {
+    Object.defineProperty(exports2, "ClusterAdapterWithHeartbeat", { enumerable: true, get: function() {
       return cluster_adapter_1.ClusterAdapterWithHeartbeat;
     } });
-    Object.defineProperty(exports, "MessageType", { enumerable: true, get: function() {
+    Object.defineProperty(exports2, "MessageType", { enumerable: true, get: function() {
       return cluster_adapter_1.MessageType;
     } });
   }
@@ -28608,13 +28684,14 @@ var require_dist = __commonJS({
 
 // ../../node_modules/socket.io/dist/parent-namespace.js
 var require_parent_namespace = __commonJS({
-  "../../node_modules/socket.io/dist/parent-namespace.js"(exports) {
+  "../../node_modules/socket.io/dist/parent-namespace.js"(exports2) {
     "use strict";
-    var __importDefault = exports && exports.__importDefault || function(mod) {
+    init_cjs_shims();
+    var __importDefault = exports2 && exports2.__importDefault || function(mod) {
       return mod && mod.__esModule ? mod : { "default": mod };
     };
-    Object.defineProperty(exports, "__esModule", { value: true });
-    exports.ParentNamespace = void 0;
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.ParentNamespace = void 0;
     var namespace_1 = require_namespace();
     var socket_io_adapter_1 = require_dist();
     var debug_1 = __importDefault(require_src());
@@ -28663,7 +28740,7 @@ var require_parent_namespace = __commonJS({
         throw new Error("fetchSockets() is not supported on parent namespaces");
       }
     };
-    exports.ParentNamespace = ParentNamespace;
+    exports2.ParentNamespace = ParentNamespace;
     ParentNamespace.count = 0;
     var ParentBroadcastAdapter = class extends socket_io_adapter_1.Adapter {
       broadcast(packet, opts) {
@@ -28677,17 +28754,18 @@ var require_parent_namespace = __commonJS({
 
 // ../../node_modules/socket.io/dist/uws.js
 var require_uws = __commonJS({
-  "../../node_modules/socket.io/dist/uws.js"(exports) {
+  "../../node_modules/socket.io/dist/uws.js"(exports2) {
     "use strict";
-    var __importDefault = exports && exports.__importDefault || function(mod) {
+    init_cjs_shims();
+    var __importDefault = exports2 && exports2.__importDefault || function(mod) {
       return mod && mod.__esModule ? mod : { "default": mod };
     };
-    Object.defineProperty(exports, "__esModule", { value: true });
-    exports.patchAdapter = patchAdapter;
-    exports.restoreAdapter = restoreAdapter;
-    exports.serveFile = serveFile;
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.patchAdapter = patchAdapter;
+    exports2.restoreAdapter = restoreAdapter;
+    exports2.serveFile = serveFile;
     var socket_io_adapter_1 = require_dist();
-    var fs_1 = __require("fs");
+    var fs_1 = require("fs");
     var debug_1 = __importDefault(require_src());
     var debug = (0, debug_1.default)("socket.io:adapter-uws");
     var SEPARATOR = "";
@@ -28806,8 +28884,8 @@ var require_uws = __commonJS({
 
 // ../../node_modules/socket.io/package.json
 var require_package = __commonJS({
-  "../../node_modules/socket.io/package.json"(exports, module) {
-    module.exports = {
+  "../../node_modules/socket.io/package.json"(exports2, module2) {
+    module2.exports = {
       name: "socket.io",
       version: "4.8.3",
       description: "node.js realtime framework server",
@@ -28900,9 +28978,10 @@ var require_package = __commonJS({
 
 // ../../node_modules/socket.io/dist/index.js
 var require_dist2 = __commonJS({
-  "../../node_modules/socket.io/dist/index.js"(exports, module) {
+  "../../node_modules/socket.io/dist/index.js"(exports2, module2) {
     "use strict";
-    var __createBinding = exports && exports.__createBinding || (Object.create ? (function(o, m, k, k2) {
+    init_cjs_shims();
+    var __createBinding = exports2 && exports2.__createBinding || (Object.create ? (function(o, m, k, k2) {
       if (k2 === void 0) k2 = k;
       var desc = Object.getOwnPropertyDescriptor(m, k);
       if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
@@ -28915,12 +28994,12 @@ var require_dist2 = __commonJS({
       if (k2 === void 0) k2 = k;
       o[k2] = m[k];
     }));
-    var __setModuleDefault = exports && exports.__setModuleDefault || (Object.create ? (function(o, v) {
+    var __setModuleDefault = exports2 && exports2.__setModuleDefault || (Object.create ? (function(o, v) {
       Object.defineProperty(o, "default", { enumerable: true, value: v });
     }) : function(o, v) {
       o["default"] = v;
     });
-    var __importStar = exports && exports.__importStar || function(mod) {
+    var __importStar = exports2 && exports2.__importStar || function(mod) {
       if (mod && mod.__esModule) return mod;
       var result = {};
       if (mod != null) {
@@ -28929,22 +29008,22 @@ var require_dist2 = __commonJS({
       __setModuleDefault(result, mod);
       return result;
     };
-    var __importDefault = exports && exports.__importDefault || function(mod) {
+    var __importDefault = exports2 && exports2.__importDefault || function(mod) {
       return mod && mod.__esModule ? mod : { "default": mod };
     };
-    Object.defineProperty(exports, "__esModule", { value: true });
-    exports.Namespace = exports.Socket = exports.Server = void 0;
-    var http_1 = __importDefault(__require("http"));
-    var fs_1 = __require("fs");
-    var zlib_1 = __require("zlib");
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.Namespace = exports2.Socket = exports2.Server = void 0;
+    var http_1 = __importDefault(require("http"));
+    var fs_1 = require("fs");
+    var zlib_1 = require("zlib");
     var accepts = require_accepts();
-    var stream_1 = __require("stream");
-    var path = __require("path");
+    var stream_1 = require("stream");
+    var path = require("path");
     var engine_io_1 = require_engine_io();
     var client_1 = require_client();
-    var events_1 = __require("events");
+    var events_1 = require("events");
     var namespace_1 = require_namespace();
-    Object.defineProperty(exports, "Namespace", { enumerable: true, get: function() {
+    Object.defineProperty(exports2, "Namespace", { enumerable: true, get: function() {
       return namespace_1.Namespace;
     } });
     var parent_namespace_1 = require_parent_namespace();
@@ -28952,12 +29031,12 @@ var require_dist2 = __commonJS({
     var parser = __importStar(require_cjs2());
     var debug_1 = __importDefault(require_src());
     var socket_1 = require_socket2();
-    Object.defineProperty(exports, "Socket", { enumerable: true, get: function() {
+    Object.defineProperty(exports2, "Socket", { enumerable: true, get: function() {
       return socket_1.Socket;
     } });
     var typed_events_1 = require_typed_events();
     var uws_1 = require_uws();
-    var cors_1 = __importDefault(__require("cors"));
+    var cors_1 = __importDefault(require("cors"));
     var debug = (0, debug_1.default)("socket.io:server");
     var clientVersion = require_package().version;
     var dotMapRegex = /\.map/;
@@ -29634,7 +29713,7 @@ var require_dist2 = __commonJS({
         return this.sockets.disconnectSockets(close);
       }
     };
-    exports.Server = Server2;
+    exports2.Server = Server2;
     var emitterMethods = Object.keys(events_1.EventEmitter.prototype).filter(function(key2) {
       return typeof events_1.EventEmitter.prototype[key2] === "function";
     });
@@ -29643,33 +29722,45 @@ var require_dist2 = __commonJS({
         return this.sockets[fn].apply(this.sockets, arguments);
       };
     });
-    module.exports = (srv, opts) => new Server2(srv, opts);
-    module.exports.Server = Server2;
-    module.exports.Namespace = namespace_1.Namespace;
-    module.exports.Socket = socket_1.Socket;
+    module2.exports = (srv, opts) => new Server2(srv, opts);
+    module2.exports.Server = Server2;
+    module2.exports.Namespace = namespace_1.Namespace;
+    module2.exports.Socket = socket_1.Socket;
   }
 });
 
 // src/server.ts
+init_cjs_shims();
 init_env();
-import { createServer } from "http";
+var import_node_http = require("http");
 
 // src/app.ts
-import express from "express";
-import cors from "cors";
-import helmet from "helmet";
-import morgan from "morgan";
+init_cjs_shims();
+var import_express15 = __toESM(require("express"));
+var import_cors = __toESM(require("cors"));
+var import_helmet = __toESM(require("helmet"));
+var import_morgan = __toESM(require("morgan"));
 
 // src/routes/index.ts
-import { Router as Router14 } from "express";
+init_cjs_shims();
+var import_express14 = require("express");
 
 // src/routes/auth/auth.routes.ts
-import { Router } from "express";
+init_cjs_shims();
+var import_express = require("express");
+
+// src/controllers/auth/auth.controller.ts
+init_cjs_shims();
+
+// src/services/auth/auth.service.ts
+init_cjs_shims();
 
 // src/services/auth/signup.service.ts
-import bcrypt2 from "bcrypt";
+init_cjs_shims();
+var import_bcrypt2 = __toESM(require("bcrypt"));
 
 // src/lib/errors.ts
+init_cjs_shims();
 var AppError = class extends Error {
   status;
   constructor(message, status = 500) {
@@ -29682,48 +29773,52 @@ var AppError = class extends Error {
 init_prisma();
 
 // src/schema/auth.schema.ts
-import { z } from "zod";
-var signupSchema = z.object({
-  name: z.string().min(1, "name is required"),
-  email: z.string().email("Invalid email"),
-  password: z.string().min(6, "Password must be at least 6 chars")
+init_cjs_shims();
+var import_zod = require("zod");
+var signupSchema = import_zod.z.object({
+  name: import_zod.z.string().min(1, "name is required"),
+  email: import_zod.z.string().email("Invalid email"),
+  password: import_zod.z.string().min(6, "Password must be at least 6 chars")
 });
-var verifyEmailSchema = z.object({
-  email: z.string().email("Invalid email"),
-  code: z.string().min(4, "code is required")
+var verifyEmailSchema = import_zod.z.object({
+  email: import_zod.z.string().email("Invalid email"),
+  code: import_zod.z.string().min(4, "code is required")
 });
-var loginSchema = z.object({
-  email: z.string().email("Invalid email"),
-  password: z.string().min(1, "password is required")
+var loginSchema = import_zod.z.object({
+  email: import_zod.z.string().email("Invalid email"),
+  password: import_zod.z.string().min(1, "password is required")
 });
-var refreshSchema = z.object({
-  refreshToken: z.string().min(1, "refreshToken is required")
+var refreshSchema = import_zod.z.object({
+  refreshToken: import_zod.z.string().min(1, "refreshToken is required")
 });
-var logoutSchema = z.object({
-  refreshToken: z.string().min(1, "refreshToken is required")
+var logoutSchema = import_zod.z.object({
+  refreshToken: import_zod.z.string().min(1, "refreshToken is required")
 });
 
 // src/lib/normalize.ts
+init_cjs_shims();
 function normalizeEmail(email) {
   return email.trim().toLowerCase();
 }
 
 // src/lib/otp.ts
-import bcrypt from "bcrypt";
+init_cjs_shims();
+var import_bcrypt = __toESM(require("bcrypt"));
 function generateOtp() {
   return String(Math.floor(1e5 + Math.random() * 9e5));
 }
 async function hashOtp(code) {
-  return bcrypt.hash(code, 12);
+  return import_bcrypt.default.hash(code, 12);
 }
 async function verifyOtp(code, codeHash) {
-  return bcrypt.compare(code, codeHash);
+  return import_bcrypt.default.compare(code, codeHash);
 }
 
 // src/lib/mailer.ts
+init_cjs_shims();
+var import_nodemailer = __toESM(require("nodemailer"));
 init_env();
-import nodemailer from "nodemailer";
-var transporter = nodemailer.createTransport({
+var transporter = import_nodemailer.default.createTransport({
   host: process.env.SMTP_HOST,
   port: Number(process.env.SMTP_PORT || 587),
   secure: false,
@@ -29760,7 +29855,7 @@ async function signupService(body) {
   const { name, email, password } = parsed.data;
   const normalizedEmail = normalizeEmail(email);
   const trimmedName = name.trim();
-  const password_hash = await bcrypt2.hash(password, 12);
+  const password_hash = await import_bcrypt2.default.hash(password, 12);
   const existingUser = await prisma.users.findUnique({
     where: {
       email: normalizedEmail
@@ -29813,12 +29908,17 @@ async function signupService(body) {
 }
 
 // src/services/auth/verify-email.service.ts
+init_cjs_shims();
 init_prisma();
 
+// src/helper/session.ts
+init_cjs_shims();
+
 // src/lib/tokens.ts
+init_cjs_shims();
+var import_jsonwebtoken = __toESM(require("jsonwebtoken"));
+var import_crypto = __toESM(require("crypto"));
 init_env();
-import jwt from "jsonwebtoken";
-import crypto2 from "crypto";
 function mustEnv(name) {
   const v = process.env[name];
   if (!v) throw new Error(`${name} missing in env`);
@@ -29826,25 +29926,25 @@ function mustEnv(name) {
 }
 function signAccessToken(payload) {
   const ttlMin = Number(process.env.ACCESS_TOKEN_TTL_MIN || 15);
-  return jwt.sign(payload, mustEnv("JWT_ACCESS_SECRET"), {
+  return import_jsonwebtoken.default.sign(payload, mustEnv("JWT_ACCESS_SECRET"), {
     expiresIn: `${ttlMin}m`
   });
 }
 function signRefreshToken(payload) {
   const days = Number(process.env.REFRESH_TOKEN_TTL_DAYS || 30);
-  return jwt.sign(payload, mustEnv("JWT_REFRESH_SECRET"), {
+  return import_jsonwebtoken.default.sign(payload, mustEnv("JWT_REFRESH_SECRET"), {
     expiresIn: `${days}d`
   });
 }
 function verifyRefreshToken(token) {
-  const decoded = jwt.verify(token, mustEnv("JWT_REFRESH_SECRET"));
+  const decoded = import_jsonwebtoken.default.verify(token, mustEnv("JWT_REFRESH_SECRET"));
   if (typeof decoded === "string") {
     throw new Error("Invalid refresh token payload");
   }
   return decoded;
 }
 function hashRefreshToken(token) {
-  return crypto2.createHash("sha256").update(token).digest("hex");
+  return import_crypto.default.createHash("sha256").update(token).digest("hex");
 }
 function refreshExpiryDate() {
   const days = Number(process.env.REFRESH_TOKEN_TTL_DAYS || 30);
@@ -30009,7 +30109,8 @@ async function verifyEmailService(body) {
 }
 
 // src/services/auth/login.service.ts
-import bcrypt3 from "bcrypt";
+init_cjs_shims();
+var import_bcrypt3 = __toESM(require("bcrypt"));
 init_prisma();
 async function loginService(body) {
   const parsed = loginSchema.safeParse(body);
@@ -30041,7 +30142,7 @@ async function loginService(body) {
     if (!user.is_active) {
       throw new AppError("Account is inactive", 403);
     }
-    const ok = await bcrypt3.compare(password, user.password_hash);
+    const ok = await import_bcrypt3.default.compare(password, user.password_hash);
     if (!ok) {
       throw new AppError("Invalid email or password", 401);
     }
@@ -30094,7 +30195,7 @@ async function loginService(body) {
         403
       );
     }
-    const ok = await bcrypt3.compare(password, officer.password_hash);
+    const ok = await import_bcrypt3.default.compare(password, officer.password_hash);
     if (!ok) {
       throw new AppError("Invalid email or password", 401);
     }
@@ -30143,6 +30244,7 @@ async function loginService(body) {
 }
 
 // src/services/auth/refresh.service.ts
+init_cjs_shims();
 init_prisma();
 async function refreshService(body) {
   const parsed = refreshSchema.safeParse(body);
@@ -30283,6 +30385,7 @@ async function refreshService(body) {
 }
 
 // src/services/auth/logout.service.ts
+init_cjs_shims();
 init_prisma();
 async function logoutService(body) {
   const parsed = logoutSchema.safeParse(body);
@@ -30330,6 +30433,7 @@ async function logoutService(body) {
 }
 
 // src/services/auth/me.service.ts
+init_cjs_shims();
 init_prisma();
 async function meService(jwtUser) {
   const userId = jwtUser?.id;
@@ -30411,11 +30515,13 @@ async function meService(jwtUser) {
 }
 
 // src/services/auth/password.service.ts
-import bcrypt4 from "bcrypt";
-import { z as z2 } from "zod";
+init_cjs_shims();
+var import_bcrypt4 = __toESM(require("bcrypt"));
+var import_zod2 = require("zod");
 init_prisma();
 
 // src/services/auth/verification.service.ts
+init_cjs_shims();
 init_env();
 init_prisma();
 function ttlMinutes() {
@@ -30488,13 +30594,13 @@ async function verifyLatestCode(opts) {
 }
 
 // src/services/auth/password.service.ts
-var forgotPasswordSchema = z2.object({
-  email: z2.string().email("Invalid email")
+var forgotPasswordSchema = import_zod2.z.object({
+  email: import_zod2.z.string().email("Invalid email")
 });
-var resetPasswordSchema = z2.object({
-  email: z2.string().email("Invalid email"),
-  code: z2.string().min(4, "code is required"),
-  new_password: z2.string().min(6, "Password must be at least 6 chars")
+var resetPasswordSchema = import_zod2.z.object({
+  email: import_zod2.z.string().email("Invalid email"),
+  code: import_zod2.z.string().min(4, "code is required"),
+  new_password: import_zod2.z.string().min(6, "Password must be at least 6 chars")
 });
 async function forgotPasswordService(body) {
   const parsed = forgotPasswordSchema.safeParse(body);
@@ -30532,7 +30638,7 @@ async function resetPasswordService(body) {
     lookupEmail: email,
     code: parsed.data.code
   });
-  const password_hash = await bcrypt4.hash(parsed.data.new_password, 12);
+  const password_hash = await import_bcrypt4.default.hash(parsed.data.new_password, 12);
   const user = await prisma.users.update({
     where: {
       email
@@ -30626,7 +30732,8 @@ async function resetPassword(req, res, next) {
 }
 
 // src/middleware/auth.ts
-import jwt2 from "jsonwebtoken";
+init_cjs_shims();
+var import_jsonwebtoken2 = __toESM(require("jsonwebtoken"));
 function requireAuth(req, res, next) {
   try {
     const header = req.headers.authorization || "";
@@ -30638,7 +30745,7 @@ function requireAuth(req, res, next) {
     if (!secret) {
       return res.status(500).json({ ok: false, message: "Server misconfigured" });
     }
-    const decoded = jwt2.verify(token, secret);
+    const decoded = import_jsonwebtoken2.default.verify(token, secret);
     if (typeof decoded === "string") {
       return res.status(401).json({ ok: false, message: "Invalid token payload" });
     }
@@ -30667,7 +30774,7 @@ function requireAuth(req, res, next) {
 }
 
 // src/routes/auth/auth.routes.ts
-var router = Router();
+var router = (0, import_express.Router)();
 router.post("/signup", signup);
 router.post("/verify-email", verifyEmail);
 router.post("/login", login);
@@ -30679,27 +30786,34 @@ router.get("/me", requireAuth, me);
 var auth_routes_default = router;
 
 // src/routes/user/profile.routes.ts
-import { Router as Router2 } from "express";
-import multer2 from "multer";
+init_cjs_shims();
+var import_express2 = require("express");
+var import_multer2 = __toESM(require("multer"));
 
 // src/lib/upload.memory.ts
-import multer from "multer";
-var uploadMemory = multer({
-  storage: multer.memoryStorage(),
+init_cjs_shims();
+var import_multer = __toESM(require("multer"));
+var uploadMemory = (0, import_multer.default)({
+  storage: import_multer.default.memoryStorage(),
   limits: {
     fileSize: 15 * 1024 * 1024
     // 15MB (adjust)
   }
 });
 
+// src/controllers/user/profile.controller.ts
+init_cjs_shims();
+
 // src/services/user/profile.service.ts
+init_cjs_shims();
+var import_bcrypt5 = __toESM(require("bcrypt"));
+var import_zod3 = require("zod");
 init_pool();
-import bcrypt5 from "bcrypt";
-import { z as z3 } from "zod";
 
 // src/lib/upload.cloudinary.ts
-import { v2 as cloudinary } from "cloudinary";
-cloudinary.config({
+init_cjs_shims();
+var import_cloudinary = require("cloudinary");
+import_cloudinary.v2.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET
@@ -30707,7 +30821,7 @@ cloudinary.config({
 async function uploadBufferToCloudinary(params) {
   const { buffer, folder, resourceType } = params;
   return new Promise((resolve2, reject) => {
-    const stream = cloudinary.uploader.upload_stream(
+    const stream = import_cloudinary.v2.uploader.upload_stream(
       {
         folder,
         resource_type: resourceType
@@ -30725,12 +30839,12 @@ async function uploadBufferToCloudinary(params) {
   });
 }
 async function deleteFromCloudinary(publicId) {
-  return cloudinary.uploader.destroy(publicId, { resource_type: "image" });
+  return import_cloudinary.v2.uploader.destroy(publicId, { resource_type: "image" });
 }
 async function uploadPrivateToCloudinary(params) {
   const { buffer, folder, resourceType } = params;
   return new Promise((resolve2, reject) => {
-    const stream = cloudinary.uploader.upload_stream(
+    const stream = import_cloudinary.v2.uploader.upload_stream(
       { folder, resource_type: resourceType, type: "authenticated" },
       (error, result) => {
         if (error || !result) return reject(error);
@@ -30745,7 +30859,7 @@ async function uploadPrivateToCloudinary(params) {
 }
 function signedPrivateUrl(publicId, resourceType, opts) {
   const expiresAt = Math.floor(Date.now() / 1e3) + (opts?.ttlSeconds ?? 300);
-  return cloudinary.url(publicId, {
+  return import_cloudinary.v2.url(publicId, {
     type: "authenticated",
     resource_type: resourceType,
     secure: true,
@@ -30756,15 +30870,15 @@ function signedPrivateUrl(publicId, resourceType, opts) {
 }
 
 // src/services/user/profile.service.ts
-var editNameSchema = z3.object({
-  name: z3.string().min(1, "name is required")
+var editNameSchema = import_zod3.z.object({
+  name: import_zod3.z.string().min(1, "name is required")
 });
-var requestEmailChangeSchema = z3.object({
-  new_email: z3.string().email("Invalid email")
+var requestEmailChangeSchema = import_zod3.z.object({
+  new_email: import_zod3.z.string().email("Invalid email")
 });
-var confirmEmailChangeSchema = z3.object({
-  new_email: z3.string().email("Invalid email"),
-  code: z3.string().min(4, "code is required")
+var confirmEmailChangeSchema = import_zod3.z.object({
+  new_email: import_zod3.z.string().email("Invalid email"),
+  code: import_zod3.z.string().min(4, "code is required")
 });
 function mustUserId(jwtUser) {
   const userId = jwtUser?.id;
@@ -30928,9 +31042,9 @@ async function getPublicProfileService(userId) {
     badges
   };
 }
-var changePasswordSchema = z3.object({
-  current_password: z3.string().min(1, "Current password is required"),
-  new_password: z3.string().min(6, "New password must be at least 6 characters")
+var changePasswordSchema = import_zod3.z.object({
+  current_password: import_zod3.z.string().min(1, "Current password is required"),
+  new_password: import_zod3.z.string().min(6, "New password must be at least 6 characters")
 });
 async function changePasswordService(jwtUser, body) {
   const userId = mustUserId(jwtUser);
@@ -30948,9 +31062,9 @@ async function changePasswordService(jwtUser, body) {
   if (!password_hash) {
     throw new AppError("This account has no password set.", 400);
   }
-  const isMatch = await bcrypt5.compare(current_password, password_hash);
+  const isMatch = await import_bcrypt5.default.compare(current_password, password_hash);
   if (!isMatch) throw new AppError("Current password is incorrect.", 401);
-  const newHash = await bcrypt5.hash(new_password, 12);
+  const newHash = await import_bcrypt5.default.hash(new_password, 12);
   await pool.query(`UPDATE users SET password_hash = $1 WHERE id = $2`, [
     newHash,
     userId
@@ -30959,10 +31073,11 @@ async function changePasswordService(jwtUser, body) {
 }
 
 // src/services/user/delete-account.service.ts
+init_cjs_shims();
+var import_zod4 = require("zod");
 init_pool();
-import { z as z4 } from "zod";
-var deleteAccountSchema = z4.object({
-  confirm: z4.string().min(1, "confirm is required")
+var deleteAccountSchema = import_zod4.z.object({
+  confirm: import_zod4.z.string().min(1, "confirm is required")
 });
 function mustUserId2(jwtUser) {
   const userId = jwtUser?.id;
@@ -31082,13 +31197,13 @@ async function changePassword(req, res, next) {
 }
 
 // src/routes/user/profile.routes.ts
-var router2 = Router2();
+var router2 = (0, import_express2.Router)();
 router2.get("/public/:userId", getPublicProfile);
 router2.use(requireAuth);
 var uploadProfileImage = (req, res, next) => {
   uploadMemory.single("image")(req, res, (err) => {
     if (!err) return next();
-    if (err instanceof multer2.MulterError && err.code === "LIMIT_FILE_SIZE") {
+    if (err instanceof import_multer2.default.MulterError && err.code === "LIMIT_FILE_SIZE") {
       return res.status(413).json({ ok: false, message: "Image must be under 15 MB" });
     }
     return next(err);
@@ -31103,11 +31218,13 @@ router2.post("/change-password", changePassword);
 var profile_routes_default = router2;
 
 // src/routes/reports/reports.routes.ts
-import { Router as Router3 } from "express";
-import multer3 from "multer";
+init_cjs_shims();
+var import_express3 = require("express");
+var import_multer3 = __toESM(require("multer"));
 
 // src/middleware/optionalAuth.ts
-import jwt3 from "jsonwebtoken";
+init_cjs_shims();
+var import_jsonwebtoken3 = __toESM(require("jsonwebtoken"));
 function optionalAuth(req, _res, next) {
   const header = req.headers.authorization || "";
   const token = header.startsWith("Bearer ") ? header.slice(7) : null;
@@ -31121,7 +31238,7 @@ function optionalAuth(req, _res, next) {
     return next();
   }
   try {
-    const decoded = jwt3.verify(token, secret);
+    const decoded = import_jsonwebtoken3.default.verify(token, secret);
     if (typeof decoded === "string") {
       req.user = null;
       return next();
@@ -31155,10 +31272,15 @@ function optionalAuth(req, _res, next) {
   }
 }
 
+// src/controllers/reports/reports.controller.ts
+init_cjs_shims();
+
 // src/services/reports/reports.service.ts
+init_cjs_shims();
 init_pool();
 
 // src/config/reportPriority.ts
+init_cjs_shims();
 var REPORT_PRIORITY_CONFIG = {
   levels: ["low", "medium", "high", "critical"],
   defaultLevel: "medium"
@@ -31168,13 +31290,14 @@ function isReportPriorityLevel(value) {
 }
 
 // src/services/ai/prioritySuggestionToken.ts
-import { createHash, createHmac, timingSafeEqual } from "crypto";
+init_cjs_shims();
+var import_node_crypto = require("crypto");
 var AI_PRIORITY_TOKEN_VERSION = "v1";
 function getSigningSecret() {
   return process.env.AI_PRIORITY_TOKEN_SECRET?.trim() || process.env.JWT_ACCESS_SECRET?.trim() || process.env.JWT_REFRESH_SECRET?.trim() || null;
 }
 function hashImageBuffer(imageBuffer) {
-  return createHash("sha256").update(imageBuffer).digest("hex");
+  return (0, import_node_crypto.createHash)("sha256").update(imageBuffer).digest("hex");
 }
 function buildPayload(priority, imageHash) {
   return `${AI_PRIORITY_TOKEN_VERSION}:${priority}:${imageHash}`;
@@ -31186,7 +31309,7 @@ function signPrioritySuggestion(params) {
   }
   const imageHash = hashImageBuffer(params.imageBuffer);
   const payload = buildPayload(params.priority, imageHash);
-  const signature = createHmac("sha256", secret).update(payload).digest("hex");
+  const signature = (0, import_node_crypto.createHmac)("sha256", secret).update(payload).digest("hex");
   return `${AI_PRIORITY_TOKEN_VERSION}.${params.priority}.${imageHash}.${signature}`;
 }
 function verifyPrioritySuggestionToken(token, imageBuffer) {
@@ -31202,16 +31325,17 @@ function verifyPrioritySuggestionToken(token, imageBuffer) {
   if (imageHash !== submittedImageHash) {
     return null;
   }
-  const expectedSignature = createHmac("sha256", secret).update(buildPayload(priority, imageHash)).digest("hex");
+  const expectedSignature = (0, import_node_crypto.createHmac)("sha256", secret).update(buildPayload(priority, imageHash)).digest("hex");
   const expected = Buffer.from(expectedSignature, "hex");
   const received = Buffer.from(signature, "hex");
   if (expected.length !== received.length) {
     return null;
   }
-  return timingSafeEqual(expected, received) ? priority : null;
+  return (0, import_node_crypto.timingSafeEqual)(expected, received) ? priority : null;
 }
 
 // src/services/ward/ward.service.ts
+init_cjs_shims();
 init_pool();
 async function detectWard(lat, lng) {
   if (lat < -90 || lat > 90 || lng < -180 || lng > 180) {
@@ -31777,9 +31901,11 @@ async function claimReportsService(params) {
 }
 
 // src/services/gamification/badges.service.ts
+init_cjs_shims();
 init_pool();
 
 // src/services/gamification/stats.service.ts
+init_cjs_shims();
 init_pool();
 async function mustUser(userId) {
   const res = await pool.query(
@@ -32221,7 +32347,11 @@ async function similarReportsController(req, res) {
   }
 }
 
+// src/controllers/reports/interactions.controller.ts
+init_cjs_shims();
+
 // src/services/reports/interactions.service.ts
+init_cjs_shims();
 init_pool();
 init_triggers_service();
 async function syncReportUpvoteCount(reportId) {
@@ -32674,6 +32804,7 @@ async function toggleBookmarkController(req, res) {
 }
 
 // src/controllers/reports/status.controller.ts
+init_cjs_shims();
 init_pool();
 init_triggers_service();
 var VALID_STATUSES = [
@@ -32752,6 +32883,7 @@ async function updateReportStatusController(req, res) {
 }
 
 // src/controllers/reports/followers.controller.ts
+init_cjs_shims();
 init_followers_service();
 async function toggleFollowController(req, res) {
   try {
@@ -32783,7 +32915,11 @@ async function toggleFollowController(req, res) {
   }
 }
 
+// src/controllers/ai/analyze.controller.ts
+init_cjs_shims();
+
 // src/services/ai/imageAnalysis.service.ts
+init_cjs_shims();
 var REPORT_CATEGORIES = [
   "Road Damage",
   "Waste Management",
@@ -32978,11 +33114,11 @@ async function analyzeImageController(req, res) {
 }
 
 // src/routes/reports/reports.routes.ts
-var reportsRoutes = Router3();
+var reportsRoutes = (0, import_express3.Router)();
 var uploadReportMedia = (req, res, next) => {
   uploadMemory.single("media")(req, res, (err) => {
     if (!err) return next();
-    if (err instanceof multer3.MulterError && err.code === "LIMIT_FILE_SIZE") {
+    if (err instanceof import_multer3.default.MulterError && err.code === "LIMIT_FILE_SIZE") {
       return res.status(413).json({
         success: false,
         error: "Media file too large (max 15MB)"
@@ -33021,9 +33157,11 @@ reportsRoutes.patch("/:id/status", requireAuth, updateReportStatusController);
 var reports_routes_default = reportsRoutes;
 
 // src/routes/stats/stats.routes.ts
-import { Router as Router4 } from "express";
+init_cjs_shims();
+var import_express4 = require("express");
 
 // src/controllers/gamification/stats.controller.ts
+init_cjs_shims();
 async function getMyStatsController(req, res, next) {
   try {
     const userId = req.user?.id;
@@ -33062,15 +33200,17 @@ async function getUserStatsPublicController(req, res, next) {
 }
 
 // src/routes/stats/stats.routes.ts
-var statsRoutes = Router4();
+var statsRoutes = (0, import_express4.Router)();
 statsRoutes.get("/me", requireAuth, getMyStatsController);
 statsRoutes.get("/:userId", getUserStatsPublicController);
 var stats_routes_default = statsRoutes;
 
 // src/routes/badges/badges.routes.ts
-import { Router as Router5 } from "express";
+init_cjs_shims();
+var import_express5 = require("express");
 
 // src/controllers/gamification/badges.controller.ts
+init_cjs_shims();
 async function getMyBadgesController(req, res, next) {
   try {
     const userId = req.user?.id;
@@ -33135,16 +33275,21 @@ async function getBadgeDetailController(req, res, next) {
 }
 
 // src/routes/badges/badges.routes.ts
-var badgesRoutes = Router5();
+var badgesRoutes = (0, import_express5.Router)();
 badgesRoutes.get("/me", requireAuth, getMyBadgesController);
 badgesRoutes.get("/all", requireAuth, getAllBadgesForUserController);
 badgesRoutes.get("/:badgeId", getBadgeDetailController);
 var badges_routes_default = badgesRoutes;
 
 // src/routes/leaderboard/leaderboard.routes.ts
-import { Router as Router6 } from "express";
+init_cjs_shims();
+var import_express6 = require("express");
+
+// src/controllers/gamification/leaderboard.controller.ts
+init_cjs_shims();
 
 // src/services/gamification/leaderboard.service.ts
+init_cjs_shims();
 init_pool();
 function getTimeBounds(timeframe) {
   if (timeframe === "all_time") {
@@ -33368,15 +33513,17 @@ async function getMyRankController(req, res, next) {
 }
 
 // src/routes/leaderboard/leaderboard.routes.ts
-var leaderboardRoutes = Router6();
+var leaderboardRoutes = (0, import_express6.Router)();
 leaderboardRoutes.get("/", getLeaderboardController);
 leaderboardRoutes.get("/me", requireAuth, getMyRankController);
 var leaderboard_routes_default = leaderboardRoutes;
 
 // src/routes/notifications/notifications.routes.ts
-import { Router as Router7 } from "express";
+init_cjs_shims();
+var import_express7 = require("express");
 
 // src/controllers/notifications/notifications.controller.ts
+init_cjs_shims();
 init_notifications_service();
 async function getNotificationsController(req, res, next) {
   try {
@@ -33488,9 +33635,10 @@ async function clearAllNotificationsController(req, res, next) {
 }
 
 // src/services/notifications/push.service.ts
+init_cjs_shims();
+var import_expo_server_sdk = require("expo-server-sdk");
 init_prisma();
-import { Expo } from "expo-server-sdk";
-var expo = new Expo();
+var expo = new import_expo_server_sdk.Expo();
 function isOfficerRole2(role) {
   return role === "officer";
 }
@@ -33510,7 +33658,7 @@ async function sendPushNotification(recipientId, payload, recipientRole) {
   if (!rows.length) return;
   const messages = [];
   for (const row of rows) {
-    if (!Expo.isExpoPushToken(row.token)) {
+    if (!import_expo_server_sdk.Expo.isExpoPushToken(row.token)) {
       console.warn(
         `Invalid Expo push token for recipient ${recipientId}: ${row.token}`
       );
@@ -33593,7 +33741,7 @@ async function removePushToken(recipientId, token, recipientRole) {
 }
 
 // src/routes/notifications/notifications.routes.ts
-var notificationsRoutes = Router7();
+var notificationsRoutes = (0, import_express7.Router)();
 notificationsRoutes.use(requireAuth);
 notificationsRoutes.get("/", getNotificationsController);
 notificationsRoutes.get("/unread-count", getUnreadCountController);
@@ -33637,9 +33785,14 @@ notificationsRoutes.delete("/push-token", async (req, res) => {
 var notifications_routes_default = notificationsRoutes;
 
 // src/routes/notification-preferences/notification-preferences.routes.ts
-import { Router as Router8 } from "express";
+init_cjs_shims();
+var import_express8 = require("express");
+
+// src/controllers/notifications/preferences.controller.ts
+init_cjs_shims();
 
 // src/services/notifications/preferences.service.ts
+init_cjs_shims();
 init_prisma();
 async function getNotificationPreferences(userId) {
   return prisma.notification_preferences.upsert({
@@ -33721,16 +33874,21 @@ async function updatePreferencesController(req, res, next) {
 }
 
 // src/routes/notification-preferences/notification-preferences.routes.ts
-var notificationPreferencesRoutes = Router8();
+var notificationPreferencesRoutes = (0, import_express8.Router)();
 notificationPreferencesRoutes.use(requireAuth);
 notificationPreferencesRoutes.get("/", getPreferencesController);
 notificationPreferencesRoutes.put("/", updatePreferencesController);
 var notification_preferences_routes_default = notificationPreferencesRoutes;
 
 // src/routes/search/search.routes.ts
-import { Router as Router9 } from "express";
+init_cjs_shims();
+var import_express9 = require("express");
+
+// src/controllers/search/search.controller.ts
+init_cjs_shims();
 
 // src/services/search/search.service.ts
+init_cjs_shims();
 init_pool();
 function reportSearchFields(scope) {
   const placeFields = [
@@ -34101,16 +34259,18 @@ async function getPublicOfficerDetailController(req, res, next) {
 }
 
 // src/routes/search/search.routes.ts
-var searchRoutes = Router9();
+var searchRoutes = (0, import_express9.Router)();
 searchRoutes.get("/reports", searchReportsController);
 searchRoutes.get("/directory", searchDirectoryController);
 searchRoutes.get("/officers/:officerId", getPublicOfficerDetailController);
 var search_routes_default = searchRoutes;
 
 // src/routes/ward/ward.routes.ts
-import { Router as Router10 } from "express";
+init_cjs_shims();
+var import_express10 = require("express");
 
 // src/controllers/ward/ward.controller.ts
+init_cjs_shims();
 init_pool();
 async function listWardsController(req, res, next) {
   try {
@@ -34236,7 +34396,11 @@ async function getMunicipalityBoundariesController(req, res, next) {
   }
 }
 
+// src/controllers/ward/department.controller.ts
+init_cjs_shims();
+
 // src/services/ward/department.service.ts
+init_cjs_shims();
 init_pool();
 async function listDepartments(wardId) {
   const { rows } = await pool.query(
@@ -34420,7 +34584,11 @@ async function assignOfficerController(req, res, next) {
   }
 }
 
+// src/controllers/ward/publish.controller.ts
+init_cjs_shims();
+
 // src/services/ward/publish.service.ts
+init_cjs_shims();
 init_pool();
 var CYCLE_DAYS = 7;
 async function getWardPublishingSchemaStatus() {
@@ -34887,6 +35055,7 @@ async function getPublicPublishedReportController(req, res, next) {
 }
 
 // src/middleware/wardAuth.ts
+init_cjs_shims();
 function requireWardUser(req, res, next) {
   if (!req.user) {
     return res.status(401).json({ ok: false, message: "Unauthorized" });
@@ -34901,7 +35070,7 @@ function requireWardUser(req, res, next) {
 }
 
 // src/routes/ward/ward.routes.ts
-var router3 = Router10();
+var router3 = (0, import_express10.Router)();
 router3.get("/", listWardsController);
 router3.get("/categories", listCategoriesController);
 router3.get("/detect", detectWardFromCoords);
@@ -34921,9 +35090,11 @@ router3.get("/published", requireAuth, requireWardUser, getPublishedReportsContr
 var ward_routes_default = router3;
 
 // src/routes/report-posts/report-posts.routes.ts
-import { Router as Router11 } from "express";
+init_cjs_shims();
+var import_express11 = require("express");
 
 // src/controllers/report-posts/feed.controller.ts
+init_cjs_shims();
 init_feed_service();
 async function feedController(req, res, next) {
   try {
@@ -35006,7 +35177,7 @@ async function addCommentController2(req, res, next) {
 }
 
 // src/routes/report-posts/report-posts.routes.ts
-var router4 = Router11();
+var router4 = (0, import_express11.Router)();
 router4.get("/feed", optionalAuth, feedController);
 router4.get("/bookmarked", requireAuth, bookmarkedPostsController);
 router4.get("/:id", optionalAuth, detailController);
@@ -35017,9 +35188,11 @@ router4.post("/:id/comments", requireAuth, addCommentController2);
 var report_posts_routes_default = router4;
 
 // src/routes/officer/officer.routes.ts
-import { Router as Router12 } from "express";
+init_cjs_shims();
+var import_express12 = require("express");
 
 // src/middleware/requireOfficer.ts
+init_cjs_shims();
 function requireOfficerRole(req, res, next) {
   if (!req.user) {
     return res.status(401).json({ ok: false, message: "Unauthorized" });
@@ -35033,10 +35206,14 @@ function requireOfficerRole(req, res, next) {
   next();
 }
 
+// src/controllers/officer/officer.controller.ts
+init_cjs_shims();
+
 // src/services/officer/officer.service.ts
+init_cjs_shims();
 init_pool();
+var import_bcrypt6 = __toESM(require("bcrypt"));
 init_triggers_service();
-import bcrypt6 from "bcrypt";
 function toDbStatus(mobileStatus) {
   if (mobileStatus === "todo") return "incoming";
   return mobileStatus;
@@ -35866,7 +36043,7 @@ async function forceChangeOfficerPassword(officerId, newPassword) {
   if (!res.rows[0].must_change_password) {
     throw new AppError("Password reset not required for this account", 403);
   }
-  const hash = await bcrypt6.hash(newPassword, 12);
+  const hash = await import_bcrypt6.default.hash(newPassword, 12);
   await pool.query(
     `UPDATE officers
      SET password_hash = $2, must_change_password = false, password_changed_at = NOW(), updated_at = NOW()
@@ -35891,14 +36068,14 @@ async function changeOfficerPassword(officerId, oldPassword, newPassword) {
   if (res.rows.length === 0) {
     throw new AppError("User not found", 404);
   }
-  const ok = await bcrypt6.compare(oldPassword, res.rows[0].password_hash);
+  const ok = await import_bcrypt6.default.compare(oldPassword, res.rows[0].password_hash);
   if (!ok) {
     throw new AppError("Current password is incorrect", 400);
   }
   if (newPassword.length < 6) {
     throw new AppError("New password must be at least 6 characters", 400);
   }
-  const hash = await bcrypt6.hash(newPassword, 12);
+  const hash = await import_bcrypt6.default.hash(newPassword, 12);
   if (table === "officers") {
     await pool.query(
       `UPDATE officers SET password_hash = $2, must_change_password = false, password_changed_at = NOW() WHERE id = $1`,
@@ -36159,7 +36336,7 @@ async function changePassword2(req, res, next) {
 }
 
 // src/routes/officer/officer.routes.ts
-var router5 = Router12();
+var router5 = (0, import_express12.Router)();
 router5.use(requireAuth, requireOfficerRole);
 router5.get("/tasks", listTasks);
 router5.get("/tasks/:id", taskDetail);
@@ -36181,13 +36358,15 @@ router5.post("/force-change-password", forceChangePassword);
 var officer_routes_default = router5;
 
 // src/routes/chat/chat.routes.ts
-import { Router as Router13 } from "express";
+init_cjs_shims();
+var import_express13 = require("express");
 
 // src/middleware/chat-rate-limit.ts
-import rateLimit, { ipKeyGenerator } from "express-rate-limit";
+init_cjs_shims();
+var import_express_rate_limit = __toESM(require("express-rate-limit"));
 var WINDOW_MS = Number(process.env.CHAT_RATE_WINDOW_MS || 5e3);
 var MAX = Number(process.env.CHAT_RATE_MAX || 10);
-var chatSendRateLimit = rateLimit({
+var chatSendRateLimit = (0, import_express_rate_limit.default)({
   windowMs: WINDOW_MS,
   max: MAX,
   standardHeaders: true,
@@ -36196,7 +36375,7 @@ var chatSendRateLimit = rateLimit({
   // Fall back to ipKeyGenerator for unauthenticated requests (IPv6-safe).
   keyGenerator: (req) => {
     const u = req.user;
-    return u?.id ? `${u.kind ?? "user"}:${u.id}` : ipKeyGenerator(req.ip ?? "");
+    return u?.id ? `${u.kind ?? "user"}:${u.id}` : (0, import_express_rate_limit.ipKeyGenerator)(req.ip ?? "");
   },
   handler: (_req, res) => {
     res.status(429).json({
@@ -36223,7 +36402,11 @@ function shouldAllowTyping(socketRef) {
   return true;
 }
 
+// src/controllers/chat/chat.controller.ts
+init_cjs_shims();
+
 // src/services/chat/principal.ts
+init_cjs_shims();
 init_pool();
 var MUNICIPALITY_OFFICER_SCOPE_FALLBACK_LIMIT = 1;
 async function loadUser(id) {
@@ -36320,9 +36503,11 @@ async function resolvePrincipal(input) {
 }
 
 // src/services/chat/chat.service.ts
+init_cjs_shims();
 init_pool();
 
 // src/services/chat/access.ts
+init_cjs_shims();
 init_pool();
 var WRITE_BLOCKED_STATUSES = /* @__PURE__ */ new Set(["resolved", "closed"]);
 function evaluateChatAccess(principal, chat, participant, action) {
@@ -36413,14 +36598,23 @@ async function assertChatAccess(principal, chatId, action) {
 }
 
 // src/services/chat/workflow.service.ts
+init_cjs_shims();
 init_pool();
 init_notifications_service();
 
+// src/realtime/io.ts
+init_cjs_shims();
+
 // ../../node_modules/socket.io/wrapper.mjs
+init_cjs_shims();
 var import_dist = __toESM(require_dist2(), 1);
 var { Server, Namespace, Socket } = import_dist.default;
 
+// src/realtime/chat-namespace.ts
+init_cjs_shims();
+
 // src/services/chat/receipts.service.ts
+init_cjs_shims();
 init_pool();
 async function recordDelivered(principal, chatId, messageIds) {
   if (messageIds.length === 0) return 0;
@@ -36527,7 +36721,8 @@ async function getUnreadSummary(principal) {
 }
 
 // src/realtime/socket-auth.ts
-import jwt4 from "jsonwebtoken";
+init_cjs_shims();
+var import_jsonwebtoken4 = __toESM(require("jsonwebtoken"));
 function extractToken(socket) {
   const fromAuth = socket.handshake.auth?.token;
   if (typeof fromAuth === "string" && fromAuth) {
@@ -36549,7 +36744,7 @@ async function socketAuthMiddleware(socket, next) {
     if (!token) return next(new Error("Missing access token"));
     const secret = process.env.JWT_ACCESS_SECRET;
     if (!secret) return next(new Error("Server misconfigured"));
-    const decoded = jwt4.verify(token, secret);
+    const decoded = import_jsonwebtoken4.default.verify(token, secret);
     if (typeof decoded === "string") {
       return next(new Error("Invalid token payload"));
     }
@@ -36755,6 +36950,7 @@ async function isPrincipalInChatRoom(kind, id, chatId) {
 }
 
 // src/services/chat/chat-audit.service.ts
+init_cjs_shims();
 init_pool();
 async function writeAudit(db, params) {
   await db.query(
@@ -37263,16 +37459,20 @@ async function getParticipants(principal, chatId) {
 }
 
 // src/services/chat/message.service.ts
+init_cjs_shims();
 init_pool();
 
 // src/services/chat/chat-events.bridge.ts
+init_cjs_shims();
 init_pool();
 
 // src/services/chat/chat-notify.service.ts
+init_cjs_shims();
 init_pool();
 init_notifications_service();
 
 // src/services/chat/notification-prefs.service.ts
+init_cjs_shims();
 init_pool();
 var DEFAULTS = {
   push_enabled: true,
@@ -37644,6 +37844,7 @@ async function startChatEventsBridge() {
 }
 
 // src/services/chat/group.service.ts
+init_cjs_shims();
 init_pool();
 async function addParticipant(principal, chatId, target) {
   await assertChatAccess(principal, chatId, "manage");
@@ -37981,6 +38182,7 @@ async function getHistory(principal, chatId, opts) {
 }
 
 // src/services/chat/attachment.service.ts
+init_cjs_shims();
 init_pool();
 var MAX_BYTES = Number(
   process.env.CHAT_ATTACHMENT_MAX_BYTES || 10 * 1024 * 1024
@@ -38158,9 +38360,10 @@ async function getAttachmentForDownload(principal, attachmentId, opts) {
 }
 
 // src/controllers/chat/chat.controller.ts
-import { Readable } from "stream";
+var import_node_stream = require("stream");
 
 // src/services/chat/mute.service.ts
+init_cjs_shims();
 init_pool();
 function mutedUntilSql(d) {
   switch (d) {
@@ -38198,6 +38401,7 @@ async function setMute(principal, chatId, duration) {
 }
 
 // src/services/chat/message-extras.service.ts
+init_cjs_shims();
 init_pool();
 var EDIT_WINDOW_MS = Number(process.env.CHAT_EDIT_WINDOW_MIN || 15) * 60 * 1e3;
 async function loadOwnMessage(chatId, messageId) {
@@ -38302,6 +38506,7 @@ async function searchMessages(principal, chatId, q, limit = 30) {
 }
 
 // src/services/chat/announcement.service.ts
+init_cjs_shims();
 init_pool();
 init_notifications_service();
 async function resolveRecipients(principal, input) {
@@ -38419,6 +38624,7 @@ async function listAnnouncements(principal, limit = 50, before) {
 }
 
 // src/services/chat/sla.service.ts
+init_cjs_shims();
 init_pool();
 init_notifications_service();
 var CHECKER_INTERVAL_MS = 6e4;
@@ -38559,6 +38765,7 @@ async function fireOverdue(timer) {
 }
 
 // src/services/chat/admin.service.ts
+init_cjs_shims();
 init_pool();
 async function exportChatHistory(principal, chatId) {
   await assertChatAccess(principal, chatId, "manage");
@@ -38968,7 +39175,7 @@ async function downloadAttachmentController(req, res) {
       `inline; filename="${encodeURIComponent(delivery.fileName)}"`
     );
     res.setHeader("Cache-Control", "private, no-store");
-    Readable.fromWeb(upstream.body).pipe(
+    import_node_stream.Readable.fromWeb(upstream.body).pipe(
       res
     );
   } catch (err) {
@@ -39255,7 +39462,7 @@ async function adminListChatsController(req, res) {
 }
 
 // src/routes/chat/chat.routes.ts
-var chatRoutes = Router13();
+var chatRoutes = (0, import_express13.Router)();
 chatRoutes.use(requireAuth);
 chatRoutes.get("/attachments/:attachmentId", downloadAttachmentController);
 chatRoutes.get("/notification-prefs", getNotificationPrefsController);
@@ -39310,7 +39517,7 @@ chatRoutes.post("/:id/disable-participant", disableParticipantController);
 var chat_routes_default = chatRoutes;
 
 // src/routes/index.ts
-var router6 = Router14();
+var router6 = (0, import_express14.Router)();
 router6.use("/auth", auth_routes_default);
 router6.use("/profile", profile_routes_default);
 router6.use("/reports", reports_routes_default);
@@ -39327,6 +39534,7 @@ router6.use("/chat", chat_routes_default);
 var routes_default = router6;
 
 // src/middleware/error.ts
+init_cjs_shims();
 var errorHandler = (err, _req, res, _next) => {
   console.error(err);
   const status = err.status ?? 500;
@@ -39336,11 +39544,11 @@ var errorHandler = (err, _req, res, _next) => {
 };
 
 // src/app.ts
-var app = express();
-app.use(helmet());
-app.use(cors());
-app.use(express.json());
-app.use(morgan("dev"));
+var app = (0, import_express15.default)();
+app.use((0, import_helmet.default)());
+app.use((0, import_cors.default)());
+app.use(import_express15.default.json());
+app.use((0, import_morgan.default)("dev"));
 app.get("/", (_req, res) => {
   res.json({ status: "API running" });
 });
@@ -39352,6 +39560,7 @@ var app_default = app;
 init_pool();
 
 // src/services/notifications/realtime-delivery.service.ts
+init_cjs_shims();
 init_pool();
 var NOTIFICATION_CHANNEL2 = "notification_events";
 var PUSH_BRIDGE_LOCK_KEY = 24040101;
@@ -39436,7 +39645,7 @@ async function startServer() {
     await startRealtimeNotificationDelivery();
     await startChatEventsBridge();
     startSlaChecker();
-    const httpServer = createServer(app_default);
+    const httpServer = (0, import_node_http.createServer)(app_default);
     initRealtime(httpServer);
     httpServer.listen(PORT, "0.0.0.0", () => {
       console.log(`Server running on http://0.0.0.0:${PORT}`);

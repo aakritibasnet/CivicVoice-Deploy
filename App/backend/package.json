@@ -4,7 +4,6 @@
   "description": "civicvoice",
   "license": "ISC",
   "author": "aakriti basnet",
-  "type": "module",
   "main": "dist/server.js",
   "scripts": {
     "dev": "nodemon",
