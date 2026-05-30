@@ -1,5 +1,8 @@
 import { pool } from "@/db/pool";
 import { uploadBufferToCloudinary } from "@/lib/upload.cloudinary";
+import { AppError } from "@/lib/errors";
+import { REPORT_PRIORITY_CONFIG } from "@/config/reportPriority";
+import { verifyPrioritySuggestionToken } from "@/services/ai/prioritySuggestionToken";
 import { detectWard } from "@/services/ward/ward.service";
 function toNullableNumber(v) {
     if (v === undefined || v === null || v === "")
@@ -24,13 +27,18 @@ async function findInitialKanbanColumn(client, role) {
 }
 // ─── Create Report ──────────────────────
 export async function createReportService(input) {
-    const { userId, deviceId, fileBuffer, mediaType, title, description, category, isPublic, locationLat, locationLng, locationAccuracyM, address, } = input;
+    const { userId, deviceId, fileBuffer, mediaType, title, description, category, isPublic, locationLat, locationLng, locationAccuracyM, address, aiPriorityToken, } = input;
     if (mediaType !== "photo" && mediaType !== "video") {
         throw new Error("Invalid media_type (must be photo or video)");
     }
     const lat = toNullableNumber(locationLat);
     const lng = toNullableNumber(locationLng);
     const acc = toNullableNumber(locationAccuracyM);
+    const verifiedPriority = verifyPrioritySuggestionToken(aiPriorityToken, fileBuffer);
+    if (aiPriorityToken && !verifiedPriority) {
+        throw new AppError("Invalid AI priority suggestion for this media.", 400);
+    }
+    const reportPriority = verifiedPriority ?? REPORT_PRIORITY_CONFIG.defaultLevel;
     // 1) Upload to Cloudinary
     const upload = await uploadBufferToCloudinary({
         buffer: fileBuffer,
@@ -78,10 +86,11 @@ export async function createReportService(input) {
         incoming_ack_deadline_at,
         ward_deadline_at,
         device_id,
+        priority,
         photo_urls
         -- ✅ Removed pathway_type and pathway_reason (nullable now)
       )
-      VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21)
+      VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22)
       RETURNING
         id,
         user_id,           -- ✅ Return user_id, not duplicate id
@@ -100,6 +109,7 @@ export async function createReportService(input) {
         ward_id, 
         kanban_column_id,
         assigned_level,
+        priority,
         incoming_ack_deadline_at,
         submitted_at,
         created_at
@@ -126,7 +136,8 @@ export async function createReportService(input) {
             incomingAckDeadlineAt, // $18 incoming_ack_deadline_at
             null, // $19 ward_deadline_at starts when active work begins
             deviceId || null, // $20
-            JSON.stringify(photoUrls), // $21
+            reportPriority, // $21
+            JSON.stringify(photoUrls), // $22
             // ✅ Removed pathway values
         ];
         const { rows } = await client.query(q, values);

@@ -1,7 +1,8 @@
 import { analyzeReportImage, AiUnavailableError, isAiConfigured, } from "@/services/ai/imageAnalysis.service";
+import { signPrioritySuggestion } from "@/services/ai/prioritySuggestionToken";
 // POST /api/reports/analyze-image
 // Multipart: field "media" = the captured photo.
-// On success: { success: true, data: { category, title, description, suggested_priority } }
+// On success: { success: true, data: { category, title, description, suggested_priority, priority_token } }
 // On AI-unavailable: HTTP 503 with { success:false, code:"ai_unavailable" } so the
 // mobile client can silently fall back to manual entry.
 export async function analyzeImageController(req, res) {
@@ -28,9 +29,16 @@ export async function analyzeImageController(req, res) {
             });
         }
         const result = await analyzeReportImage(file.buffer, file.mimetype);
+        const priorityToken = signPrioritySuggestion({
+            priority: result.suggested_priority,
+            imageBuffer: file.buffer,
+        });
         return res.json({
             success: true,
-            data: result,
+            data: {
+                ...result,
+                priority_token: priorityToken,
+            },
         });
     }
     catch (err) {

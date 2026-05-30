@@ -234,6 +234,17 @@ export async function listMyChats(principal) {
       ORDER BY cp2.joined_at ASC
       LIMIT 1
     ) ELSE NULL END AS other_participant_id`;
+    // The municipality-side branch (3) lists ALL ward bridge chats in a
+    // municipality. Only municipality-scoped principals may see that — ward
+    // officers and ward-role org users share the municipality_id but must be
+    // confined to their own ward (branches 1 and 2). Passing NULL here makes
+    // the `$4 IS NOT NULL` guard short-circuit branch 3 for them.
+    const isMunicipalitySide = principal.officerType !== "ward_officer" &&
+        principal.role !== "ward" &&
+        principal.role !== "citizen";
+    const municipalityScopeId = isMunicipalitySide
+        ? principal.municipalityId
+        : null;
     const { rows } = await pool.query(`-- 1) Explicit participant rows
      SELECT ${BASE},
             cp.role_in_chat::text AS my_role,
@@ -281,7 +292,7 @@ export async function listMyChats(principal) {
         AND $4 IS NOT NULL
         AND ${NO_EXPLICIT}
 
-     ORDER BY last_message_at DESC NULLS LAST, created_at DESC`, [principal.kind, principal.id, principal.wardId, principal.municipalityId]);
+     ORDER BY last_message_at DESC NULLS LAST, created_at DESC`, [principal.kind, principal.id, principal.wardId, municipalityScopeId]);
     return rows;
 }
 export async function getParticipants(principal, chatId) {

@@ -9,6 +9,7 @@
 //   we throw AiUnavailableError so the controller can tell the client to
 //   fall back to manual entry instead of 500-ing.
 import { AppError } from "@/lib/errors";
+import { REPORT_PRIORITY_CONFIG, } from "@/config/reportPriority";
 // Keep in sync with mobile App/mobile/components/ui/common/CategoryDropdown.tsx
 export const REPORT_CATEGORIES = [
     "Road Damage",
@@ -21,8 +22,7 @@ export const REPORT_CATEGORIES = [
     "Illegal Dumping",
     "Sidewalk Damage",
 ];
-// Matches the priority_level enum in prisma/schema.prisma.
-export const PRIORITY_LEVELS = ["low", "medium", "high", "critical"];
+const PRIORITY_LEVELS = REPORT_PRIORITY_CONFIG.levels;
 /** Thrown when AI is not configured or the upstream call fails. */
 export class AiUnavailableError extends AppError {
     constructor(message) {
@@ -58,7 +58,7 @@ function coercePriority(value) {
     const v = String(value ?? "").trim().toLowerCase();
     return PRIORITY_LEVELS.includes(v)
         ? v
-        : "medium";
+        : REPORT_PRIORITY_CONFIG.defaultLevel;
 }
 function clampText(value, max) {
     const s = String(value ?? "").trim().replace(/\s+/g, " ");

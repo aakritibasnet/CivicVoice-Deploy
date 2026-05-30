@@ -53,10 +53,20 @@ export function evaluateChatAccess(principal, chat, participant, action) {
                     principal.role !== "ward" &&
                     principal.role !== "citizen";
             break;
-        case "ward_municipality":
-            // Bridge channel: the authorized ward side OR the municipality side.
-            typeAllowed = wardMatch || muniMatch;
+        case "ward_municipality": {
+            // Bridge channel between ONE ward and its municipality. The ward side is
+            // the principals whose ward matches the chat's ward. The municipality
+            // side is municipality-scoped principals only — ward officers and
+            // ward-role org users must NOT reach a sibling ward's chat through the
+            // municipality match (they share a municipality_id), or every ward in a
+            // municipality would see every other ward's conversation.
+            const isMunicipalitySide = muniMatch &&
+                principal.officerType !== "ward_officer" &&
+                principal.role !== "ward" &&
+                principal.role !== "citizen";
+            typeAllowed = wardMatch || isMunicipalitySide;
             break;
+        }
         case "complaint_case":
             // Strictly explicit participants assigned to the report. With no
             // participant row there is no derived access.

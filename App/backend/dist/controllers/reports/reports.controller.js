@@ -17,7 +17,13 @@ export async function createReportController(req, res) {
                 error: "Media file is required",
             });
         }
-        const { title, description, media_type, category, is_public, location_lat, location_lng, location_accuracy_m, device_id, } = req.body;
+        const { title, description, media_type, category, is_public, location_lat, location_lng, location_accuracy_m, device_id, ai_priority_token, } = req.body;
+        if (ai_priority_token != null && typeof ai_priority_token !== "string") {
+            return res.status(400).json({
+                success: false,
+                error: "Invalid AI priority token",
+            });
+        }
         // 🔍 Debug what's being sent to service
         console.log("🔍 Calling createReportService with userId:", userId);
         const report = await createReportService({
@@ -33,6 +39,7 @@ export async function createReportController(req, res) {
             locationLng: location_lng,
             locationAccuracyM: location_accuracy_m,
             address: req.body.address || null,
+            aiPriorityToken: ai_priority_token || null,
         });
         // 🔍 Check what came back
         console.log("✅ Report created:", {
@@ -69,7 +76,8 @@ export async function createReportController(req, res) {
     }
     catch (err) {
         console.error("❌ createReportController error:", err);
-        return res.status(500).json({
+        const status = typeof err?.status === "number" ? err.status : 500;
+        return res.status(status).json({
             success: false,
             error: err?.message || "Server error",
         });

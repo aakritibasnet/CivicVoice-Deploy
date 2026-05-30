@@ -117,6 +117,50 @@ test("ward_municipality: either the ward side or municipality side is allowed", 
     assert.equal(evaluateChatAccess(wardSide, c, null, "write").allowed, true);
     assert.equal(evaluateChatAccess(muniSide, c, null, "write").allowed, true);
 });
+test("ward_municipality: ward officer from a sibling ward cannot read another ward's bridge chat", () => {
+    const c = chat({
+        type: "ward_municipality",
+        ward_id: WARD_A,
+        municipality_id: MUNI_A,
+    });
+    // Same municipality, different ward — must NOT leak via the municipality match.
+    const otherWardOfficer = principal({
+        officerType: "ward_officer",
+        wardId: WARD_B,
+        municipalityId: MUNI_A,
+    });
+    const d = evaluateChatAccess(otherWardOfficer, c, null, "read");
+    assert.equal(d.allowed, false);
+    assert.equal(d.reason, "not_a_member");
+});
+test("ward_municipality: ward-role org user cannot read a sibling ward's bridge chat", () => {
+    const c = chat({
+        type: "ward_municipality",
+        ward_id: WARD_A,
+        municipality_id: MUNI_A,
+    });
+    const otherWardUser = principal({
+        kind: "user",
+        role: "ward",
+        wardId: WARD_B,
+        municipalityId: MUNI_A,
+    });
+    assert.equal(evaluateChatAccess(otherWardUser, c, null, "read").allowed, false);
+});
+test("ward_municipality: ward-role org user CAN read its own ward's bridge chat", () => {
+    const c = chat({
+        type: "ward_municipality",
+        ward_id: WARD_A,
+        municipality_id: MUNI_A,
+    });
+    const ownWardUser = principal({
+        kind: "user",
+        role: "ward",
+        wardId: WARD_A,
+        municipalityId: MUNI_A,
+    });
+    assert.equal(evaluateChatAccess(ownWardUser, c, null, "read").allowed, true);
+});
 test("complaint_case: no access without an explicit participant row", () => {
     const pr = principal({ officerType: "ward_officer", wardId: WARD_A });
     const c = chat({ type: "complaint_case", ward_id: WARD_A });

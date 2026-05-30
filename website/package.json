@@ -9,7 +9,11 @@
     "start": "next start",
     "lint": "eslint",
     "seed": "tsx prisma/seed.ts",
-    "seed-wards": "tsx prisma/seed-wards.ts"
+    "seed-wards": "tsx prisma/seed-wards.ts",
+    "seed:ward-users": "tsx prisma/scripts/seed-ward-users.ts",
+    "boundaries:download": "tsx prisma/scripts/download-nepal-boundaries.ts",
+    "boundaries:import": "tsx prisma/scripts/import-nepal-boundaries.ts",
+    "db:setup-wards": "tsx prisma/scripts/ward-setup.ts"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts",

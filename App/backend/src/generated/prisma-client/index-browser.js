@@ -605,6 +605,7 @@ exports.Prisma.ChatsScalarFieldEnum = {
   priority: 'priority',
   is_group: 'is_group',
   is_archived: 'is_archived',
+  restrict_send: 'restrict_send',
   created_by_kind: 'created_by_kind',
   created_by_id: 'created_by_id',
   last_message_at: 'last_message_at',
@@ -650,6 +651,91 @@ exports.Prisma.Message_receiptsScalarFieldEnum = {
   delivered_at: 'delivered_at',
   read_at: 'read_at',
   acknowledged_at: 'acknowledged_at'
+};
+
+exports.Prisma.Chat_notification_prefsScalarFieldEnum = {
+  party_kind: 'party_kind',
+  party_id: 'party_id',
+  push_enabled: 'push_enabled',
+  in_app_enabled: 'in_app_enabled',
+  dnd: 'dnd',
+  quiet_hours_start: 'quiet_hours_start',
+  quiet_hours_end: 'quiet_hours_end',
+  mention_override: 'mention_override',
+  updated_at: 'updated_at'
+};
+
+exports.Prisma.Chat_mentionsScalarFieldEnum = {
+  id: 'id',
+  message_id: 'message_id',
+  mentioned_kind: 'mentioned_kind',
+  mentioned_id: 'mentioned_id',
+  created_at: 'created_at'
+};
+
+exports.Prisma.Message_reactionsScalarFieldEnum = {
+  id: 'id',
+  message_id: 'message_id',
+  party_kind: 'party_kind',
+  party_id: 'party_id',
+  emoji: 'emoji',
+  created_at: 'created_at'
+};
+
+exports.Prisma.Message_attachmentsScalarFieldEnum = {
+  id: 'id',
+  message_id: 'message_id',
+  file_name: 'file_name',
+  mime_type: 'mime_type',
+  size_bytes: 'size_bytes',
+  storage_key: 'storage_key',
+  thumbnail_key: 'thumbnail_key',
+  resource_type: 'resource_type',
+  scan_status: 'scan_status',
+  uploaded_by_kind: 'uploaded_by_kind',
+  uploaded_by_id: 'uploaded_by_id',
+  created_at: 'created_at'
+};
+
+exports.Prisma.Chat_audit_logScalarFieldEnum = {
+  id: 'id',
+  chat_id: 'chat_id',
+  actor_kind: 'actor_kind',
+  actor_id: 'actor_id',
+  action: 'action',
+  metadata: 'metadata',
+  created_at: 'created_at'
+};
+
+exports.Prisma.Chat_sla_configsScalarFieldEnum = {
+  chat_id: 'chat_id',
+  resolve_by_hours: 'resolve_by_hours',
+  escalate_by_hours: 'escalate_by_hours',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
+exports.Prisma.Chat_sla_timersScalarFieldEnum = {
+  id: 'id',
+  chat_id: 'chat_id',
+  started_at: 'started_at',
+  resolve_deadline: 'resolve_deadline',
+  escalate_deadline: 'escalate_deadline',
+  overdue_fired_at: 'overdue_fired_at',
+  resolved_at: 'resolved_at',
+  created_at: 'created_at'
+};
+
+exports.Prisma.Chat_announcementsScalarFieldEnum = {
+  id: 'id',
+  sender_kind: 'sender_kind',
+  sender_id: 'sender_id',
+  scope: 'scope',
+  scope_id: 'scope_id',
+  municipality_id: 'municipality_id',
+  body: 'body',
+  sent_count: 'sent_count',
+  created_at: 'created_at'
 };
 
 exports.Prisma.SortOrder = {
@@ -757,6 +843,12 @@ exports.chat_message_type = exports.$Enums.chat_message_type = {
   system: 'system'
 };
 
+exports.chat_scan_status = exports.$Enums.chat_scan_status = {
+  pending: 'pending',
+  clean: 'clean',
+  infected: 'infected'
+};
+
 exports.Prisma.ModelName = {
   activity_log: 'activity_log',
   analytics_snapshots: 'analytics_snapshots',
@@ -800,7 +892,15 @@ exports.Prisma.ModelName = {
   chats: 'chats',
   chat_participants: 'chat_participants',
   messages: 'messages',
-  message_receipts: 'message_receipts'
+  message_receipts: 'message_receipts',
+  chat_notification_prefs: 'chat_notification_prefs',
+  chat_mentions: 'chat_mentions',
+  message_reactions: 'message_reactions',
+  message_attachments: 'message_attachments',
+  chat_audit_log: 'chat_audit_log',
+  chat_sla_configs: 'chat_sla_configs',
+  chat_sla_timers: 'chat_sla_timers',
+  chat_announcements: 'chat_announcements'
 };
 
 /**
