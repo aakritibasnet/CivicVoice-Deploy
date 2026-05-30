@@ -88,7 +88,9 @@
       "Bash(grep -v \"^$\")",
       "Bash(Remove-Item *)",
       "PowerShell(Get-NetTCPConnection *)",
-      "Bash(npm install *)"
+      "Bash(npm install *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)"
     ]
   }
 }
