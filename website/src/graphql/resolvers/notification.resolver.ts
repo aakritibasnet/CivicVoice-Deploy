@@ -1,5 +1,5 @@
 import type { GQLContext } from "../context";
-import { Prisma } from "@/app/generated/prisma";
+import { Prisma } from "@/app/generated/prisma/client";
 import prisma from "@/src/lib/prisma";
 
 const NOTIFICATION_CHANNEL = "notification_events";

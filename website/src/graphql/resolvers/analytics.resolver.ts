@@ -1,4 +1,4 @@
-import { report_status } from "@/app/generated/prisma";
+import { report_status } from "@/app/generated/prisma/client";
 import type { GQLContext } from "../context";
 import { buildBoardScopeWhere } from "@/src/lib/reportWorkflowServer";
 import { getWardHappinessMetrics } from "@/src/lib/reportWorkflowEnforcer";

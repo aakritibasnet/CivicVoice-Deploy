@@ -1,4 +1,4 @@
-import { Prisma, report_status, user_role } from "@/app/generated/prisma";
+import { Prisma, report_status, user_role } from "@/app/generated/prisma/client";
 import { GQLContext } from "../context";
 import type { WorkflowStatus, WorkflowView } from "@/src/lib/reportWorkflow";
 import { FIXED_DEPARTMENT_SLUGS } from "@/src/features/departments/catalog";

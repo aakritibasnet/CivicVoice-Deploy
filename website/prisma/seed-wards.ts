@@ -1,4 +1,4 @@
-import { PrismaClient } from "@/app/generated/prisma";
+import { PrismaClient } from "@/app/generated/prisma/client";
 import { WARD_BOUNDARIES } from "./data/ward-boundaries";
 import { DEFAULT_KANBAN_COLUMNS } from "./data/default-kanban-columns";
 import bcrypt from "bcryptjs";
