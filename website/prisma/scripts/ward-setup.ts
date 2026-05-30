@@ -35,6 +35,9 @@ const DATA_DIR = path.resolve(SCRIPT_DIR, "../data/nepal-boundaries");
 const MUNICIPALITY_FILE = path.join(DATA_DIR, "municipalities.geojson");
 const WARD_FILE = path.join(DATA_DIR, "wards.geojson");
 const CRED_FILE = path.join(ROOT, "ward-credentials.txt");
+const FAST_WARD_SETUP =
+  process.argv.includes("--fast") || process.env.FAST_WARD_SETUP === "true";
+const VALLEY_MUNICIPALITIES = ["Kathmandu", "Lalitpur", "Bhaktapur"];
 
 const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 
@@ -137,26 +140,60 @@ async function step2_download() {
 
 async function step3_importMunicipalities() {
   console.log("\n═══════════════════════════════════════");
-  console.log("STEP 3/6 — Import Municipality Boundaries (774)");
+  console.log(
+    FAST_WARD_SETUP
+      ? "STEP 3/6 — Import Municipality Boundaries (Kathmandu Valley only)"
+      : "STEP 3/6 — Import Municipality Boundaries (774)",
+  );
   console.log("═══════════════════════════════════════");
 
-  const existing = await pool.query(
-    "SELECT COUNT(*) as c FROM municipalities WHERE boundary IS NOT NULL",
-  );
-  if (parseInt(existing.rows[0].c) > 700) {
-    console.log(
-      `⏭️  Already have ${existing.rows[0].c} municipalities with boundaries`,
+  if (FAST_WARD_SETUP) {
+    const existing = await pool.query(
+      "SELECT COUNT(*) as c FROM municipalities WHERE name = ANY($1) AND boundary IS NOT NULL",
+      [VALLEY_MUNICIPALITIES],
     );
-    return;
+    if (parseInt(existing.rows[0].c) >= VALLEY_MUNICIPALITIES.length) {
+      console.log("⏭️  Kathmandu Valley municipalities already imported");
+      return;
+    }
+    console.log("⚡ Fast mode: importing only Kathmandu, Lalitpur, Bhaktapur");
+  } else {
+    const existing = await pool.query(
+      "SELECT COUNT(*) as c FROM municipalities WHERE boundary IS NOT NULL",
+    );
+    if (parseInt(existing.rows[0].c) > 700) {
+      console.log(
+        `⏭️  Already have ${existing.rows[0].c} municipalities with boundaries`,
+      );
+      return;
+    }
   }
 
   const data = JSON.parse(readFileSync(MUNICIPALITY_FILE, "utf-8"));
-  console.log(`   Loaded ${data.features.length} features`);
+  const features = FAST_WARD_SETUP
+    ? data.features.filter((feature: any) =>
+        VALLEY_MUNICIPALITIES.includes(feature.properties.shapeName),
+      )
+    : data.features;
+
+  if (FAST_WARD_SETUP && features.length !== VALLEY_MUNICIPALITIES.length) {
+    throw new Error(
+      `Expected ${VALLEY_MUNICIPALITIES.length} valley municipalities, found ${features.length}`,
+    );
+  }
+
+  if (!FAST_WARD_SETUP && features.length > 700) {
+    console.log(
+      `   Loaded ${features.length} features`,
+    );
+  } else {
+    console.log(`   Loaded ${features.length} features`);
+  }
 
   let inserted = 0;
   const usedCodes = new Set<string>();
 
-  for (const feature of data.features) {
+  for (const feature of features) {
     const name = feature.properties.shapeName;
     if (!name) continue;
 
@@ -201,7 +238,7 @@ async function step3_importMunicipalities() {
       console.error(`   ❌ ${name}:`, (err as Error).message.slice(0, 80));
     }
 
-    if (inserted % 100 === 0)
+    if (inserted % (FAST_WARD_SETUP ? 1 : 100) === 0)
       process.stdout.write(`\r   ${inserted} imported...`);
   }
 
@@ -539,7 +576,11 @@ async function main() {
   console.log(`\n╔═══════════════════════════════════════════════════════╗`);
   console.log(`║  ✅ SETUP COMPLETE (${elapsed}s)                          ║`);
   console.log(`║                                                       ║`);
-  console.log(`║  774 municipalities (all Nepal)                       ║`);
+  console.log(
+    FAST_WARD_SETUP
+      ? `║  3 municipalities (Kathmandu Valley fast setup)       ║`
+      : `║  774 municipalities (all Nepal)                       ║`,
+  );
   console.log(`║  119 wards (Kathmandu + Lalitpur + Bhaktapur)         ║`);
   console.log(`║  119 ward users + 4 municipality + 1 admin            ║`);
   console.log(`║                                                       ║`);

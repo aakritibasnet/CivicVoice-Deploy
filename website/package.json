@@ -13,7 +13,8 @@
     "seed:ward-users": "tsx prisma/scripts/seed-ward-users.ts",
     "boundaries:download": "tsx prisma/scripts/download-nepal-boundaries.ts",
     "boundaries:import": "tsx prisma/scripts/import-nepal-boundaries.ts",
-    "db:setup-wards": "tsx prisma/scripts/ward-setup.ts"
+    "db:setup-wards": "tsx prisma/scripts/ward-setup.ts",
+    "db:setup-wards:fast": "tsx prisma/scripts/ward-setup.ts --fast"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts",

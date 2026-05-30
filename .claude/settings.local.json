@@ -87,7 +87,8 @@
       "Bash(awk '/^model users /{f=1} f{print} /^}/{if\\(f\\)exit}' prisma/schema.prisma)",
       "Bash(grep -v \"^$\")",
       "Bash(Remove-Item *)",
-      "PowerShell(Get-NetTCPConnection *)"
+      "PowerShell(Get-NetTCPConnection *)",
+      "Bash(npm install *)"
     ]
   }
 }
